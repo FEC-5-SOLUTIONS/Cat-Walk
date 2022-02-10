@@ -17,13 +17,21 @@ module.exports = {
     filename: 'bundle.js',
     path: DIST_DIR
   },
+  devServer: {
+    static: {
+      directory: DIST_DIR,
+    },
+    port: 3000,
+    open: true,
+    liveReload: true,
+  },
+  resolve: { extensions: ['.js', '.jsx'] },
   devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.(js|jsx)?/,
         exclude: /node_modules/,
-        // resolve: { extensions: ['.js', '.jsx'] },
         use: {
           loader: 'babel-loader',
           options: {
