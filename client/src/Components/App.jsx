@@ -1,7 +1,13 @@
 import React from 'react';
+import ProductDetail from './ProductDetail.jsx'
 
 function App() {
-  return <div>Hello World!</div>;
+  return (
+    <div>
+      <div>Hello World!</div>
+      <ProductDetail />
+    </div>
+    );
 }
 
 export default App;
