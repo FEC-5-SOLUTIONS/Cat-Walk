@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductDetail from './ProductDetail.jsx'
+import ProductDetail from './ProductDetail';
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <div>Hello World!</div>
       <ProductDetail />
     </div>
-    );
+  );
 }
 
 export default App;
