@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Stats() {
+function Stats({metaData}) {
   return <div> Hello from Stats Tab</div>;
 }
 

@@ -40,15 +40,13 @@ app.get('/api/related/', (req, res) => {
 });
 
 // GET REVIEWS
-
 app.get('/api/reviews/meta/:productID', (req, res) => {
-  console.log('here')
-  const queryString = `${baseUrl}/reviews/meta/?product_id=${req.query.productID}`;
   axios({
     method: 'GET',
-    url: queryString,
+    url: `${baseUrl}/reviews/meta/?product_id=${req.params.productID}`,
     headers,
-  }).then((axiosResponse) => res.send(axiosResponse));
+  }).then((axiosResponse) => res.status(200).send(axiosResponse.data))
+    .catch((err) => res.status(400).send());
 });
 
 
