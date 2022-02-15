@@ -40,6 +40,18 @@ app.get('/api/related/', (req, res) => {
 });
 
 // GET REVIEWS
+
+app.get('/api/reviews/meta/:productID', (req, res) => {
+  console.log('here')
+  const queryString = `${baseUrl}/reviews/meta/?product_id=${req.query.productID}`;
+  axios({
+    method: 'GET',
+    url: queryString,
+    headers,
+  }).then((axiosResponse) => res.send(axiosResponse));
+});
+
+
 app.get('/api/reviews/', (req, res) => {
   axios({
     method: 'GET',
