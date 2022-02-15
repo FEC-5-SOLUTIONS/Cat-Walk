@@ -1,7 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 import Stats from './StatsTab/Stats';
 import ReviewsList from './ReviewsList/ReviewsList';
-import axios from 'axios';
 import styles from './Ratings.module.css';
 
 class RatingsAndReviews extends React.Component {
@@ -32,7 +32,7 @@ class RatingsAndReviews extends React.Component {
     return (
       <div className={styles.redText}>
         Hello from RatingsAndReviews in red
-        <Stats metaData = {this.state.meta}/>
+        <Stats metaData={this.state.meta}/>
         <ReviewsList />
       </div>
     );
