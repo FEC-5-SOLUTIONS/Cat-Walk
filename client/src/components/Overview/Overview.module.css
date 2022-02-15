@@ -1,21 +1,70 @@
+.Overview > div{
+  font-family: Arial, Helvetica, sans-serif;
+  /* color: blue; */
+}
+.Overview_Top {
+  display: flex;
+  flex-direction: row;
+  align-items:left;
+}
+.info_BigText{
+  font-size:20px;
+  font-weight:bold;
+}
+.info_SmallText{
+  font-size:8px;
+  text-transform:uppercase;
+}
+.price_onSale{
+  font-size:8px;
+  text-transform:uppercase;
+  text-decoration:line-through;
+}
+.price_salePrice{
+  font-size:8px;
+  text-transform:uppercase;
+  color: red;
+  font-weight: bold;
+}
+.desc_BigText{
+  font-size:12px;
+  font-weight:bold;
+}
+.desc_SmallText{
+  font-size:8px;
+}
+.DescriptionAndFeatures{
+  width: 20%;
+  position: reltave;
+}
 .StyleButtonContainer {
   display: flex;
   flex-direction: row;
-  width: 25%;
+  width: 200px;
   flex-wrap: wrap;
+  padding: 10px;
 }
 .StyleButtonContainer>div {
-  width: 25%;
+  display:flex;
+  flex-direction: row-reverse;
 }
 .StyleButton {
-  width: 50px;
-  height: 50px;
-  padding: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 4px;
   object-fit: cover;
   border-radius: 50%;
 }
 .StyleButton:hover {
   cursor: pointer;
+}
+.Check{
+  position:absolute;
+  justify-content: right;
+  align-items: top;
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
 }
 .FeaturedImage {
   width: 200px;
