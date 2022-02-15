@@ -9,7 +9,7 @@ function Stats({ metaData }) {
           #
         </div>
         <div className={styles.statsStars}>
-          <Stars ratings={metaData.ratings} />
+          <Stars metaData={metaData} />
         </div>
         <div className={styles.statsRec}>
           recomended

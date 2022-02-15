@@ -2,6 +2,72 @@
   color: red;
 }
 
+.statsTab {
+  border-style: solid;
+  border-color: black;
+}
+
+.statsFlex {
+  display: grid;
+  grid-template-columns: 4;
+  grid-template-rows: 5;
+}
+
+.statsAvg {
+  grid-area: 1/1/2/2;
+
+}
+.statsStars {
+  grid-area: 1/2/2/5;
+
+}
+
+
+
+.quarterStar {
+  color: white;
+  fa-border: 0%, black;
+}
+
+.halfStar {
+
+}
+
+.sevenfiveStar {
+
+}
+
+.fullStar {
+
+}
+
+.statsRec {
+  grid-area: 2/1/3/5;
+}
+.statsBars {
+  grid-area: 3/1/4/5;
+
+}
+.statsFit {
+  grid-area: 4/1/5/5;
+}
+
+.statsComfort {
+  grid-area: 5/1/6/5;
+}
+
+
+.reviewsList {
+  border-style: solid;
+  border-color: black;
+}
+
+.reviewBorder {
+  border-style: solid;
+  border-color: red;
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
 
 .blueText {
   color: blue;
