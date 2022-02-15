@@ -22,7 +22,7 @@ app.get('/api/product/', (req, res) => {
 });
 
 // GET STYLES
-app.get('/api/styles', (req, res) => {
+app.get('/api/styles/', (req, res) => {
   axios({
     method: 'GET',
     url: `${baseUrl}/products/${req.query.product_id}/styles`,
