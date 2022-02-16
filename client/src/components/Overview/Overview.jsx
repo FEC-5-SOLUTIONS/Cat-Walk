@@ -62,7 +62,8 @@ function Overview() {
     <div className={style.Overview}>
       <div className={style.Overview_Top}>
         <div>
-          <FeaturedImage variant={selectedVariant} />
+          <BigCarousel variant={selectedVariant} />
+          {/* <FeaturedImage variant={selectedVariant} /> */}
         </div>
         <div>
           <div>{'<<placeholder - read all reviews>>'}</div>
@@ -130,18 +131,54 @@ function Actions() {
   );
 }
 
-function FeaturedImage(props) {
-  // if (!props.variant) { return <div>test</div> }
+function BigCarousel(props) {
+  // console.log(props.variant.photos);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const updateIndex = (newIndex) => {
+    let length = props.variant.photos.length;
+    if (newIndex < 0) { newIndex = length - 1; }
+    else if (newIndex >= length) { newIndex = 0; }
+    setActiveIndex(newIndex);
+  };
+
   return (
-    <div>
-      <img
-        className={style.FeaturedImage}
-        src={props.variant.photos[0].url}
-        alt={props.variant.name}
-      />
+    <div className={style.BigCarousel_Viewport}>
+      <div className={style.BigCarousel_Controls}>
+        <button onClick={() => {updateIndex(activeIndex - 1)}}>{'<'}</button>
+        <button onClick={() => {updateIndex(activeIndex + 1)}}>{'>'}</button>
+      </div>
+      <div
+        className={style.BigCarousel_Inner}
+        style={{transform: `translateX(-${activeIndex * 100}%`}}>
+        {
+          props.variant.photos.map((v, i) => (
+            <img
+              key={i}
+              className={style.BigCarousel_Image}
+              src={v.url}
+              alt={v.name}
+              style={{width: "100%"}}
+            />
+          ))
+        }
+      </div>
     </div>
   );
 }
+
+// function FeaturedImage(props) {
+//   // if (!props.variant) { return <div>test</div> }
+//   return (
+//     <div>
+//       <img
+//         className={style.FeaturedImage}
+//         src={props.variant.photos[0].url}
+//         alt={props.variant.name}
+//       />
+//     </div>
+//   );
+// }
 
 function StylesList(props) {
   function setSelectedVariant(v) {

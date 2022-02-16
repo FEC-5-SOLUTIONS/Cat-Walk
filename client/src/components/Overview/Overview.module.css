@@ -86,11 +86,40 @@
   height: 20px;
   object-fit: cover;
 }
-.FeaturedImage {
+/* .FeaturedImage {
   width: 200px;
   height: 200px;
   padding: 10px;
   object-fit: cover;
+} */
+.BigCarousel_Viewport {
+  overflow: hidden;
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+.BigCarousel_Inner {
+  white-space: nowrap;
+  justify-content:center;
+  position:absolute;
+  top:-15%;
+  transition: transform 0.3s;
+}
+.BigCarousel_Image {
+  display: inline-flex;
+  justify-content: center;
+  object-fit: cover;
+}
+.BigCarousel_Controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  z-index:1;
+  display: flex;
+  justify-content: space-between;
+}
+.BigCarousel_Controls > button {
+  margin: 5px;
 }
 .Actions {
   display: flex;
