@@ -1,12 +1,11 @@
 import React from 'react';
-import Search from './Search';
-import styles from './Questions.module.css';
+import SearchBar from './SearchBar';
 
 function Questions() {
   return (
-    <div className={styles.test}>
+    <div>
       QUESTIONS & ANSWERS
-      <Search />
+      <SearchBar />
     </div>
   );
 }

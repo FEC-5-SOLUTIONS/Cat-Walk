@@ -2,3 +2,4 @@ node_modules
 bundle.js
 bundle.js.map
 config.js
+.DS_Store
