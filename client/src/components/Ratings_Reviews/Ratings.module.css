@@ -20,12 +20,8 @@
   grid-template-rows: 5;
 }
 
-.statsAvg {
-  grid-area: 1/1/2/2;
-
-}
 .statsStars {
-  grid-area: 1/2/2/5;
+  grid-area: 1/1/2/4;
 
 }
 
@@ -71,6 +67,10 @@
 .barBar{
   border: solid;
   grid-column: 2 / 5
+}
+.charBar{
+  border: solid;
+  grid-column: 2 / 4
 }
 
 .statsFit {

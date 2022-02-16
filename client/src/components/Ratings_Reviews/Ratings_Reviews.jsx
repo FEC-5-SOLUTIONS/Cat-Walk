@@ -10,12 +10,14 @@ class RatingsAndReviews extends React.Component {
     this.state = {
       meta: [],
       reviews: [],
+      sortBy: 'relevant',
       productID: 40348,
     };
   }
 
   componentDidMount() {
     this.getMeta();
+    this.getReviews();
   }
 
   getMeta() {
@@ -28,12 +30,21 @@ class RatingsAndReviews extends React.Component {
       });
   }
 
+  getReviews() {
+    axios.get(`api/reviews/${this.state.productID}`)
+      .then((res) => {
+        this.setState({ reviews: res.data });
+      })
+      .catch((err) => {
+        console.log('err');
+      });
+  }
+
   render() {
     return (
-      <div className={styles.redText}>
-        Hello from RatingsAndReviews in red
-        <Stats metaData={this.state.meta}/>
-        <ReviewsList />
+      <div className={styles.reviewBorder}>
+        <Stats metaData={this.state.meta} />
+        <ReviewsList reviewsData={this.state.reviews} sort={this.state.sortBy} />
       </div>
     );
   }

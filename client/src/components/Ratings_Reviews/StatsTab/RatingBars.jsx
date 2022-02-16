@@ -16,8 +16,6 @@ const bars = (obj) => {
     if (obj[i]) {
       let percentage = (Number(obj[i]) / totalCount) * 100;
       let whiteSpace = 100 - percentage;
-      let solido = `solid`
-      let barColor = `linear-gradient(to right, black ${percentage}%, white ${whiteSpace}%`;
       returnJSX.push(
         <div className={styles.barHolder}>
           <div className={styles.barNumber}>
@@ -26,8 +24,8 @@ const bars = (obj) => {
           <div className={styles.barBar}>
             <div style = {{ background: 'black',
             width: `${percentage}%`,
-            height: `100%`
-            }}></div>
+            height: '100%',
+            }}> </div>
 
           </div>
         </div>

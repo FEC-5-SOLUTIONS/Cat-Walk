@@ -50,7 +50,7 @@ app.get('/api/reviews/meta/:productID', (req, res) => {
 });
 
 
-app.get('/api/reviews/', (req, res) => {
+app.get('/api/reviews/:sort/:productID/:count', (req, res) => {
   axios({
     method: 'GET',
     url: `${baseUrl}/reviews/`,
