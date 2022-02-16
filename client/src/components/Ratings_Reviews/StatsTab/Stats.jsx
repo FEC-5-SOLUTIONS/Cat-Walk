@@ -1,6 +1,7 @@
 import React from 'react';
 import Stars from '../../Shared/Stars';
 import Recommended from './recommended';
+import RatingBars from './RatingBars'
 import styles from '../Ratings.module.css';
 
 function Stats({ metaData }) {
@@ -16,7 +17,7 @@ function Stats({ metaData }) {
         <Recommended metaData={metaData} />
       </div>
       <div className={styles.statsBars}>
-        rating barss
+        <RatingBars metaData={metaData} />
       </div>
       <div className={styles.statsFit}>
         fit
