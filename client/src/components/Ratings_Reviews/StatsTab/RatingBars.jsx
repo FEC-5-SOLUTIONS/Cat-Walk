@@ -23,11 +23,13 @@ const bars = (obj) => {
           <div className={styles.barNumber}>
             {i}
           </div>
-          <div style={{
-            background: `${barColor}`,
-            border: `${solido}`,
-            gridColumn: '2 /5'
-          }}></div>
+          <div className={styles.barBar}>
+            <div style = {{ background: 'black',
+            width: `${percentage}%`,
+            height: `100%`
+            }}></div>
+
+          </div>
         </div>
       )
     } else {
