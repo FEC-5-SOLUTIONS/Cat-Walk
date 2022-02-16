@@ -68,7 +68,7 @@ function Overview() {
         <div>
           <div>{'<<placeholder - read all reviews>>'}</div>
           <ProductInfo product={product} variant={selectedVariant} />
-          <StylesList variants={variants} setSelectedVariant={setSelectedVariant} />
+          <StylesList variants={variants} selectedVariant={selectedVariant} setSelectedVariant={setSelectedVariant} />
           <Actions />
         </div>
       </div>
@@ -167,19 +167,6 @@ function BigCarousel(props) {
   );
 }
 
-// function FeaturedImage(props) {
-//   // if (!props.variant) { return <div>test</div> }
-//   return (
-//     <div>
-//       <img
-//         className={style.FeaturedImage}
-//         src={props.variant.photos[0].url}
-//         alt={props.variant.name}
-//       />
-//     </div>
-//   );
-// }
-
 function StylesList(props) {
   function setSelectedVariant(v) {
     props.setSelectedVariant(v);
@@ -192,6 +179,7 @@ function StylesList(props) {
           <StyleButton
             key={i}
             variant={variant}
+            selectedVariant={props.selectedVariant}
             setSelectedVariant={setSelectedVariant}
           />
         ))
@@ -208,12 +196,7 @@ function StyleButton(props) {
 
   return (
     <div>
-      <img
-        className={style.Check}
-        // src="https://pngtree.com/freepng/check-mark-icon-design-template-vector-isolated_4085369.html"
-        src={props.variant.photos[0].thumbnail_url}
-        alt="✓"
-      />
+      { props.variant.style_id === props.selectedVariant.style_id ? <CheckMark /> : null }
       <img
         className={style.StyleButton}
         src={props.variant.photos[0].thumbnail_url}
@@ -221,6 +204,16 @@ function StyleButton(props) {
         onClick={handleClick}
       />
     </div>
+  );
+}
+
+function CheckMark() {
+  return (
+    <img
+      className={style.Check}
+      src={'https://cdn.pixabay.com/photo/2014/03/25/16/58/check-mark-297739_960_720.png'}
+      alt="✓"
+    />
   );
 }
 
