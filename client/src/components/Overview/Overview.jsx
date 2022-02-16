@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-import React from 'react';
-// import React, { useState, useEffect } from 'react';
+// import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import style from './Overview.module.css';
 
@@ -27,115 +27,56 @@ const product =
 //   created_at: '2021-08-13T14:38:44.509Z',
 //   updated_at: '2021-08-13T14:38:44.509Z',
 // };
+
 const product_id = product.id;
 const quantities = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const sizes = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'];
 
-// function Overview() {
-//   const [variants, setVariants] = useState([]);
-//   const [selectedVariant, setSelectedVariant] = useState({});
-//   const [info, setInfo] = useState(false);
+function Overview() {
+  const [variants, setVariants] = useState([]);
+  const [selectedVariant, setSelectedVariant] = useState({ });
+  const [info, setInfo] = useState(false);
 
-//   useEffect(() => {
-//     axios({
-//       method: 'GET',
-//       url: '/api/styles/',
-//       params: { product_id },
-//     }).then((response) => {
-//       setVariants(response.data.results);
-//     })
-//       .then(() => {
-//         variants.forEach((v) => {
-//           if (v['default?']) {
-//             setSelectedVariant(v);
-//           }
-//         });
-//       })
-//       .then(() => { setInfo(true); });
-//   }, [info]);
-
-//   if (!info) { return <div>overview</div>; }
-//   console.log(selectedVariant);
-//   return <div> hello </div> ;
-//   return (
-//     <div className={style.Overview}>
-//       <div className={style.Overview_Top}>
-//         <div>
-//           <FeaturedImage variant={selectedVariant} />
-//         </div>
-//         <div>
-//           <div>{'<<placeholder - read all reviews>>'}</div>
-//           <ProductInfo product={product} variant={selectedVariant} />
-//           <StylesList variants={variants} setSelectedVariant={setSelectedVariant} />
-//           <Actions />
-//         </div>
-//       </div>
-//       <div className={style.Overview_Bottom}>
-//         <Description product={product} />
-//         <FeaturesList />
-//       </div>
-//     </div>
-//   );
-// }
-
-class Overview extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      variants: [],
-      selectedVariant: {},
-      info: false,
-    };
-
-    this.setSelectedVariant = this.setSelectedVariant.bind(this);
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     axios({
       method: 'GET',
       url: '/api/styles/',
       params: { product_id },
-    }).then(
-      (response) => {
-        this.setState({ variants: response.data.results });
-      },
-    ).then(() => {
-      this.state.variants.forEach(
-        (v) => {
+    })
+      .then((response) => {
+        setVariants(response.data.results);
+        setInfo(true);
+      })
+      .then(() => {
+        variants.forEach((v) => {
           if (v['default?']) {
-            this.setState({ selectedVariant: v });
-          }
-        },
-      );
-    }).then(() => { this.setState({ info: true }); });
-  }
+            setSelectedVariant(v);
+          }});
+      });
+  }, [info]);
 
-  setSelectedVariant(v) {
-    this.setState({ selectedVariant: v });
-  }
-
-  render() {
-    if (!this.state.info) { return <div> test </div>; }
-    return (
-      <div className={style.Overview}>
-        <div className={style.Overview_Top}>
-          <div>
-            <FeaturedImage variant={this.state.selectedVariant} />
-          </div>
-          <div>
-            <div>{'<<placeholder - read all reviews>>'}</div>
-            <ProductInfo product={product} variant={this.state.selectedVariant} />
-            <StylesList variants={this.state.variants} setSelectedVariant={this.setSelectedVariant} />
-            <Actions />
-          </div>
+  if (!selectedVariant.name) { return <div>overview</div>; }
+  // console.log(selectedVariant);
+  // return <div> hello </div> ;
+  return (
+    <div className={style.Overview}>
+      <div className={style.Overview_Top}>
+        <div>
+          <FeaturedImage variant={selectedVariant} />
         </div>
-        <div className={style.Overview_Bottom}>
-          <Description product={product} />
-          <FeaturesList />
+        <div>
+          <div>{'<<placeholder - read all reviews>>'}</div>
+          <ProductInfo product={product} variant={selectedVariant} />
+          <StylesList variants={variants} setSelectedVariant={setSelectedVariant} />
+          <Actions />
         </div>
       </div>
-    );
-  }
+      <div className={style.Overview_Bottom}>
+        <Description product={product} />
+        <FeaturesList />
+      </div>
+    </div>
+  );
 }
 
 export default Overview;
