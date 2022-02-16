@@ -4,7 +4,7 @@ import axios from 'axios';
 import style from './Overview.module.css';
 
 const product = {
-  id: 40348, //40348
+  id: 40348, // 40348
   campus: 'hr-rfp',
   name: 'Heir Force Ones',
   slogan: 'A sneaker dynasty',
@@ -39,16 +39,15 @@ class Overview extends React.Component {
       (response) => {
         this.setState({ variants: response.data.results });
       },
-    ).then( () => {
+    ).then(() => {
       this.state.variants.forEach(
         (v) => {
           if (v['default?']) {
             this.setState({ selectedVariant: v });
           }
-        });
-      }
-    ).then( () => { this.setState({ info: true })}
-    );
+        },
+      );
+    }).then(() => { this.setState({ info: true }); });
   }
 
   setSelectedVariant(v) {
@@ -71,7 +70,10 @@ class Overview extends React.Component {
             <Actions />
           </div>
         </div>
-        <DescriptionAndFeatures product={product} />
+        <div className={style.Overview_Bottom}>
+          <Description product={product} />
+          <FeaturesList />
+        </div>
       </div>
     );
   }
@@ -81,43 +83,49 @@ export default Overview;
 
 function ProductInfo(props) {
   return (
-    <div>
+    <div className={style.ProductInfo}>
       <div className={style.info_SmallText}>{props.product.category}</div>
       <div className={style.info_BigText}>{props.product.name}</div>
-      {/* <div className={style.info_SmallText}>{`$${props.variant.original_price}`}</div> */}
-      <Price variant={props.variant}/>
+      <div><Price variant={props.variant} /></div>
       <div className={style.info_SmallText}>{`style > ${props.variant.name}`}</div>
     </div>
   );
 }
 function Price(props) {
-  if(props.variant.sale_price) {
+  if (props.variant.sale_price) {
     return (
       <div>
-        <sp className={style.price_onSale}>{`$${props.variant.original_price}`}</sp>
-        <sp className={style.price_salePrice}>{`    $${props.variant.sale_price}`}</sp>
+        <div className={style.price_onSale}>{`$${props.variant.original_price}`}</div>
+        <div className={style.price_salePrice}>{`    $${props.variant.sale_price}`}</div>
       </div>
     );
-  } else {
-    return <sp className={style.info_SmallText}>{`$${props.variant.original_price}`}</sp>
   }
+  return <sp className={style.info_SmallText}>{`$${props.variant.original_price}`}</sp>;
 }
 
-function Actions(props){
+function Actions() {
   return (
-    <div>
-      <div id="size"><select>
-        {
-          sizes.map( (s) => <option value={s}>{s}</option>)
-        }
-      </select></div>
-      <div id="quantity"><select>
-        {
-          quantities.map( (q) => <option value={q}>{q}</option>)
-        }
-      </select></div>
-      <div id="addToBag"><button>add to bag</button></div>
-      <div id="addToOutfit"><button>add to outfit</button></div>
+    <div className={style.Actions}>
+      <div className={style.Actions_Row}>
+        <div id="size">
+          <select>
+            {
+            sizes.map((s, i) => <option key={i} value={s}>{s}</option>)
+          }
+          </select>
+        </div>
+        <div id="quantity">
+          <select>
+            {
+            quantities.map((q, i) => <option key={i} value={q}>{q}</option>)
+          }
+          </select>
+        </div>
+      </div>
+      <div className={style.Actions_Row}>
+        <div id="addToBag"><button type="submit">add to bag</button></div>
+        <div id="addToOutfit"><button type="submit">add to outfit</button></div>
+      </div>
     </div>
   );
 }
@@ -143,12 +151,13 @@ function StylesList(props) {
   return (
     <div className={style.StyleButtonContainer}>
       {
-        props.variants.map((variant, i) =>
-        <StyleButton
-          key={i}
-          variant={variant}
-          setSelectedVariant={setSelectedVariant}
-        /> )
+        props.variants.map((variant, i) => (
+          <StyleButton
+            key={i}
+            variant={variant}
+            setSelectedVariant={setSelectedVariant}
+          />
+        ))
       }
     </div>
   );
@@ -178,11 +187,21 @@ function StyleButton(props) {
   );
 }
 
-function DescriptionAndFeatures(props) {
+function Description(props) {
   return (
-    <div className={style.DescriptionAndFeatures}>
+    <div className={style.Description}>
       <div className={style.desc_BigText}>{props.product.slogan}</div>
       <div className={style.desc_SmallText}>{props.product.description}</div>
+    </div>
+  );
+}
+
+function FeaturesList(props) {
+  return (
+    <div className={style.FeaturesList}>
+      <div>✓   feature 1</div>
+      <div>✓   feature 2</div>
+      <div>✓   feature 3</div>
     </div>
   );
 }

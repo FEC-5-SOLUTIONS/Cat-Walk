@@ -1,11 +1,15 @@
-.Overview > div{
+.Overview > div {
   font-family: Arial, Helvetica, sans-serif;
+  font-size:8px;
   /* color: blue; */
 }
 .Overview_Top {
-  display: flex;
-  flex-direction: row;
-  align-items:left;
+  display:flex;
+  justify-content: center;
+}
+.Overview_Bottom {
+  display:flex;
+  justify-content: center;
 }
 .info_BigText{
   font-size:20px;
@@ -26,6 +30,9 @@
   color: red;
   font-weight: bold;
 }
+.ProductInfo > div {
+  padding: 5px;
+}
 .desc_BigText{
   font-size:12px;
   font-weight:bold;
@@ -33,9 +40,22 @@
 .desc_SmallText{
   font-size:8px;
 }
-.DescriptionAndFeatures{
-  width: 20%;
-  position: reltave;
+.Description{
+  display:flex;
+  flex-direction:column;
+  width: 200px;
+  position: relative;
+  align-items:flex-start;
+  justify-content:center;
+}
+.FeaturesList{
+  display:flex;
+  flex-direction:column;
+  width: 200px;
+  position: relative;
+  align-items:flex-start;
+  justify-content:center;
+  padding:1%;
 }
 .StyleButtonContainer {
   display: flex;
@@ -44,7 +64,7 @@
   flex-wrap: wrap;
   padding: 10px;
 }
-.StyleButtonContainer>div {
+.StyleButtonContainer > div {
   display:flex;
   flex-direction: row-reverse;
 }
@@ -71,4 +91,17 @@
   height: 200px;
   padding: 10px;
   object-fit: cover;
+}
+.Actions {
+  display: flex;
+  flex-direction: column;
+}
+.Actions_Row{
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-start;
+  align-items:stretch;
+}
+.Actions_Row > div {
+  padding: 2px;
 }
