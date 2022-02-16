@@ -49,17 +49,11 @@ app.get('/api/reviews/meta/:productID', (req, res) => {
     .catch((err) => res.status(400).send());
 });
 
-
-app.get('/api/reviews/:sort/:productID/:count', (req, res) => {
+app.get('/api/all_reviews/:sort/:productID/:count', (req, res) => {
+  console.log('here')
   axios({
     method: 'GET',
-    url: `${baseUrl}/reviews/`,
-    params: {
-      page: req.query.page || 1,
-      count: req.query.count || 5,
-      sort: req.query.sort || 'newest',
-      product_id: req.query.product_id,
-    },
+    url: `${baseUrl}/reviews/?product_id=${req.params.productID}&sort=${req.params.sort}&count=${req.params.count}`,
     headers,
   }).then((axiosResponse) => res.send(axiosResponse.data));
 });

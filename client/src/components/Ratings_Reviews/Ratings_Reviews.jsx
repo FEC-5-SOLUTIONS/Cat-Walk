@@ -11,6 +11,7 @@ class RatingsAndReviews extends React.Component {
       meta: [],
       reviews: [],
       sortBy: 'relevant',
+      count: 2,
       productID: 40348,
     };
   }
@@ -31,7 +32,7 @@ class RatingsAndReviews extends React.Component {
   }
 
   getReviews() {
-    axios.get(`api/reviews/${this.state.productID}`)
+    axios.get(`api/all_reviews/${this.state.sortBy}/${this.state.productID}/${this.state.count}`)
       .then((res) => {
         this.setState({ reviews: res.data });
       })
