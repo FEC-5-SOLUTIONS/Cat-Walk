@@ -1,22 +1,82 @@
 /* eslint-disable camelcase */
 import React from 'react';
+// import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import style from './Overview.module.css';
 
-const product = {
-  id: 40348, // 40348
+const product =
+{
+  id: 40344,
   campus: 'hr-rfp',
-  name: 'Heir Force Ones',
-  slogan: 'A sneaker dynasty',
-  description: "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
-  category: 'Kicks',
-  default_price: '99.00',
+  name: 'Camo Onesie',
+  slogan: 'Blend in to your crowd',
+  description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
+  category: 'Jackets',
+  default_price: '140.00',
   created_at: '2021-08-13T14:38:44.509Z',
   updated_at: '2021-08-13T14:38:44.509Z',
 };
+// {
+//   id: 40348, // 40348
+//   campus: 'hr-rfp',
+//   name: 'Heir Force Ones',
+//   slogan: 'A sneaker dynasty',
+//   description: "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
+//   category: 'Kicks',
+//   default_price: '99.00',
+//   created_at: '2021-08-13T14:38:44.509Z',
+//   updated_at: '2021-08-13T14:38:44.509Z',
+// };
 const product_id = product.id;
 const quantities = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const sizes = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'];
+
+// function Overview() {
+//   const [variants, setVariants] = useState([]);
+//   const [selectedVariant, setSelectedVariant] = useState({});
+//   const [info, setInfo] = useState(false);
+
+//   useEffect(() => {
+//     axios({
+//       method: 'GET',
+//       url: '/api/styles/',
+//       params: { product_id },
+//     }).then((response) => {
+//       setVariants(response.data.results);
+//     })
+//       .then(() => {
+//         variants.forEach((v) => {
+//           if (v['default?']) {
+//             setSelectedVariant(v);
+//           }
+//         });
+//       })
+//       .then(() => { setInfo(true); });
+//   }, [info]);
+
+//   if (!info) { return <div>overview</div>; }
+//   console.log(selectedVariant);
+//   return <div> hello </div> ;
+//   return (
+//     <div className={style.Overview}>
+//       <div className={style.Overview_Top}>
+//         <div>
+//           <FeaturedImage variant={selectedVariant} />
+//         </div>
+//         <div>
+//           <div>{'<<placeholder - read all reviews>>'}</div>
+//           <ProductInfo product={product} variant={selectedVariant} />
+//           <StylesList variants={variants} setSelectedVariant={setSelectedVariant} />
+//           <Actions />
+//         </div>
+//       </div>
+//       <div className={style.Overview_Bottom}>
+//         <Description product={product} />
+//         <FeaturesList />
+//       </div>
+//     </div>
+//   );
+// }
 
 class Overview extends React.Component {
   constructor(props) {
@@ -56,7 +116,6 @@ class Overview extends React.Component {
 
   render() {
     if (!this.state.info) { return <div> test </div>; }
-
     return (
       <div className={style.Overview}>
         <div className={style.Overview_Top}>
