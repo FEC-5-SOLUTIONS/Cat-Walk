@@ -59,20 +59,25 @@ function Overview() {
   // console.log(selectedVariant);
   // return <div> hello </div> ;
   return (
-    <div className={style.Overview}>
-      <div className={style.Overview_Top}>
-        <div>
+    <div id="Overview" className={style.Overview}>
+      <div id="Overview-Top" className={style.Overview_Top}>
+        <div id="Display-Section" className={style.DisplaySection}>
+          <ThumbCarousel variant={selectedVariant} />
           <BigCarousel variant={selectedVariant} />
           {/* <FeaturedImage variant={selectedVariant} /> */}
         </div>
-        <div>
+        <div id="Info-Section">
           <div>{'<<placeholder - read all reviews>>'}</div>
           <ProductInfo product={product} variant={selectedVariant} />
-          <StylesList variants={variants} selectedVariant={selectedVariant} setSelectedVariant={setSelectedVariant} />
+          <StylesList
+            variants={variants}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+          />
           <Actions />
         </div>
       </div>
-      <div className={style.Overview_Bottom}>
+      <div id="Overview-Bottom" className={style.Overview_Bottom}>
         <Description product={product} />
         <FeaturesList />
       </div>
@@ -131,35 +136,88 @@ function Actions() {
   );
 }
 
+function ThumbCarousel(props) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  let itemsInView = 5;
+  let length = props.variant.photos.length;
+
+  const updateIndex = (newIndex) => {
+    // console.log(`${newIndex} / ${length}`);
+
+    if (newIndex < 0) {
+      newIndex = length - itemsInView;
+    } else if (newIndex >= length - itemsInView + 1) {
+      newIndex = 0;
+    }
+    setActiveIndex(newIndex);
+  };
+
+  return (
+    <div id="ThumbCarousel" className={style.ThumbCarousel} >
+      <div id="ThumbCarousel-Controls" className={style.ThumbCarousel_Controls}>
+          <button onClick={() => {updateIndex(activeIndex - 1)}}>{'↑'}</button>
+          <button onClick={() => {updateIndex(activeIndex + 1)}}>{'↓'}</button>
+        </div>
+      <div id="ThumbCarousel-ViewPort" className={style.ThumbCarousel_Viewport}>
+        <div id="ThumbCarousel-Inner"
+          className={style.ThumbCarousel_Inner}
+          style={{ transform: `translateY(-${activeIndex * (100 * length ** -1)}%` }}
+        >
+          {
+            props.variant.photos.map((v, i) => (
+              <div id="ThumbCarousel-ImageContainer" key={i} className={style.ThumbCarousel_ImageContainer}>
+                <img
+                  id="ThumbCarousel-Image"
+                  key={i}
+                  className={style.ThumbCarousel_Image}
+                  src={v.thumbnail_url}
+                  alt={v.name}
+                  style={{ height: '100%' }}
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function BigCarousel(props) {
   // console.log(props.variant.photos);
   const [activeIndex, setActiveIndex] = useState(0);
+  let length = props.variant.photos.length;
 
   const updateIndex = (newIndex) => {
-    let length = props.variant.photos.length;
-    if (newIndex < 0) { newIndex = length - 1; }
-    else if (newIndex >= length) { newIndex = 0; }
+    if (newIndex < 0) {
+      newIndex = length - 1;
+    } else if (newIndex >= length) {
+      newIndex = 0;
+    }
     setActiveIndex(newIndex);
   };
 
   return (
     <div className={style.BigCarousel_Viewport}>
       <div className={style.BigCarousel_Controls}>
-        <button onClick={() => {updateIndex(activeIndex - 1)}}>{'<'}</button>
-        <button onClick={() => {updateIndex(activeIndex + 1)}}>{'>'}</button>
+        <button onClick={() => {updateIndex(activeIndex - 1)}}>{'←'}</button>
+        <button onClick={() => {updateIndex(activeIndex + 1)}}>{'→'}</button>
       </div>
       <div
         className={style.BigCarousel_Inner}
-        style={{transform: `translateX(-${activeIndex * 100}%`}}>
+        style={{ transform: `translateX(-${activeIndex * 100 * (length ** -1)}%` }}
+      >
         {
           props.variant.photos.map((v, i) => (
-            <img
-              key={i}
-              className={style.BigCarousel_Image}
-              src={v.url}
-              alt={v.name}
-              style={{width: "100%"}}
-            />
+            <div key={i} className={style.BigCarousel_ImageContainer} >
+              <img
+                key={i}
+                className={style.BigCarousel_Image}
+                src={v.url}
+                alt={v.name}
+                // style={{ width: "100%" }}
+              />
+            </div>
           ))
         }
       </div>
@@ -212,7 +270,7 @@ function CheckMark() {
     <img
       className={style.Check}
       src={'https://cdn.pixabay.com/photo/2014/03/25/16/58/check-mark-297739_960_720.png'}
-      alt="✓"
+      // alt="✓"
     />
   );
 }
