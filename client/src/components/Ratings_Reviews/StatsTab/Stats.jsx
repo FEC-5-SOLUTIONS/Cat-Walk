@@ -12,8 +12,8 @@ function Stats({ metaData }) {
   // }
   // const a = metaData;
   let average = 0;
-  if (!Array.isArray(metaData)){
-    average = getAvg(metaData.ratings)
+  if (!Array.isArray(metaData)) {
+    average = getAvg(metaData.ratings);
   }
   return (
     <div className={`${styles.statsTab} ${styles.statsFlex}`}>
