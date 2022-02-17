@@ -15,7 +15,6 @@ const bars = (obj) => {
   for (let i = 1; i <= 5; i++) {
     if (obj[i]) {
       let percentage = (Number(obj[i]) / totalCount) * 100;
-      let whiteSpace = 100 - percentage;
       returnJSX.push(
         <div className={styles.barHolder}>
           <div className={styles.barNumber}>

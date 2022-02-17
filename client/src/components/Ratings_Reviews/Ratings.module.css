@@ -61,16 +61,24 @@
 }
 .barNumber{
   grid-column: 1;
-  justify-content: center;
-  padding-left: 90%;
+
+  padding-left: 10%;
 }
 .barBar{
   border: solid;
   grid-column: 2 / 5
 }
+.charHolder{
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: stretch;
+}
+
 .charBar{
-  border: solid;
-  grid-column: 2 / 4
+  border: solid black;
 }
 
 .statsFit {

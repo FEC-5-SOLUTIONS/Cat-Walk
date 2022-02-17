@@ -51,11 +51,7 @@ function Stars({ metaData }) {
 
   return !metaData.ratings ? null : (
     <div>
-      <div>{avg}</div>
-      <div>
-        {stars.map((star) => star)}
-      </div>
-
+      {avg} {stars.map((star) => star)}
     </div>
   );
 }

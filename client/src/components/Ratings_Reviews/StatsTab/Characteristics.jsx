@@ -7,9 +7,9 @@ const bars = (obj) => {
     let currentChar = Object.keys(obj)[i];
     let percentage = ((obj[currentChar].value) / 5) * 100;
     returnJSX.push(
-      <div className={styles.reviewBorder}>
+      <div className={styles.charHolder}>
         <div>{Object.keys(obj)[i]}:</div>
-        <div className={styles.barBar}>
+        <div className={styles.charBar}>
           <div style={{ background: 'black',
             width: `${percentage}%`,
             height: '100%',
