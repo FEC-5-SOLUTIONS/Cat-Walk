@@ -67,6 +67,7 @@
 .StyleButtonContainer > div {
   display:flex;
   flex-direction: row-reverse;
+  z-index:1;
 }
 .StyleButton {
   width: 40px;
@@ -86,12 +87,6 @@
   height: 15px;
   object-fit: cover;
 }
-/* .FeaturedImage {
-  width: 200px;
-  height: 200px;
-  padding: 10px;
-  object-fit: cover;
-} */
 .BigCarousel_Viewport {
   overflow: hidden;
   width: 250px;
@@ -100,14 +95,11 @@
 }
 .BigCarousel_Inner {
   white-space: nowrap;
-  justify-content:center;
-  position:absolute;
-  top:-15%;
+  display:inline-flex;
   transition: transform 0.3s;
 }
 .BigCarousel_Image {
-  display: inline-flex;
-  justify-content: center;
+  top:auto;
   object-fit: cover;
 }
 .BigCarousel_Controls {
