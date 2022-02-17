@@ -9,6 +9,7 @@ class ReviewsList extends React.Component {
       viewMore: false,
       buttonText: 'View More',
     };
+    this.handleChange=this.handleChange.bind(this);
   }
 
   handleClick (e) {
@@ -19,12 +20,20 @@ class ReviewsList extends React.Component {
     });
   }
 
+  handleChange(e) {
+    this.props.sortFunc(e.target.value);
+  }
 
   render() {
     return !this.props.reviewsData.results ? <div>nothing to see</div> : (
       <div>
         <div>
-          {this.props.reviewsData.results.length} Reviews sorted by '{this.props.sort}'
+          {this.props.reviewsData.results.length} Reviews sorted by
+          <select value={this.props.sort} onChange={this.handleChange}>
+            <option value="relevant">relevant</option>
+            <option value="newest">newest</option>
+            <option value="helpful">helpful</option>
+          </select>
         </div>
         <div>
         {!this.state.viewMore ?

@@ -14,6 +14,7 @@ class RatingsAndReviews extends React.Component {
       count: 2,
       productID: 40346,
     };
+    this.sort = this.sort.bind(this);
   }
 
   componentDidMount() {
@@ -41,12 +42,17 @@ class RatingsAndReviews extends React.Component {
       });
   }
 
+  sort(value) {
+    this.setState({ sortBy: value });
+    this.getReviews();
+  }
+
   render() {
     return (
       <div>
       <div className={styles.reviewBorder}>
         <Stats metaData={this.state.meta} />
-        <ReviewsList reviewsData={this.state.reviews} sort={this.state.sortBy} />
+        <ReviewsList reviewsData={this.state.reviews} sort={this.state.sortBy} sortFunc={this.sort} />
       </div>
       </div>
     );
