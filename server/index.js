@@ -13,7 +13,7 @@ const headers = { authorization: auth.key };
 const baseUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
 
 // GET PRODUCT
-app.get('/api/product/', (req, res) => {
+app.get('/api/product', (req, res) => {
   axios({
     method: 'GET',
     url: `${baseUrl}/products/${req.query.product_id}`,
@@ -31,7 +31,7 @@ app.get('/api/styles', (req, res) => {
 });
 
 // GET RELATED
-app.get('/api/related/', (req, res) => {
+app.get('/api/related', (req, res) => {
   axios({
     method: 'GET',
     url: `${baseUrl}/products/${req.query.product_id}/related`,
@@ -59,7 +59,7 @@ app.get('/api/all_reviews/:sort/:productID', (req, res) => {
 });
 
 // GET QUESTIONS
-app.get('/api/questions/', (req, res) => {
+app.get('/api/questions', (req, res) => {
   axios({
     method: 'GET',
     url: `${baseUrl}/qa/questions`,
@@ -73,7 +73,7 @@ app.get('/api/questions/', (req, res) => {
 });
 
 // GET ANSWERS
-app.get('/api/answers/', (req, res) => {
+app.get('/api/answers', (req, res) => {
   axios({
     method: 'GET',
     url: `${baseUrl}/qa/questions/${req.query.question_id}/answers`,
