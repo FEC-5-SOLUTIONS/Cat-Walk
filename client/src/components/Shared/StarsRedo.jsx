@@ -38,7 +38,7 @@ const getAvg = (obj) => {
 function Stars({ metaData }) {
   const[rating, setRating] = useState(4);
   const[hover, setHover] = useState(null);
-  console.log('metaData: ', metaData);
+  // console.log('metaData: ', metaData);
   let avg = 0;
   // console.log('avg: ', avg);
   // let stars = {};
@@ -61,7 +61,7 @@ function Stars({ metaData }) {
             className={styles.starButton}
             value = {ratingValue}
             onClick={() => {
-              console.log('clicked')
+              // console.log('clicked')
               setRating(ratingValue)}
             }
             onMouseEnter ={()=> setHover(ratingValue)}

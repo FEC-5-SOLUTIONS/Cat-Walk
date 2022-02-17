@@ -28,7 +28,7 @@ class RatingsAndReviews extends React.Component {
         this.setState({ meta: res.data });
       })
       .catch((err) => {
-        console.log('err');
+        // console.log('err');
       });
   }
 
@@ -38,7 +38,7 @@ class RatingsAndReviews extends React.Component {
         this.setState({ reviews: res.data });
       })
       .catch((err) => {
-        console.log('err');
+        // console.log('err');
       });
   }
 

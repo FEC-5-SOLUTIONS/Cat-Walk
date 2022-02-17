@@ -9,7 +9,7 @@ class ReviewsList extends React.Component {
       viewMore: false,
       buttonText: 'View More',
     };
-    this.handleChange=this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick (e) {
