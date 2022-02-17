@@ -92,6 +92,10 @@
   grid-area: 5/1/6/5;
 }
 
+.reviewList{
+  max-height: 100%;
+  overflow: scroll;
+}
 
 .reviewsList {
   border-style: solid;

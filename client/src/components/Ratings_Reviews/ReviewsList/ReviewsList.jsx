@@ -41,7 +41,7 @@ class ReviewsList extends React.Component {
             <option value="helpful">helpful</option>
           </select>
         </div>
-        <div>
+        <div className={styles.reviewList}>
         {!this.state.viewMore ?
         <ReviewList data = {this.props.reviewsData.results.slice(0,2)} /> : <ReviewList data = {this.props.reviewsData.results} />}
         </div>
