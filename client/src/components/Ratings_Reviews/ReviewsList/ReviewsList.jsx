@@ -9,14 +9,20 @@ class ReviewsList extends React.Component {
       viewMore: false,
       buttonText: 'View More',
     };
-    this.handleChange=this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick (e) {
     // e.preventDefault();
+    let newText = '';
+    if (this.state.buttonText === 'View More') {
+      newText = 'View Less';
+    } else {
+      newText = 'View More';
+    }
     this.setState({
       viewMore: !this.state.viewMore,
-      buttonText: 'View Less',
+      buttonText: newText,
     });
   }
 

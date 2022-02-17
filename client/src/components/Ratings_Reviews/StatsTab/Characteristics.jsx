@@ -24,9 +24,9 @@ const bars = (obj) => {
 function Characteristics({metaData}) {
   let barList = [];
   if (metaData.characteristics) {
-    console.log('characteristics: ', metaData.characteristics);
+    // console.log('characteristics: ', metaData.characteristics);
     barList = bars(metaData.characteristics);
-    console.log(barList);
+    // console.log(barList);
   }
 
   return !metaData.characteristics ? null : (

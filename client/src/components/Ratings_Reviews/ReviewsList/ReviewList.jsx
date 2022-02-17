@@ -6,7 +6,7 @@ function ReviewList({ data }) {
   let datas = [];
   if (data) {
     datas = data;
-    console.log('datas: ', data);
+    // console.log('datas: ', data);
   }
   return !data ? null : (
     <div>

@@ -7,16 +7,18 @@
   display: none;
 } */
 
+
+
 .star{
+  font-size: 25px;
+  overflow: hidden;
   position: relative;
-  size: 25%;
-  width: 10%
 }
 
-.darkStar{
-  size: 25%;
+.star .darkStar{
+  color: gold;
+  position: absolute;;
+  overflow: hidden;
   top: 0;
-  left: 0;
-  width: 10%;
-  color: blue;
+
 }

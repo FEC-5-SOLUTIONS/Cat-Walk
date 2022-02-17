@@ -1,11 +1,17 @@
 import React from 'react';
 import Photos from './photos';
+import Stars from '../../Shared/StarsUni';
 import styles from '../Ratings.module.css';
 
 function ReviewListItem({review}) {
   return (
     <div>
-      <div>{review.rating} {review.date.slice(0,10)}</div>
+      <div>
+        <div style={{ width: 'fit-content' }}>
+          <Stars average={review.rating} />
+        </div>
+        {review.date.slice(0,10)}
+      </div>
       <div>{review.summary}</div>
       <div>{review.body}</div>
       <div>posted by : {review.reviewer_name}</div>

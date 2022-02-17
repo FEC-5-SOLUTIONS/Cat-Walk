@@ -52,9 +52,9 @@ const bars = (obj) => {
 function RatingBars({ metaData }) {
   let barList = [];
   if (metaData.ratings) {
-    console.log('ratings: ', metaData.ratings);
+    // console.log('ratings: ', metaData.ratings);
     barList = bars(metaData.ratings);
-    console.log(barList);
+    // console.log(barList);
   }
 
   return !metaData.ratings ? null : (

@@ -48,6 +48,9 @@
   grid-area: 2/1/3/5;
 }
 
+.starContainer{
+  width: fit-content;
+}
 .statsBars {
   grid-area: 3/1/4/5;
 
