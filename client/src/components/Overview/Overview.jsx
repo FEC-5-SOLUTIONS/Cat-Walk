@@ -248,7 +248,7 @@ function StylesList(props) {
 
 function StyleButton(props) {
   function handleClick() {
-    console.log(props.variant.name);
+    // console.log(props.variant.name);
     props.setSelectedVariant(props.variant);
   }
 
