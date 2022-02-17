@@ -38,7 +38,7 @@ const getAvg = (obj) => {
 };
 
 function Stars({ metaData }) {
-  console.log('metaData: ', metaData);
+  // console.log('metaData: ', metaData);
   let avg = 0;
   // console.log('avg: ', avg);
   let stars = {};
