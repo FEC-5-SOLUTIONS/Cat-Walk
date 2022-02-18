@@ -63,9 +63,8 @@ function RatingsAndReviews() {
     e.preventDefault();
     let newText = 'View More';
     if (buttonText === 'View More') {
-      newText='View Less';
+      newText = 'View Less';
     }
-    console.log('entered click event')
     setViewMore(!viewMore);
     setButtonText(newText);
   };
