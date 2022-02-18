@@ -1,5 +1,6 @@
 import React from 'react';
 
+// function to get percentage, can probable export to util but it's not much so maybe not necessary
 const recPer = (obj) => {
   // console.log(obj.true);
   const percentage = (Number(obj.true)) / (Number(obj.true) + Number(obj.false));

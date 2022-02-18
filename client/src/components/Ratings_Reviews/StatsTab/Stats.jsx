@@ -16,10 +16,10 @@ function Stats({ meta, average }) {
       <div className={styles.statsRec}>
         <Recommended meta={meta} />
       </div>
-      {/* <div className={styles.statsBars}>
+      <div className={styles.statsBars}>
         <RatingBars meta={meta} />
       </div>
-      <div className={styles.statsFit}>
+      {/* <div className={styles.statsFit}>
         <Characteristics meta={meta} />
       </div> */}
     </div>
