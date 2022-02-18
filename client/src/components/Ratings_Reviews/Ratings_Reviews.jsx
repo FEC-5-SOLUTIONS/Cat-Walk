@@ -24,6 +24,8 @@ function RatingsAndReviews() {
   const [avg, setAverage] = useState(0);
   const [sort, setSort] = useState('relevant');
   const [productID, setProductID] = useState(40346);
+  const [viewMore, setViewMore] = useState(false);
+  const [buttonText, setButtonText] = useState('View More');
 
   useEffect(() => {
     axios.get(`api/reviews/meta/${productID}`)
@@ -54,6 +56,20 @@ function RatingsAndReviews() {
       });
   },[productID, sort]);
 
+  const handleChange = (e) => {
+    setSort(e.target.value);
+  };
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    let newText = 'View More';
+    if (buttonText === 'View More') {
+      newText='View Less';
+    }
+    console.log('entered click event')
+    setViewMore(!viewMore);
+    setButtonText(newText);
+  };
+
   // getMeta() {
   //   axios.get(`api/reviews/meta/${this.state.productID}`)
   //     .then((res) => {
@@ -82,8 +98,14 @@ function RatingsAndReviews() {
     <div className={styles.topLevel}>
       <div className={styles.reviewRatingsContainer}>
         <Stats meta={meta} average = {avg} />
-        hello
-        {/* <ReviewsList reviews={reviews} sort={sort} sortBy={setSort} /> */}
+        <ReviewsList
+          reviews={reviews}
+          sort={sort}
+          handleChange={handleChange}
+          text={buttonText}
+          viewMore={viewMore}
+          click={handleButtonClick}
+        />
       </div>
     </div>
   );
