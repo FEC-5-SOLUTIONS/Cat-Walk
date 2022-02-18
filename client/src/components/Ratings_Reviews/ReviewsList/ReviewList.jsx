@@ -9,7 +9,7 @@ function ReviewList({ data }) {
     // console.log('datas: ', data);
   }
   return !data ? null : (
-    <div>
+    <div className={styles.reviewListContainer}>
       {datas.map((review) =>
       <ReviewListItem review={review} />
       )}

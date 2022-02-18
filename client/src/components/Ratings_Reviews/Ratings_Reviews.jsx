@@ -49,8 +49,8 @@ class RatingsAndReviews extends React.Component {
 
   render() {
     return (
-      <div>
-      <div className={styles.reviewBorder}>
+      <div className={styles.topLevel}>
+      <div className={styles.reviewRatingsContainer}>
         <Stats metaData={this.state.meta} />
         <ReviewsList reviewsData={this.state.reviews} sort={this.state.sortBy} sortFunc={this.sort} />
       </div>

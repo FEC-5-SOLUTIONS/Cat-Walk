@@ -32,7 +32,7 @@ class ReviewsList extends React.Component {
 
   render() {
     return !this.props.reviewsData.results ? <div>nothing to see</div> : (
-      <div>
+      <div className={styles.reviewsContainer}>
         <div>
           {this.props.reviewsData.results.length} Reviews sorted by
           <select value={this.props.sort} onChange={this.handleChange}>
