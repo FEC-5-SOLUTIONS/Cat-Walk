@@ -18,8 +18,3 @@ function ReviewList({ data }) {
 }
 
 export default ReviewList;
-
-// {datas.map((review)=>{
-//   <ReviewListItem />;
-//   console.log('review: ', review);
-// })}
