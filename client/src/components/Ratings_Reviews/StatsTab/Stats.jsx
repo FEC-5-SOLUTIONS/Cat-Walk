@@ -19,27 +19,25 @@ function Stats({ meta, average }) {
       <div className={styles.statsBars}>
         <RatingBars meta={meta} />
       </div>
-      {/* <div className={styles.statsFit}>
+      <div className={styles.statsFit}>
         <Characteristics meta={meta} />
-      </div> */}
+      </div>
     </div>
   );
 }
-
-
-  export default Stats;
-    // <div className={`${styles.statsTab} ${styles.statsFlex}`}>
-    //   <div className={styles.statsStars}>
-    //     {String(average).slice(0, 4)}
-    //     <Stars average={average} />
-    //   </div>
-    //   <div className={styles.statsRec}>
-    //     <Recommended meta={meta} />
-    //   </div>
-    //   <div className={styles.statsBars}>
-    //     <RatingBars meta={meta} />
-    //   </div>
-    //   <div className={styles.statsFit}>
-    //     <Characteristics meta={meta} />
-    //   </div>
-    // </div>
+export default Stats;
+// <div className={`${styles.statsTab} ${styles.statsFlex}`}>
+//   <div className={styles.statsStars}>
+//     {String(average).slice(0, 4)}
+//     <Stars average={average} />
+//   </div>
+//   <div className={styles.statsRec}>
+//     <Recommended meta={meta} />
+//   </div>
+//   <div className={styles.statsBars}>
+//     <RatingBars meta={meta} />
+//   </div>
+//   <div className={styles.statsFit}>
+//     <Characteristics meta={meta} />
+//   </div>
+// </div>
