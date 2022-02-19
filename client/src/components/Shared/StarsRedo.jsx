@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import styles from './ReviewStar.module.css';
 
-function Stars({ metaData }) {
+function Stars({ starRating, setStarRating }) {
   const[rating, setRating] = useState(0);
   const[hover, setHover] = useState(null);
 
   return (
     <div>
-      {[...Array(5)].map( (star, i) => {
+      {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1;
         return (
         <label>
@@ -17,16 +17,18 @@ function Stars({ metaData }) {
             type='radio'
             name='rating'
             className={styles.starButton}
-            value = {ratingValue}
+            value={ratingValue}
             onClick={() => {
               // console.log('clicked')
-              setRating(ratingValue)}
-            }
-            onMouseEnter ={()=> setHover(ratingValue)}
-            onMouseLeave = {()=>setHover(null)} />
-          <FontAwesomeIcon icon={faStar}
-          className={styles.star}
-          color={ratingValue <= (hover || rating) ? "yellow": "gray"}
+              setStarRating(ratingValue);
+            }}
+            onMouseEnter={() => setHover(ratingValue)}
+            onMouseLeave={() => setHover(null)}
+          />
+          <FontAwesomeIcon
+            icon={faStar}
+            className={styles.star}
+            color={ratingValue <= (hover || starRating) ? 'yellow' : 'gray'}
           size={25} />
         </label>
         );

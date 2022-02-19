@@ -25,14 +25,21 @@ const fitArray = ['Runs tight',
   'Runs long',
 ];
 
-
-
-
 function Modal() {
+  const [starRating, setStarRating] = useState(0);
+  const [sizeRating, setSizeRating] = useState(0);
+  const [widthRating, setWidthRating] = useState(0);
+  const [comfortRating, setComfortRating] = useState(0);
+  const [qualityRating, setQualityRating] = useState(0);
+  const [lengthRating, setLengthRating] = useState(0);
+  const [fitRating, setFitRating] = useState(0);
+  // have to make a post request once all of the required info is here
+  // call will be initiated by clicking the submit button
+
   return (
     <div>
       <div>
-        <Stars />
+        <Stars starRating={starRating} setStarRating={setStarRating} />
         <div>
           Do you recommend this product?
           <label>
@@ -55,12 +62,34 @@ function Modal() {
           </label>
         </div>
       </div>
-      <Chars char="Size" array={sizeArray} />
-      <Chars char="Width" array={widthArray} />
-      <Chars char="Comfort" array={comfortArray} />
-      <Chars char="Quality" array={qualityArray} />
-      <Chars char="Length" array={lengthArray} />
-      <Chars char="Fit" array={fitArray} />
+      <div>
+        <Chars char="Size" array={sizeArray} setSizeRating={setSizeRating} />
+        <Chars char="Width" array={widthArray} setWidthRating={setWidthRating} />
+        <Chars char="Comfort" array={comfortArray} setComfortRating={setComfortRating} />
+        <Chars char="Quality" array={qualityArray} setQualityRating={setQualityRating} />
+        <Chars char="Length" array={lengthArray} setLengthRating={setLengthRating} />
+        <Chars char="Fit" array={fitArray} setFitRating={setFitRating} />
+      </div>
+      <div>
+        Please enter a Summary:
+        <input type="text" maxLength="60" placeholder="Example: Best Purchase Ever!" />
+      </div>
+      <div>
+        Please enter a Review:
+        <input type="text" maxLength="1000" placeholder="Why did you like the product or not?" />
+      </div>
+      <div>
+        What is your nickname:
+        <input type="text" maxLength="60" placeholder="Please enter a nickname" />
+      </div>
+      <div>
+        Please enter your email:
+        <input type="text" maxLength="60" placeholder="Please enter your email" />
+      </div>
+      <div>
+        <button>Submit</button>
+        <button>Cancel</button>
+      </div>
     </div>
   );
 }
