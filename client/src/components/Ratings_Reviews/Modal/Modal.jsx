@@ -35,23 +35,38 @@ function Modal({ setModal }) {
   const [lengthRating, setLengthRating] = useState(0);
   const [fitRating, setFitRating] = useState(0);
 
-  // useref for nickname
-  const nicknameRef = useRef(0);
+  const [email, setEmail] = useState(0);
+  const [summary, setSummary] = useState(0);
+  const [nickname, setNickname] = useState(0);
+  const [review, setReview] = useState(0);
+  // below is code for when was using useRef
+  // issue was that it was not checking truthy as desired
+  // // useref for nickname
+  // const nicknameRef = useRef(0);
 
-  // useref for email
-  const emailRef = useRef(0);
-  // useref for summary
-  const summaryRef = useRef(0);
+  // // useref for email
+  // const emailRef = useRef(0);
+  // // useref for summary
+  // const summaryRef = useRef(0);
 
-  // useref for review
-  const reviewRef = useRef(0);
+  // // useref for review
+  // const reviewRef = useRef(0);
 
-  function handleRefChange() {
-    console.log('reviewRef: ', reviewRef.current.value)
-  }
+  // function handleRefChange() {
+  //   console.log('reviewRef: ', reviewRef.current.value)
+  // }
+
+  // nicknameRef.current.value,
+  // emailRef.current.value,
+  // summaryRef.current.value,
+  // reviewRef.current.value,
 
   function handleRecClick(e) {
-    setRecRating(e.target.value);
+    if (e.target.value === '1') {
+      setRecRating(true);
+    } else {
+      setRecRating(false);
+    }
   }
 
   const postArray = [
@@ -64,10 +79,10 @@ function Modal({ setModal }) {
     Number(qualityRating),
     Number(lengthRating),
     Number(fitRating),
-    nicknameRef.current.value,
-    emailRef.current.value,
-    summaryRef.current.value,
-    reviewRef.current.value,
+    email,
+    summary,
+    nickname,
+    review,
   ];
   // the funciton below will itterate throught the array and check for any 0 in postarray
   // if there is no 0 in postarray -> we have all required fields filled
@@ -123,19 +138,33 @@ function Modal({ setModal }) {
       </div>
       <div>
         Please enter a Summary:
-        <input type="text" maxLength="60" placeholder="Example: Best Purchase Ever!" ref={summaryRef} />
+        <input type="text" maxLength="60" placeholder="Example: Best Purchase Ever!"
+        onChange={(e)=>setSummary(e.target.value)}
+        />
       </div>
       <div>
         Please enter a Review:
-        <input type="text" maxLength="1000" placeholder="Why did you like the product or not?" ref={reviewRef} onChange={handleRefChange} />
+        <input type="text"
+        maxLength="1000"
+        placeholder="Why did you like the product or not?"
+        onChange={(e)=>setReview(e.target.value)}
+        />
       </div>
       <div>
         What is your nickname:
-        <input type="text" maxLength="60" placeholder="Please enter a nickname" ref={nicknameRef} />
+        <input type="text"
+        maxLength="60"
+        placeholder="Please enter a nickname"
+        onChange={(e)=>setNickname(e.target.value)}
+        />
       </div>
       <div>
         Please enter your email:
-        <input type="text" maxLength="60" placeholder="Please enter your email" ref={emailRef}/>
+        <input type="text"
+        maxLength="60"
+        placeholder="Please enter your email"
+        onChange={(e)=>setEmail(e.target.value)}
+        />
       </div>
       <div>
         <button onClick={handleSubmit}>Submit</button>
