@@ -27,6 +27,7 @@ const fitArray = ['Runs tight',
 
 function Modal({ setModal }) {
   const [starRating, setStarRating] = useState(0);
+  const [recRating, setRecRating] = useState(null);
   const [sizeRating, setSizeRating] = useState(0);
   const [widthRating, setWidthRating] = useState(0);
   const [comfortRating, setComfortRating] = useState(0);
@@ -35,18 +36,27 @@ function Modal({ setModal }) {
   const [fitRating, setFitRating] = useState(0);
 
   // useref for nickname
-  const nicknameRef = useRef('');
+  const nicknameRef = useRef(0);
 
   // useref for email
-  const emailRef = useRef('');
+  const emailRef = useRef(0);
   // useref for summary
-  const summaryRef = useRef('');
+  const summaryRef = useRef(0);
 
   // useref for review
-  const reviewRef = useRef('');
+  const reviewRef = useRef(0);
+
+  function handleRefChange() {
+    console.log('reviewRef: ', reviewRef.current.value)
+  }
+
+  function handleRecClick(e) {
+    setRecRating(e.target.value);
+  }
 
   const postArray = [
     starRating,
+    Number(recRating),
     Number(starRating),
     Number(sizeRating),
     Number(widthRating),
@@ -54,11 +64,25 @@ function Modal({ setModal }) {
     Number(qualityRating),
     Number(lengthRating),
     Number(fitRating),
-    nicknameRef.current.value.length,
-    emailRef.current.value.length,
-    summaryRef.current.value.length,
-    reviewRef.current.value.length,
+    nicknameRef.current.value,
+    emailRef.current.value,
+    summaryRef.current.value,
+    reviewRef.current.value,
   ];
+  // the funciton below will itterate throught the array and check for any 0 in postarray
+  // if there is no 0 in postarray -> we have all required fields filled
+  // post request can now be submitted
+  const isTrue = (subject) => subject !== 0;
+  // the post request should be handled within here
+  function handleSubmit() {
+    if (postArray.every(isTrue)) {
+      for (let i = 0; i < postArray.length; i++){
+        console.log(`i is ${i} and the value is ${postArray[i]}`)
+      };
+    } else {
+      console.log('something missing');
+    }
+  }
 
   // have to make a post request once all of the required info is here
   // call will be initiated by clicking the submit button
@@ -74,8 +98,8 @@ function Modal({ setModal }) {
             <input
               type="radio"
               name="reccomend"
-              value={true}
-              onClick={(e) => console.log(e.target.value)}
+              value={1}
+              onClick={handleRecClick}
             />
           </label>
           <label>
@@ -83,8 +107,8 @@ function Modal({ setModal }) {
             <input
               type="radio"
               name="reccomend"
-              value={false}
-              onClick={(e) => console.log(e.target.value)}
+              value={0}
+              onClick={handleRecClick}
             />
           </label>
         </div>
@@ -103,7 +127,7 @@ function Modal({ setModal }) {
       </div>
       <div>
         Please enter a Review:
-        <input type="text" maxLength="1000" placeholder="Why did you like the product or not?" ref={reviewRef} />
+        <input type="text" maxLength="1000" placeholder="Why did you like the product or not?" ref={reviewRef} onChange={handleRefChange} />
       </div>
       <div>
         What is your nickname:
@@ -114,7 +138,7 @@ function Modal({ setModal }) {
         <input type="text" maxLength="60" placeholder="Please enter your email" ref={emailRef}/>
       </div>
       <div>
-        <button>Submit</button>
+        <button onClick={handleSubmit}>Submit</button>
         <button onClick={ ()=>{setModal(false)} }>Cancel</button>
       </div>
     </div>
