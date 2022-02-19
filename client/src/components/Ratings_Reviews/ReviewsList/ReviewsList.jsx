@@ -26,9 +26,9 @@ function ReviewsList({
         </div>
         <div>
           <button onClick={click}>{text}</button>
-          <button onClick={()=>{setModal(true)}}>Add A review!</button>
+          <button onClick={()=>{setModal(true)}}>Add A review! </button>
         </div>
-        {modal ? <Modal /> : null}
+        {modal ? <Modal setModal={setModal} /> : null}
       </div>
     );
 }

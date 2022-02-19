@@ -25,7 +25,7 @@ const fitArray = ['Runs tight',
   'Runs long',
 ];
 
-function Modal() {
+function Modal({ setModal }) {
   const [starRating, setStarRating] = useState(0);
   const [sizeRating, setSizeRating] = useState(0);
   const [widthRating, setWidthRating] = useState(0);
@@ -33,6 +33,33 @@ function Modal() {
   const [qualityRating, setQualityRating] = useState(0);
   const [lengthRating, setLengthRating] = useState(0);
   const [fitRating, setFitRating] = useState(0);
+
+  // useref for nickname
+  const nicknameRef = useRef('');
+
+  // useref for email
+  const emailRef = useRef('');
+  // useref for summary
+  const summaryRef = useRef('');
+
+  // useref for review
+  const reviewRef = useRef('');
+
+  const postArray = [
+    starRating,
+    Number(starRating),
+    Number(sizeRating),
+    Number(widthRating),
+    Number(comfortRating),
+    Number(qualityRating),
+    Number(lengthRating),
+    Number(fitRating),
+    nicknameRef.current.value.length,
+    emailRef.current.value.length,
+    summaryRef.current.value.length,
+    reviewRef.current.value.length,
+  ];
+
   // have to make a post request once all of the required info is here
   // call will be initiated by clicking the submit button
 
@@ -72,23 +99,23 @@ function Modal() {
       </div>
       <div>
         Please enter a Summary:
-        <input type="text" maxLength="60" placeholder="Example: Best Purchase Ever!" />
+        <input type="text" maxLength="60" placeholder="Example: Best Purchase Ever!" ref={summaryRef} />
       </div>
       <div>
         Please enter a Review:
-        <input type="text" maxLength="1000" placeholder="Why did you like the product or not?" />
+        <input type="text" maxLength="1000" placeholder="Why did you like the product or not?" ref={reviewRef} />
       </div>
       <div>
         What is your nickname:
-        <input type="text" maxLength="60" placeholder="Please enter a nickname" />
+        <input type="text" maxLength="60" placeholder="Please enter a nickname" ref={nicknameRef} />
       </div>
       <div>
         Please enter your email:
-        <input type="text" maxLength="60" placeholder="Please enter your email" />
+        <input type="text" maxLength="60" placeholder="Please enter your email" ref={emailRef}/>
       </div>
       <div>
         <button>Submit</button>
-        <button>Cancel</button>
+        <button onClick={ ()=>{setModal(false)} }>Cancel</button>
       </div>
     </div>
   );

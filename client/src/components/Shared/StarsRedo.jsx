@@ -4,8 +4,15 @@ import { faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import styles from './ReviewStar.module.css';
 
 function Stars({ starRating, setStarRating }) {
-  const[rating, setRating] = useState(0);
   const[hover, setHover] = useState(null);
+
+  function handleHover(e) {
+    setHover(e.target.value);
+  }
+
+  function handleLeave(e) {
+    setHover(null);
+  }
 
   return (
     <div>
@@ -22,14 +29,15 @@ function Stars({ starRating, setStarRating }) {
               // console.log('clicked')
               setStarRating(ratingValue);
             }}
-            onMouseEnter={() => setHover(ratingValue)}
-            onMouseLeave={() => setHover(null)}
+            onMouseEnter={handleHover}
+            onMouseLeave={handleLeave}
           />
           <FontAwesomeIcon
             icon={faStar}
             className={styles.star}
-            color={ratingValue <= (hover || starRating) ? 'yellow' : 'gray'}
-          size={25} />
+            color={ratingValue <= (hover || starRating) ? 'gold' : 'gray'}
+            size="25px"
+          />
         </label>
         );
       })}
