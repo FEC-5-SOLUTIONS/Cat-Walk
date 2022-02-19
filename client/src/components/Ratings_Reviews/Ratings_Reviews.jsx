@@ -71,7 +71,7 @@ function RatingsAndReviews() {
           setModal={setModal}
         />
       </div>
-      {modal ? <Modal setModal={setModal} charObj={charObj} /> : null}
+      {modal ? <Modal setModal={setModal} charObj={charObj} productID={productID} /> : null}
     </div>
   );
 }
