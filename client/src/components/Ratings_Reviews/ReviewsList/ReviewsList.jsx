@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import ReviewList from './ReviewList';
-import Modal from '../Modal/Modal';
+// import Modal from '../Modal/Modal';
 import styles from '../Ratings.module.css';
 
 function ReviewsList({
-  reviews, sort, handleChange, text, viewMore, click
+  reviews, sort, handleChange, text, viewMore, click, setModal
 }) {
-  const [modal, setModal] = useState(false);
-
   return !reviews.results ?
     <div>nothing to see</div> : (
       <div className={styles.reviewsContainer}>
@@ -28,7 +26,6 @@ function ReviewsList({
           <button onClick={click}>{text}</button>
           <button onClick={()=>{setModal(true)}}>Add A review! </button>
         </div>
-        {modal ? <Modal setModal={setModal} /> : null}
       </div>
     );
 }

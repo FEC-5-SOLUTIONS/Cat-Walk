@@ -25,9 +25,9 @@ const fitArray = ['Runs tight',
   'Runs long',
 ];
 
-function Modal({ setModal }) {
+function Modal({ setModal, charObj }) {
   const [starRating, setStarRating] = useState(0);
-  const [recRating, setRecRating] = useState(null);
+  const [recRating, setRecRating] = useState(2);
   const [sizeRating, setSizeRating] = useState(0);
   const [widthRating, setWidthRating] = useState(0);
   const [comfortRating, setComfortRating] = useState(0);
@@ -35,8 +35,8 @@ function Modal({ setModal }) {
   const [lengthRating, setLengthRating] = useState(0);
   const [fitRating, setFitRating] = useState(0);
 
-  const [email, setEmail] = useState(0);
-  const [summary, setSummary] = useState(0);
+  const [eMail, setEMail] = useState(0);
+  const [sumText, setSumText] = useState(0);
   const [nickname, setNickname] = useState(0);
   const [review, setReview] = useState(0);
   // below is code for when was using useRef
@@ -44,10 +44,10 @@ function Modal({ setModal }) {
   // // useref for nickname
   // const nicknameRef = useRef(0);
 
-  // // useref for email
-  // const emailRef = useRef(0);
-  // // useref for summary
-  // const summaryRef = useRef(0);
+  // // useref for eMail
+  // const eMailRef = useRef(0);
+  // // useref for sumText
+  // const sumTextRef = useRef(0);
 
   // // useref for review
   // const reviewRef = useRef(0);
@@ -57,8 +57,8 @@ function Modal({ setModal }) {
   // }
 
   // nicknameRef.current.value,
-  // emailRef.current.value,
-  // summaryRef.current.value,
+  // eMailRef.current.value,
+  // sumTextRef.current.value,
   // reviewRef.current.value,
 
   function handleRecClick(e) {
@@ -71,7 +71,6 @@ function Modal({ setModal }) {
 
   const postArray = [
     starRating,
-    Number(recRating),
     Number(starRating),
     Number(sizeRating),
     Number(widthRating),
@@ -79,8 +78,8 @@ function Modal({ setModal }) {
     Number(qualityRating),
     Number(lengthRating),
     Number(fitRating),
-    email,
-    summary,
+    eMail,
+    sumText,
     nickname,
     review,
   ];
@@ -91,9 +90,23 @@ function Modal({ setModal }) {
   // the post request should be handled within here
   function handleSubmit() {
     if (postArray.every(isTrue)) {
-      for (let i = 0; i < postArray.length; i++){
-        console.log(`i is ${i} and the value is ${postArray[i]}`)
-      };
+      if(typeof recRating === 'boolean') {
+        // must construct object here and make get request
+        const dataObj = {
+          product_id: productID,
+          rating: starRating,
+          summary: sumText,
+          body: review,
+          recommend: recRating,
+          name: nickname,
+          email: eMail,
+          characteristic: {
+          },
+        };
+        console.log('letsgo');
+      } else {
+        console.log('missing something ');
+      }
     } else {
       console.log('something missing');
     }
@@ -129,17 +142,32 @@ function Modal({ setModal }) {
         </div>
       </div>
       <div>
-        <Chars char="Size" array={sizeArray} setSizeRating={setSizeRating} />
+        {(Object.keys(charObj)).map((char)=>{
+          if (char === 'Comfort') {
+            return <Chars char={char} array={comfortArray} setComfortRating={setComfortRating} />;
+          } else if (char === 'Size') {
+            return <Chars char="Size" array={sizeArray} setSizeRating={setSizeRating} />
+          } else if (char === 'width') {
+            return <Chars char="Width" array={widthArray} setWidthRating={setWidthRating} />
+          } else if (char === 'Quality') {
+            return <Chars char="Quality" array={qualityArray} setQualityRating={setQualityRating} />
+          }else if (char === 'Length') {
+            return <Chars char="Length" array={lengthArray} setLengthRating={setLengthRating} />
+          } else {
+            return <Chars char="Fit" array={fitArray} setFitRating={setFitRating} />
+          }
+        })}
+        {/* <Chars char="Size" array={sizeArray} setSizeRating={setSizeRating} />
         <Chars char="Width" array={widthArray} setWidthRating={setWidthRating} />
         <Chars char="Comfort" array={comfortArray} setComfortRating={setComfortRating} />
         <Chars char="Quality" array={qualityArray} setQualityRating={setQualityRating} />
         <Chars char="Length" array={lengthArray} setLengthRating={setLengthRating} />
-        <Chars char="Fit" array={fitArray} setFitRating={setFitRating} />
+        <Chars char="Fit" array={fitArray} setFitRating={setFitRating} /> */}
       </div>
       <div>
-        Please enter a Summary:
+        Please enter a sumText:
         <input type="text" maxLength="60" placeholder="Example: Best Purchase Ever!"
-        onChange={(e)=>setSummary(e.target.value)}
+        onChange={(e)=>setSumText(e.target.value)}
         />
       </div>
       <div>
@@ -159,11 +187,11 @@ function Modal({ setModal }) {
         />
       </div>
       <div>
-        Please enter your email:
+        Please enter your eMail:
         <input type="text"
         maxLength="60"
-        placeholder="Please enter your email"
-        onChange={(e)=>setEmail(e.target.value)}
+        placeholder="Please enter your eMail"
+        onChange={(e)=>setEMail(e.target.value)}
         />
       </div>
       <div>

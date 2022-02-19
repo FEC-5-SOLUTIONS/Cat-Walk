@@ -2,15 +2,18 @@ import React, { useState, createContext, useEffect } from 'react';
 import axios from 'axios';
 import Stats from './StatsTab/Stats';
 import ReviewsList from './ReviewsList/ReviewsList';
+import Modal from './Modal/Modal';
 import getAvg from '../utils/getAvg';
 import styles from './Ratings.module.css';
 
 function RatingsAndReviews() {
+  const [modal, setModal] = useState(false);
   const [meta, setMeta] = useState([]);
+  const [charObj, setCharObj] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [avg, setAverage] = useState(0);
   const [sort, setSort] = useState('relevant');
-  const [productID, setProductID] = useState(40346);
+  const [productID, setProductID] = useState(40348);
   const [viewMore, setViewMore] = useState(false);
   const [buttonText, setButtonText] = useState('View More');
 
@@ -18,6 +21,7 @@ function RatingsAndReviews() {
     axios.get(`api/reviews/meta/${productID}`)
       .then((res) => {
         setMeta(res.data);
+        setCharObj(res.data.characteristics);
       })
       .catch((err) => {
         // console.log('err');
@@ -64,8 +68,10 @@ function RatingsAndReviews() {
           text={buttonText}
           viewMore={viewMore}
           click={handleButtonClick}
+          setModal={setModal}
         />
       </div>
+      {modal ? <Modal setModal={setModal} charObj={charObj} /> : null}
     </div>
   );
 }
