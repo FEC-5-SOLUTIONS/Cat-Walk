@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import axios from 'axios';
 import Stars from '../../Shared/StarsRedo';
 import Chars from './Characteristics';
 
@@ -104,7 +105,7 @@ function Modal({ setModal, charObj, productID}) {
         // must construct object here and make get request
         // first create the object for all the characteristics
         const characteristicObj = {};
-        for(var i = 0 ; i < chaToArray.length; i++) {
+        for (let i = 0; i < chaToArray.length; i++) {
           const currentChara = chaToArray[i];
           const currentID = charObj[currentChara].id;
           characteristicObj[currentID] = Number(charRatingObj[currentChara]);
@@ -117,9 +118,13 @@ function Modal({ setModal, charObj, productID}) {
           recommend: recRating,
           name: nickname,
           email: eMail,
-          characteristic: characteristicObj
+          characteristics: characteristicObj,
         };
-        console.log('dataObj: ', dataObj);
+        axios({
+          method: 'post',
+          url: '/api/reviews',
+          data: dataObj,
+        });
       } else {
         console.log('missing something ');
       }

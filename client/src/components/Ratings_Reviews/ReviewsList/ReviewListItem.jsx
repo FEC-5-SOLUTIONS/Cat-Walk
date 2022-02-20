@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Photos from './photos';
 import Stars from '../../Shared/StarsUni';
 import styles from '../Ratings.module.css';
@@ -9,6 +10,16 @@ function ReviewListItem({ review }) {
     const convertedDate = new Date(review.date);
     dateString = convertedDate.toDateString();
   }
+
+  function helpful() {
+    // make axsios put request here
+    const id = review.review_id
+    axios.put(`/api/reviews/${id}`)
+      .then((res) => {
+        console.log('success');
+      })
+  }
+
   return (
     <div>
       <div>
@@ -24,7 +35,7 @@ function ReviewListItem({ review }) {
         <Photos pics={review.photos} /> : null}
       {review.response ?
         <div>{review.response}</div> : null}
-      <div>helpful?({review.helpfulness})</div>
+      <div onClick={helpful}>helpful?({review.helpfulness})</div>
     </div>
   );
 }
