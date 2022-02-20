@@ -40,16 +40,20 @@ app.get('/api/related', (req, res) => {
 });
 
 // GET REVIEWS
-app.get('/api/reviews', (req, res) => {
+app.get('/api/reviews/meta/:productID', (req, res) => {
   axios({
     method: 'GET',
-    url: `${baseUrl}/reviews/`,
-    params: {
-      page: req.query.page || 1,
-      count: req.query.count || 5,
-      sort: req.query.sort || 'newest',
-      product_id: req.query.product_id,
-    },
+    url: `${baseUrl}/reviews/meta/?product_id=${req.params.productID}`,
+    headers,
+  }).then((axiosResponse) => res.status(200).send(axiosResponse.data))
+    .catch(() => res.status(400).send());
+});
+
+app.get('/api/all_reviews/:sort/:productID', (req, res) => {
+  // console.log('here')
+  axios({
+    method: 'GET',
+    url: `${baseUrl}/reviews/?product_id=${req.params.productID}&sort=${req.params.sort}&count=100`,
     headers,
   }).then((axiosResponse) => res.send(axiosResponse.data));
 });
@@ -90,8 +94,8 @@ app.put('/api/questions/:id', (req, res) => {
     .then(() => {
       res.sendStatus(204);
     })
-    .catch((err) => {
-      console.log(err, 'err in mark question as helpful');
+    .catch(() => {
+      res.sendStatus(400);
     });
 });
 
@@ -105,8 +109,8 @@ app.put('/api/answers/:id/helpful', (req, res) => {
     .then(() => {
       res.sendStatus(204);
     })
-    .catch((err) => {
-      console.log(err, 'err in mark answer as helpful');
+    .catch(() => {
+      res.sendStatus(204);
     });
 });
 
@@ -120,8 +124,8 @@ app.put('/api/answers/:id/report', (req, res) => {
     .then(() => {
       res.sendStatus(204);
     })
-    .catch((err) => {
-      console.log(err, 'err in report answer');
+    .catch(() => {
+      res.sendStatus(204);
     });
 });
 

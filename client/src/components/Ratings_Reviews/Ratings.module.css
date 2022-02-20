@@ -2,6 +2,99 @@
   color: red;
 }
 
+.reviewBorder {
+  border-style: solid;
+  border-color: black;
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+.statsTab {
+  border-style: solid;
+  border-color: black;
+}
+
+.statsFlex {
+  display: grid;
+  grid-template-columns: 4;
+  grid-template-rows: 5;
+}
+
+.statsStars {
+  grid-area: 1/1/2/4;
+
+}
+
+
+
+.quarterStar {
+  color: white;
+  fa-border: 0%, black;
+}
+
+.halfStar {
+
+}
+
+.sevenfiveStar {
+
+}
+
+.fullStar {
+
+}
+
+.statsRec {
+  grid-area: 2/1/3/5;
+}
+
+.statsBars {
+  grid-area: 3/1/4/5;
+
+}
+.barHolder{
+  display: grid;
+  grid-template-columns: 4;
+  grid-template-rows: 1;
+  padding: 1px;
+
+}
+.barNumber{
+  grid-column: 1;
+
+  padding-left: 10%;
+}
+.barBar{
+  border: solid;
+  grid-column: 2 / 5
+}
+.charHolder{
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: stretch;
+}
+
+.charBar{
+  border: solid black;
+}
+
+.statsFit {
+  grid-area: 4/1/5/5;
+}
+
+.statsComfort {
+  grid-area: 5/1/6/5;
+}
+
+
+.reviewsList {
+  border-style: solid;
+  border-color: black;
+}
+
 
 .blueText {
   color: blue;
