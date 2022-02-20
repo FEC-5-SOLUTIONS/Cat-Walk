@@ -4,13 +4,17 @@
   box-sizing: border-box;
 }
 
+.qna {
+  margin: 50px auto;
+  padding-left: 50px;
+}
+
 .form {
   display: flex;
   flex-direction: row;
 }
 
 .search_field {
-  margin: 20px auto;
   padding: 10px 35px 10px 15px;
   height: 40px;
   width: 60%;
@@ -27,4 +31,12 @@
   height: 20px;
   object-fit: cover;
   margin-left: -800px;
+}
+
+.questions_list {
+  /* text-align: center; */
+}
+
+.buttons {
+  /* text-align: center; */
 }

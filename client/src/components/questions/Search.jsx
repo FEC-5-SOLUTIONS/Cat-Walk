@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Questions.module.css';
 
-function SearchBar() {
+export default function Search() {
   return (
     <form className={styles.form}>
       <input
@@ -9,14 +9,18 @@ function SearchBar() {
         type="text"
         placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
       />
-      <button type="submit" className={styles.search_button}>
+      {/* <button
+        className={styles.search_button}
+        type="submit"
+        onClick={(e) => {
+          e.preventDefault();
+        }}
+      >
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/5/55/Magnifying_glass_icon.svg"
           alt="search"
         />
-      </button>
+      </button> */}
     </form>
   );
 }
-
-export default SearchBar;
