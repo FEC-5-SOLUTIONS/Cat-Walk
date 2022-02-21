@@ -119,6 +119,7 @@ function Modal({ setModal, charObj, productID}) {
           name: nickname,
           email: eMail,
           characteristics: characteristicObj,
+          photos: [],
         };
         axios({
           method: 'post',
