@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import Stars from '../../Shared/StarsRedo';
 import Chars from './Characteristics';
+import styles from './Modal.module.css';
 
 // characteristic arrays
 const sizeArray = ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'];
@@ -138,81 +139,83 @@ function Modal({ setModal, charObj, productID}) {
   // call will be initiated by clicking the submit button
 
   return (
-    <div>
-      <div>
-        <Stars starRating={starRating} setStarRating={setStarRating} />
-        <div>
-          Do you recommend this product?
-          <label>
-            Yes!
-            <input
-              type="radio"
-              name="reccomend"
-              value={1}
-              onClick={handleRecClick}
-            />
-          </label>
-          <label>
-            No:
-            <input
-              type="radio"
-              name="reccomend"
-              value={0}
-              onClick={handleRecClick}
-            />
-          </label>
+    <div className={styles.modalBackground}>
+      <div className={styles.modalContainer}>
+        <div className={styles.starsAndRec}>
+          <Stars starRating={starRating} setStarRating={setStarRating} />
+          <div>
+            Do you recommend this product?
+            <label>
+              Yes!
+              <input
+                type="radio"
+                name="reccomend"
+                value={1}
+                onClick={handleRecClick}
+              />
+            </label>
+            <label>
+              No:
+              <input
+                type="radio"
+                name="reccomend"
+                value={0}
+                onClick={handleRecClick}
+              />
+            </label>
+          </div>
         </div>
-      </div>
-      <div>
-        {(chaToArray).map((char) => {
-          if (char === 'Comfort') {
-            return <Chars char={char} array={comfortArray} setComfortRating={setComfortRating} />;
-          } else if (char === 'Size') {
-            return <Chars char="Size" array={sizeArray} setSizeRating={setSizeRating} />
-          } else if (char === 'Width') {
-            return <Chars char="Width" array={widthArray} setWidthRating={setWidthRating} />
-          } else if (char === 'Quality') {
-            return <Chars char="Quality" array={qualityArray} setQualityRating={setQualityRating} />
-          } else if (char === 'Length') {
-            return <Chars char="Length" array={lengthArray} setLengthRating={setLengthRating} />
-          } else {
-            return <Chars char="Fit" array={fitArray} setFitRating={setFitRating} />
-          }
-        })}
-      </div>
-      <div>
-        Please enter a sumText:
-        <input type="text" maxLength="60" placeholder="Example: Best Purchase Ever!"
-          onChange={(e) => setSumText(e.target.value)}
-        />
-      </div>
-      <div>
-        Please enter a Review:
-        <input type="text"
-          maxLength="1000"
-          placeholder="Why did you like the product or not?"
-          onChange={(e) => setReview(e.target.value)}
-        />
-      </div>
-      <div>
-        What is your nickname:
-        <input type="text"
-          maxLength="60"
-          placeholder="Please enter a nickname"
-          onChange={(e) => setNickname(e.target.value)}
-        />
-      </div>
-      <div>
-        Please enter your eMail:
-        <input type="text"
-          maxLength="60"
-          placeholder="Please enter your eMail"
-          onChange={(e) => setEMail(e.target.value)}
-        />
-      </div>
-      <div>
-        <button onClick={handleSubmit}>Submit</button>
-        <button onClick={() => { setModal(false) }}>Cancel</button>
+        <div>
+          {(chaToArray).map((char) => {
+            if (char === 'Comfort') {
+              return <Chars char={char} array={comfortArray} setComfortRating={setComfortRating} />;
+            } else if (char === 'Size') {
+              return <Chars char="Size" array={sizeArray} setSizeRating={setSizeRating} />
+            } else if (char === 'Width') {
+              return <Chars char="Width" array={widthArray} setWidthRating={setWidthRating} />
+            } else if (char === 'Quality') {
+              return <Chars char="Quality" array={qualityArray} setQualityRating={setQualityRating} />
+            } else if (char === 'Length') {
+              return <Chars char="Length" array={lengthArray} setLengthRating={setLengthRating} />
+            } else {
+              return <Chars char="Fit" array={fitArray} setFitRating={setFitRating} />
+            }
+          })}
+        </div>
+        <div>
+          Please enter a sumText:
+          <input type="text" maxLength="60" placeholder="Example: Best Purchase Ever!"
+            onChange={(e) => setSumText(e.target.value)}
+          />
+        </div>
+        <div>
+          Please enter a Review:
+          <input type="text"
+            maxLength="1000"
+            placeholder="Why did you like the product or not?"
+            onChange={(e) => setReview(e.target.value)}
+          />
+        </div>
+        <div>
+          What is your nickname:
+          <input type="text"
+            maxLength="60"
+            placeholder="Please enter a nickname"
+            onChange={(e) => setNickname(e.target.value)}
+          />
+        </div>
+        <div>
+          Please enter your eMail:
+          <input type="text"
+            maxLength="60"
+            placeholder="Please enter your eMail"
+            onChange={(e) => setEMail(e.target.value)}
+          />
+        </div>
+        <div>
+          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={() => { setModal(false) }}>Cancel</button>
+        </div>
       </div>
     </div>
   );
