@@ -94,14 +94,9 @@ export default function QuestionItem({
 
   function displayAnswers() {
     if (answers.length < 1) {
-      return 'No Answers Found';
+      return 'NO ANSWERS';
     }
     return loadAnswers(answers);
-  }
-
-  // TOGGLE LOADMORE
-  function handleLoadMore() {
-    setLoadMore(!loadMore);
   }
 
   function loadButton() {
@@ -128,6 +123,7 @@ export default function QuestionItem({
 
   return (
     <div>
+      <br />
       Q:
       {' '}
       {question}
@@ -149,7 +145,6 @@ export default function QuestionItem({
       <br />
       {displayAnswers()}
       {loadButton()}
-      {/* {answers.length > 2 ? <button type="submit" onClick={handleLoadMore}>{loadMore ? 'COLLAPSE ANSWERS' : 'LOAD MORE ANSWERS'}</button> : <div />} */}
     </div>
   );
 }
