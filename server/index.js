@@ -46,7 +46,7 @@ app.get('/api/reviews/meta/:productID', (req, res) => {
     url: `${baseUrl}/reviews/meta/?product_id=${req.params.productID}`,
     headers,
   }).then((axiosResponse) => res.status(200).send(axiosResponse.data))
-    .catch((err) => res.status(400).send());
+    .catch(() => res.status(400).send());
 });
 
 app.get('/api/all_reviews/:sort/:productID', (req, res) => {
@@ -115,6 +115,51 @@ app.get('/api/answers', (req, res) => {
     },
     headers,
   }).then((axiosResponse) => res.send(axiosResponse.data));
+});
+
+// MARK QUESTION AS HELPFUL
+app.put('/api/questions/:id', (req, res) => {
+  axios({
+    method: 'PUT',
+    url: `${baseUrl}/qa/questions/${req.body.question_id}/helpful`,
+    headers,
+  })
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch(() => {
+      res.sendStatus(400);
+    });
+});
+
+// MARK ANSWER AS HELPFUL
+app.put('/api/answers/:id/helpful', (req, res) => {
+  axios({
+    method: 'PUT',
+    url: `${baseUrl}/qa/answers/${req.body.answer_id}/helpful`,
+    headers,
+  })
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch(() => {
+      res.sendStatus(204);
+    });
+});
+
+// REPORT ANSWER
+app.put('/api/answers/:id/report', (req, res) => {
+  axios({
+    method: 'PUT',
+    url: `${baseUrl}/qa/answers/${req.body.answer_id}/report`,
+    headers,
+  })
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch(() => {
+      res.sendStatus(204);
+    });
 });
 
 app.listen(PORT, () => {

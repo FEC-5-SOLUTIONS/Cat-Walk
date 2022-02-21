@@ -1,14 +1,120 @@
-import React from 'react';
-import Search from './Search';
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import styles from './Questions.module.css';
+import Search from './Search';
+import QuestionItem from './QuestionItem';
 
-function Questions() {
+export default function Questions() {
+  const mounted = useRef(false);
+  const [questions, setQuestions] = useState([]);
+  const [moreQ, setMoreQ] = useState(false);
+  const [moreThanTwo, setMoreThanTwo] = useState(false);
+
+  // GET FIRST TWO QUESTIONS
+  function getTwoQuestions() {
+    const params = {
+      product_id: 40348,
+    };
+    axios.get('/api/questions', { params })
+      .then((res) => {
+        if (res.data.results.length > 2) {
+          setQuestions(res.data.results.slice(0, 2));
+          setMoreThanTwo(true);
+        } else {
+          setQuestions(res.data.results);
+          setMoreThanTwo(false);
+        }
+        setMoreQ(false);
+      });
+  }
+
+  // GET ALL QUESTIONS
+  function getAllQuestions(e) {
+    e.preventDefault();
+    const params = {
+      product_id: 40348,
+    };
+    axios.get('/api/questions', { params })
+      .then((res) => {
+        setQuestions(res.data.results);
+        setMoreThanTwo(true);
+        setMoreQ(true);
+      });
+  }
+
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      getTwoQuestions();
+    }
+  });
+
+  // UPVOTE A QUESTION
+  const upvoteQuestion = (qId) => {
+    const data = {
+      question_id: qId,
+    };
+    axios.put(`/api/questions/${qId}`, data)
+      .then(() => {
+        if (moreQ) {
+          getAllQuestions();
+        } else {
+          getTwoQuestions();
+        }
+      });
+  };
+
+  function loadQuestions(selectedQuestions) {
+    return (
+      <div className={styles.questions_list}>
+        { selectedQuestions.map((item) => (
+          <QuestionItem
+            question={item.question_body}
+            helpfulness={item.question_helpfulness}
+            qId={item.question_id}
+            handleClick={upvoteQuestion}
+            key={item.question_id}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  function displayQuestions() {
+    if (questions.length < 1) {
+      return 'NO ASKED QUESTIONS';
+    }
+    return loadQuestions(questions);
+  }
+
+  function loadButton() {
+    let button;
+    if (moreThanTwo) {
+      if (!moreQ) {
+        button = (
+          <button type="submit" onClick={getAllQuestions}>
+            MORE ANSWERED QUESTIONS
+          </button>
+        );
+      } else {
+        button = <div />;
+      }
+    } else {
+      button = <div />;
+    }
+    return button;
+  }
+
   return (
-    <div className={styles.test}>
+    <div className={styles.qna}>
       QUESTIONS & ANSWERS
       <Search />
+      {displayQuestions()}
+      <form className={styles.buttons}>
+        {loadButton()}
+        {' '}
+        <button type="submit">ADD A QUESTION +</button>
+      </form>
     </div>
   );
 }
-
-export default Questions;
