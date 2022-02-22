@@ -4,8 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import style from './Overview.module.css';
 
-const product =
-{
+const product = {
   id: 40344,
   campus: 'hr-rfp',
   name: 'Camo Onesie',
@@ -15,7 +14,28 @@ const product =
   default_price: '140.00',
   created_at: '2021-08-13T14:38:44.509Z',
   updated_at: '2021-08-13T14:38:44.509Z',
+  features: [
+    {
+      feature: 'Fabric',
+      value: 'Canvas',
+    },
+    {
+      feature: 'Buttons',
+      value: 'Brass',
+    },
+  ],
 };
+// {
+//   id: 40344,
+//   campus: 'hr-rfp',
+//   name: 'Camo Onesie',
+//   slogan: 'Blend in to your crowd',
+//   description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
+//   category: 'Jackets',
+//   default_price: '140.00',
+//   created_at: '2021-08-13T14:38:44.509Z',
+//   updated_at: '2021-08-13T14:38:44.509Z',
+// };
 // {
 //   id: 40348, // 40348
 //   campus: 'hr-rfp',
@@ -51,7 +71,8 @@ function Overview() {
         variants.forEach((v) => {
           if (v['default?']) {
             setSelectedVariant(v);
-          }});
+          }
+        });
       });
   }, [info]);
 
@@ -78,7 +99,7 @@ function Overview() {
       </div>
       <div id="Overview-Bottom" className={style.Overview_Bottom}>
         <Description product={product} />
-        <FeaturesList />
+        <FeaturesList product={product} />
       </div>
     </div>
   );
@@ -89,7 +110,7 @@ export default Overview;
 function ProductInfo(props) {
   return (
     <div className={style.ProductInfo}>
-      <div>{'★★★★☆'}</div>
+      <div>★★★★☆</div>
       <div className={style.info_SmallText}>{props.product.category}</div>
       <div className={style.info_BigText}>{props.product.name}</div>
       <div><Price variant={props.variant} /></div>
@@ -117,14 +138,14 @@ function Actions() {
           <select>
             {
             sizes.map((s, i) => <option key={i} value={s}>{s}</option>)
-          }
+            }
           </select>
         </div>
         <div id="quantity">
           <select>
             {
             quantities.map((q, i) => <option key={i} value={q}>{q}</option>)
-          }
+            }
           </select>
         </div>
       </div>
@@ -138,8 +159,8 @@ function Actions() {
 
 function ThumbCarousel(props) {
   const [activeIndex, setActiveIndex] = useState(0);
-  let itemsInView = 5;
-  let length = props.variant.photos.length;
+  const itemsInView = 5;
+  const { length } = props.variant.photos;
 
   const updateIndex = (newIndex) => {
     // console.log(`${newIndex} / ${length}`);
@@ -153,13 +174,14 @@ function ThumbCarousel(props) {
   };
 
   return (
-    <div id="ThumbCarousel" className={style.ThumbCarousel} >
+    <div id="ThumbCarousel" className={style.ThumbCarousel}>
       <div id="ThumbCarousel-Controls" className={style.ThumbCarousel_Controls}>
-          <button onClick={() => {updateIndex(activeIndex - 1)}}>{'↑'}</button>
-          <button onClick={() => {updateIndex(activeIndex + 1)}}>{'↓'}</button>
-        </div>
+        <button onClick={() => { updateIndex(activeIndex - 1); }}>↑</button>
+        <button onClick={() => { updateIndex(activeIndex + 1); }}>↓</button>
+      </div>
       <div id="ThumbCarousel-ViewPort" className={style.ThumbCarousel_Viewport}>
-        <div id="ThumbCarousel-Inner"
+        <div
+          id="ThumbCarousel-Inner"
           className={style.ThumbCarousel_Inner}
           style={{ transform: `translateY(-${activeIndex * (100 * length ** -1)}%` }}
         >
@@ -186,7 +208,7 @@ function ThumbCarousel(props) {
 function BigCarousel(props) {
   // console.log(props.variant.photos);
   const [activeIndex, setActiveIndex] = useState(0);
-  let length = props.variant.photos.length;
+  const { length } = props.variant.photos;
 
   const updateIndex = (newIndex) => {
     if (newIndex < 0) {
@@ -200,8 +222,8 @@ function BigCarousel(props) {
   return (
     <div className={style.BigCarousel_Viewport}>
       <div className={style.BigCarousel_Controls}>
-        <button onClick={() => {updateIndex(activeIndex - 1)}}>{'←'}</button>
-        <button onClick={() => {updateIndex(activeIndex + 1)}}>{'→'}</button>
+        <button onClick={() => { updateIndex(activeIndex - 1); }}>←</button>
+        <button onClick={() => { updateIndex(activeIndex + 1); }}>→</button>
       </div>
       <div
         className={style.BigCarousel_Inner}
@@ -209,7 +231,7 @@ function BigCarousel(props) {
       >
         {
           props.variant.photos.map((v, i) => (
-            <div key={i} className={style.BigCarousel_ImageContainer} >
+            <div key={i} className={style.BigCarousel_ImageContainer}>
               <img
                 key={i}
                 className={style.BigCarousel_Image}
@@ -269,7 +291,7 @@ function CheckMark() {
   return (
     <img
       className={style.Check}
-      src={'https://cdn.pixabay.com/photo/2014/03/25/16/58/check-mark-297739_960_720.png'}
+      src="https://cdn.pixabay.com/photo/2014/03/25/16/58/check-mark-297739_960_720.png"
       // alt="✓"
     />
   );
@@ -287,9 +309,10 @@ function Description(props) {
 function FeaturesList(props) {
   return (
     <div className={style.FeaturesList}>
-      <div>✓   feature 1</div>
-      <div>✓   feature 2</div>
-      <div>✓   feature 3</div>
+      {
+        props.product.features.map((feature) =>
+          <div>{` ✓ ${feature.feature}: ${feature.value}`}</div>)
+      }
     </div>
   );
 }
