@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import style from './Overview.module.css';
 
+
 const product =
 {
   id: 40344,
@@ -32,9 +33,9 @@ const product_id = product.id;
 const quantities = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const sizes = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'];
 
-function Overview() {
+function Overview(props) {
   const [variants, setVariants] = useState([]);
-  const [selectedVariant, setSelectedVariant] = useState({ });
+  const [selectedVariant, setSelectedVariant] = useState({ props.product });
   const [info, setInfo] = useState(false);
 
   useEffect(() => {
@@ -55,11 +56,11 @@ function Overview() {
       });
   }, [info]);
 
-  if (!selectedVariant.name) { return <div>overview</div>; }
+  // if (!selectedVariant.name) { return <div>overview</div>; }
   // console.log(selectedVariant);
   // return <div> hello </div> ;
   return (
-    <div id="Overview" className={style.Overview}>
+    <div id="Overview" className={style.Overview} data-testid="Overview">
       <div id="Overview-Top" className={style.Overview_Top}>
         <div id="Display-Section" className={style.DisplaySection}>
           <ThumbCarousel variant={selectedVariant} />
@@ -84,8 +85,6 @@ function Overview() {
     </div>
   );
 }
-
-export default Overview;
 
 function ProductInfo(props) {
   return (
@@ -293,3 +292,7 @@ function FeaturesList(props) {
     </div>
   );
 }
+
+export {
+  Overview, ProductInfo,
+};
