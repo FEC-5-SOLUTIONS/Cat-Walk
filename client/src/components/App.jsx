@@ -9,11 +9,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productID: 0,
+      product: {},
       apiResponse: false,
     };
 
-    this.setProductID = this.setProductID.bind(this);
+    this.setProduct = this.setProduct.bind(this);
   }
 
   componentDidMount() {
@@ -25,17 +25,21 @@ class App extends React.Component {
         count: 10,
       },
     }).then((response) => {
-      this.setState({
-        productID: response.data[0].id,
-      });
-      // console.log(response.data[0].id);
-    }).then(() => {
-      this.setState({ apiResponse: true });
+      this.setProduct(response.data[0].id);
     });
   }
 
-  setProductID(id) {
-    this.setState({ productID: id });
+  setProduct(id) {
+    axios({
+      method: 'GET',
+      url: '/api/product',
+      params: { product_id: id },
+    }).then((response) => {
+      this.setState({
+        product: response.data[0],
+        apiResponse: true,
+      });
+    });
   }
 
   render() {
@@ -43,16 +47,16 @@ class App extends React.Component {
       return (
         <div id="App" className="App">
           <Overview
-            productID={this.state.productID}
+            product={this.state.product}
           />
           <RelatedItems
-            productID={this.state.productID}
+            product={this.state.product}
           />
           <Questions
-            productID={this.state.productID}
+            product={this.state.product}
           />
           <RatingsAndReviews
-            productID={this.state.productID}
+            product={this.state.product}
           />
         </div>
       );
