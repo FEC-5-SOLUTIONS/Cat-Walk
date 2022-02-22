@@ -81,13 +81,14 @@ function Overview() {
   // return <div> hello </div> ;
   return (
     <div id="Overview" className={style.Overview}>
-      <div id="Overview-Top" className={style.Overview_Top}>
+      <div id="Overview-Grid" className={style.Overview_Grid} >
+      {/* <div id="Overview-Top" className={style.Overview_Top}> */}
         <div id="Display-Section" className={style.DisplaySection}>
           <ThumbCarousel variant={selectedVariant} />
           <BigCarousel variant={selectedVariant} />
           {/* <FeaturedImage variant={selectedVariant} /> */}
         </div>
-        <div id="Info-Section" className={style.Info_Section}>
+        {/* <div id="Info-Section" className={style.Info_Section}> */}
           <ProductInfo product={product} variant={selectedVariant} />
           <StylesList
             variants={variants}
@@ -95,11 +96,12 @@ function Overview() {
             setSelectedVariant={setSelectedVariant}
           />
           <Actions />
-        </div>
-      </div>
-      <div id="Overview-Bottom" className={style.Overview_Bottom}>
+        {/* </div> */}
+      {/* </div> */}
+      {/* <div id="Overview-Bottom" className={style.Overview_Bottom}> */}
         <Description product={product} />
         <FeaturesList product={product} />
+      {/* </div> */}
       </div>
     </div>
   );
@@ -220,28 +222,30 @@ function BigCarousel(props) {
   };
 
   return (
-    <div className={style.BigCarousel_Viewport}>
-      <div className={style.BigCarousel_Controls}>
-        <button onClick={() => { updateIndex(activeIndex - 1); }}>←</button>
-        <button onClick={() => { updateIndex(activeIndex + 1); }}>→</button>
-      </div>
-      <div
-        className={style.BigCarousel_Inner}
-        style={{ transform: `translateX(-${activeIndex * 100 * (length ** -1)}%` }}
-      >
-        {
-          props.variant.photos.map((v, i) => (
-            <div key={i} className={style.BigCarousel_ImageContainer}>
-              <img
-                key={i}
-                className={style.BigCarousel_Image}
-                src={v.url}
-                alt={v.name}
-                // style={{ width: "100%" }}
-              />
-            </div>
-          ))
-        }
+    <div className={style.BigCarousel}>
+      <div className={style.BigCarousel_Viewport}>
+        <div className={style.BigCarousel_Controls}>
+          <button onClick={() => { updateIndex(activeIndex - 1); }}>←</button>
+          <button onClick={() => { updateIndex(activeIndex + 1); }}>→</button>
+        </div>
+        <div
+          className={style.BigCarousel_Inner}
+          style={{ transform: `translateX(-${activeIndex * 100 * (length ** -1)}%` }}
+        >
+          {
+            props.variant.photos.map((v, i) => (
+              <div key={i} className={style.BigCarousel_ImageContainer}>
+                <img
+                  key={i}
+                  className={style.BigCarousel_Image}
+                  src={v.url}
+                  alt={v.name}
+                  // style={{ width: "100%" }}
+                />
+              </div>
+            ))
+          }
+        </div>
       </div>
     </div>
   );
