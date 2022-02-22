@@ -36,7 +36,7 @@ function Stars({ starRating, setStarRating }) {
             icon={faStar}
             className={styles.star}
             color={ratingValue <= (hover || starRating) ? 'gold' : 'gray'}
-            size="25px"
+            font-size="30px"
           />
         </label>
         );

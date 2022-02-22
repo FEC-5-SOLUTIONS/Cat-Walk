@@ -8,7 +8,7 @@ import styles from '../Ratings.module.css';
 
 function Stats({ meta, average }) {
   return !meta ? null : (
-    <div className={`${styles.statsTab} ${styles.statsFlex}`}>
+    <div className={styles.statsTab}>
       <div className={styles.statsStars}>
         {String(average).slice(0, 4)}
         <Stars average={average} />

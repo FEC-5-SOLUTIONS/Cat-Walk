@@ -21,16 +21,17 @@ function ReviewListItem({ review }) {
   }
 
   return (
-    <div>
-      <div>
+    <div className={styles.reviewItem}>
+      <div className={styles.reviewTopRow}>
         <div style={{ width: 'fit-content' }}>
           <Stars average={review.rating} />
         </div>
         {dateString}
       </div>
-      <div>{review.summary}</div>
-      <div>{review.body}</div>
+      <div className={styles.reviewSum}>{review.summary}</div>
+      <div className={styles.reviewBod}>{review.body}</div>
       <div>posted by : {review.reviewer_name}</div>
+      {!review.recommend ? null : <div>✓ Recommended!</div>}
       {review.photos.length > 0 ?
         <Photos pics={review.photos} /> : null}
       {review.response ?

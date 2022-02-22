@@ -22,9 +22,9 @@ function ReviewsList({
           {!viewMore ? <ReviewList data={reviews.results.slice(0, 2)} /> :
           <ReviewList data={reviews.results} />}
         </div>
-        <div>
-          <button onClick={click}>{text}</button>
-          <button onClick={()=>{setModal(true)}}>Add A review! </button>
+        <div className={styles.buttons}>
+          <button onClick={click} className={styles.viewButton}>{text}</button>
+          <button onClick={()=>{setModal(true)}} className={styles.addButton}>Add A review! </button>
         </div>
       </div>
     );

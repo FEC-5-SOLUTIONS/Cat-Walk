@@ -143,7 +143,7 @@ function Modal({ setModal, charObj, productID}) {
       <div className={styles.modalContainer}>
         <div className={styles.starsAndRec}>
           <Stars starRating={starRating} setStarRating={setStarRating} />
-          <div>
+          <div className={styles.recommend}>
             Do you recommend this product?
             <label>
               Yes!
@@ -154,6 +154,7 @@ function Modal({ setModal, charObj, productID}) {
                 onClick={handleRecClick}
               />
             </label>
+
             <label>
               No:
               <input
@@ -165,7 +166,7 @@ function Modal({ setModal, charObj, productID}) {
             </label>
           </div>
         </div>
-        <div>
+        <div className={styles.radios}>
           {(chaToArray).map((char) => {
             if (char === 'Comfort') {
               return <Chars char={char} array={comfortArray} setComfortRating={setComfortRating} />;
@@ -182,13 +183,13 @@ function Modal({ setModal, charObj, productID}) {
             }
           })}
         </div>
-        <div>
+        <div className={styles.form}>
           Please enter a sumText:
           <input type="text" maxLength="60" placeholder="Example: Best Purchase Ever!"
             onChange={(e) => setSumText(e.target.value)}
           />
         </div>
-        <div>
+        <div className={styles.form}>
           Please enter a Review:
           <input type="text"
             maxLength="1000"
@@ -196,7 +197,7 @@ function Modal({ setModal, charObj, productID}) {
             onChange={(e) => setReview(e.target.value)}
           />
         </div>
-        <div>
+        <div className={styles.form}>
           What is your nickname:
           <input type="text"
             maxLength="60"
@@ -204,7 +205,7 @@ function Modal({ setModal, charObj, productID}) {
             onChange={(e) => setNickname(e.target.value)}
           />
         </div>
-        <div>
+        <div className={styles.form}>
           Please enter your eMail:
           <input type="text"
             maxLength="60"
@@ -212,9 +213,9 @@ function Modal({ setModal, charObj, productID}) {
             onChange={(e) => setEMail(e.target.value)}
           />
         </div>
-        <div>
-          <button onClick={handleSubmit}>Submit</button>
-          <button onClick={() => { setModal(false) }}>Cancel</button>
+        <div className={styles.buttons}>
+          <button onClick={handleSubmit} className={styles.submit}>Submit</button>
+          <button onClick={() => { setModal(false) }} className={styles.cancel}>Cancel</button>
         </div>
       </div>
     </div>

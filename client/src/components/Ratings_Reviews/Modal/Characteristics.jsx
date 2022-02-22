@@ -1,5 +1,5 @@
 import React from 'react';
-
+import styles from './Modal.module.css';
 function Chars({
   char, array, setSizeRating, setWidthRating, setComfortRating,
   setFitRating, setQualityRating, setLengthRating
@@ -20,22 +20,29 @@ function Chars({
     }
   }
   return (
-    <div>
-      {char}
-      {array.map((cat, i) => {
-        const rating = i + 1;
-        return (
-          <label>
+    <div className={styles.cat}>
+      <div>
+        {char}
+        :
+      </div>
+      <div className={styles.catRadios}>
+        {array.map((cat, i) => {
+          const rating = i + 1;
+          return (
+            <div className={styles.indRadios}>
             {cat}
-            <input
-              type="radio"
-              name={`${char} rating`}
-              value={rating}
-              onChange={handleChange}
-            />
-          </label>
-        );
-      })}
+            <label>
+              <input
+                type="radio"
+                name={`${char} rating`}
+                value={rating}
+                onChange={handleChange}
+              />
+            </label>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
