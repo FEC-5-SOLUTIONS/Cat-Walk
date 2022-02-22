@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import styles from './Questions.module.css';
 import AnswerItem from './AnswerItem';
+import AddAnswer from './AddAnswer';
 
 export default function QuestionItem({
   question, helpfulness, qId, handleClick,
@@ -11,6 +13,7 @@ export default function QuestionItem({
   const [moreThanTwo, setMoreThanTwo] = useState(false);
   const [helpful, setHelpful] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
+  const [showAddAnswer, setShowAddAnswer] = useState(false);
 
   // GET FIRST TWO ANSWERS
   function getTwoAnswers() {
@@ -121,6 +124,27 @@ export default function QuestionItem({
     return button;
   }
 
+  const addAnswer = (status) => {
+    if (status) {
+      setShowAddAnswer(status);
+    } else {
+      setShowAddAnswer(!showAddAnswer);
+    }
+  };
+
+  const postAnswer = (body, name, email) => {
+    const data = {
+      question_id: qId,
+      body,
+      name,
+      email,
+    };
+    axios.post(`/api/answers/${qId}`, data);
+      // .then(() => {
+      //   getTwoAnswers();
+      // });
+  };
+
   return (
     <div>
       <br />
@@ -139,9 +163,16 @@ export default function QuestionItem({
       {' '}
       |
       {' '}
-      <button type="submit">
+      <button type="submit" onClick={addAnswer}>
         Add Answer
       </button>
+      <div className={showAddAnswer ? styles.show_modal : styles.hide_modal}>
+        <AddAnswer
+          question={question}
+          handleClick={addAnswer}
+          postAnswer={postAnswer}
+        />
+      </div>
       <br />
       {displayAnswers()}
       {loadButton()}

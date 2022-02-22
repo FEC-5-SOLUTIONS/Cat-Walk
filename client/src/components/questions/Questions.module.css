@@ -33,10 +33,17 @@
   margin-left: -800px;
 }
 
-.questions_list {
-  /* text-align: center; */
+.show_modal {
+  display: block;
 }
 
-.buttons {
-  /* text-align: center; */
+.hide_modal {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  background: rgb(177, 177, 177);
+  width: 70%;
+  height: auto;
 }
