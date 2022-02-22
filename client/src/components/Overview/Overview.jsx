@@ -11,13 +11,13 @@ import Actions from './ov_Actions';
 function Overview(props) {
   const product = props.product;
   const product_id = props.product.id;
-  const variants = [props.variant];
-  const selectedVariant = props.variant;
-  const info = true;
+  // const variants = [props.variant];
+  // const selectedVariant = props.variant;
+  // const info = true;
 
-  // const [variants, setVariants] = useState([]);
-  // const [selectedVariant, setSelectedVariant] = useState({  });
-  // const [info, setInfo] = useState(false);
+  const [variants, setVariants] = useState([]);
+  const [selectedVariant, setSelectedVariant] = useState({  });
+  const [info, setInfo] = useState(false);
 
   useEffect(() => {
     axios({
@@ -38,7 +38,7 @@ function Overview(props) {
       });
   }, [info]);
 
-  // if (!selectedVariant.name) { return <div>overview</div>; }
+  if (!selectedVariant.name) { return <div>overview</div>; }
 
   return (
     <div id="Overview" className={style.Overview} data-testid="Overview">
@@ -49,7 +49,7 @@ function Overview(props) {
         <StyleSelector
           variants={variants}
           selectedVariant={selectedVariant}
-          // setSelectedVariant={setSelectedVariant}
+          setSelectedVariant={setSelectedVariant}
         />
         <Actions selectedVariant={selectedVariant}/>
         <Description product={product} />
