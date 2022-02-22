@@ -67,7 +67,7 @@
   justify-content:center;
   padding:1%;
 }
-.StyleButtonContainer {
+.StyleSelector {
   grid-area: style;
   display: flex;
   flex-direction: row;
@@ -75,7 +75,7 @@
   flex-wrap: wrap;
   padding: 10px;
 }
-.StyleButtonContainer > div {
+.StyleSelector > div {
   display:flex;
   flex-direction: row-reverse;
   z-index:1;
