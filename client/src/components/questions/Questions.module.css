@@ -33,6 +33,11 @@
   margin-left: -800px;
 }
 
+.user_photo {
+  width: 120px;
+  height: 100px;
+}
+
 .show_modal {
   display: block;
 }
@@ -42,7 +47,7 @@
 }
 
 .modal {
-  position: fixed;
+  /* position: fixed; */
   background: rgb(177, 177, 177);
   width: 70%;
   height: auto;

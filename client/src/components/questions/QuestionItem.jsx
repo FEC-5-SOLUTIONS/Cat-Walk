@@ -139,10 +139,10 @@ export default function QuestionItem({
       name,
       email,
     };
-    axios.post(`/api/answers/${qId}`, data);
-      // .then(() => {
-      //   getTwoAnswers();
-      // });
+    axios.post(`/api/answers/${qId}`, data)
+      .then(() => {
+        getTwoAnswers();
+      });
   };
 
   return (

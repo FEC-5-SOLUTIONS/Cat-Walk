@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Questions.module.css';
 
-export default function AddAnswer({ question, handleClick, postAnswer }) {
+export default function AddQuestion({ handleClick, postQuestion }) {
   const [state, setState] = useState({
     body: '',
     name: '',
@@ -23,28 +23,26 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    postAnswer(state.body, state.name, state.email);
+    postQuestion(state.body, state.name, state.email);
     handleClick(false);
   }
 
   return (
     <form className={styles.modal}>
-      <h3>Submit your Answer</h3>
+      <h3>Ask Your Question</h3>
       <h4>
-        Heir Force Ones:
-        {' '}
-        {question}
+        About the Heir Force Ones
       </h4>
-      Your Answer (*)
+      Your Question (*)
       <input type="text" id="body" onChange={handleInput} />
       <br />
       What is your nickname (*)
-      <input type="text" id="name" placeholder="Example: jack543!" onChange={handleInput} />
+      <input type="text" id="name" placeholder="Example: jackson11!" onChange={handleInput} />
       <br />
       For privacy reasons, do not use your full name or email address
       <br />
       Your email (*)
-      <input type="text" id="email" placeholder="Example: jack@email.com" onChange={handleInput} />
+      <input type="text" id="email" placeholder="Why did you like the product or not?" onChange={handleInput} />
       <br />
       For authentication reasons, you will not be emailed
       <br />
@@ -54,7 +52,7 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
         type="submit"
         onClick={handleSubmit}
       >
-        Submit answer
+        Submit question
       </button>
       <button
         type="submit"
@@ -65,8 +63,7 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
     </form>
   );
 }
-AddAnswer.propTypes = {
-  question: PropTypes.string.isRequired,
+AddQuestion.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  postAnswer: PropTypes.func.isRequired,
+  postQuestion: PropTypes.func.isRequired,
 };

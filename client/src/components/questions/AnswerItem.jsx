@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import styles from './Questions.module.css';
 
 export default function AnswerItem({
   id, answer, user, date, helpfulness, photos, handleClick,
@@ -19,6 +20,10 @@ export default function AnswerItem({
       A:
       {' '}
       {answer}
+      <br />
+      {photos.map((item) => (
+        <img src={item.url} alt="user answer" key={item.id} className={styles.user_photo} />
+      ))}
       <br />
       by
       {' '}

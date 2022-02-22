@@ -3,12 +3,14 @@ import axios from 'axios';
 import styles from './Questions.module.css';
 import Search from './Search';
 import QuestionItem from './QuestionItem';
+import AddQuestion from './AddQuestion';
 
 export default function Questions() {
   const mounted = useRef(false);
   const [questions, setQuestions] = useState([]);
   const [moreQ, setMoreQ] = useState(false);
   const [moreThanTwo, setMoreThanTwo] = useState(false);
+  const [showAddQuestion, setShowAddQuestion] = useState(false);
 
   // GET FIRST TWO QUESTIONS
   function getTwoQuestions() {
@@ -105,16 +107,39 @@ export default function Questions() {
     return button;
   }
 
+  const addQuestion = () => {
+    setShowAddQuestion(!showAddQuestion);
+  };
+
+  const postQuestion = (body, name, email) => {
+    const data = {
+      body,
+      name,
+      email,
+      product_id: 40348,
+    };
+    axios.post('/api/questions', data);
+  };
+
   return (
     <div className={styles.qna}>
       QUESTIONS & ANSWERS
       <Search />
       {displayQuestions()}
-      <form className={styles.buttons}>
-        {loadButton()}
-        {' '}
-        <button type="submit">ADD A QUESTION +</button>
-      </form>
+      {loadButton()}
+      {' '}
+      <button
+        type="submit"
+        onClick={addQuestion}
+      >
+        ADD A QUESTION +
+      </button>
+      <div className={showAddQuestion ? styles.show_modal : styles.hide_modal}>
+        <AddQuestion
+          handleClick={addQuestion}
+          postQuestion={postQuestion}
+        />
+      </div>
     </div>
   );
 }

@@ -147,6 +147,22 @@ app.post('/api/answers/:id', (req, res) => {
     });
 });
 
+// POST A QUESTION
+app.post('/api/questions', (req, res) => {
+  axios({
+    method: 'POST',
+    url: `${baseUrl}/qa/questions`,
+    headers,
+    data: req.body,
+  })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(() => {
+      res.sendStatus(400);
+    });
+});
+
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Server listening on port: ${PORT}`);
