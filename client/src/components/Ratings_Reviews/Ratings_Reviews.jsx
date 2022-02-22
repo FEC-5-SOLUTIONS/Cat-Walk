@@ -1,62 +1,79 @@
-import React from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import axios from 'axios';
 import Stats from './StatsTab/Stats';
 import ReviewsList from './ReviewsList/ReviewsList';
+import Modal from './Modal/Modal';
+import getAvg from '../utils/getAvg';
 import styles from './Ratings.module.css';
 
-class RatingsAndReviews extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      meta: [],
-      reviews: [],
-      sortBy: 'relevant',
-      count: 2,
-      productID: 40346,
-    };
-    this.sort = this.sort.bind(this);
-  }
+function RatingsAndReviews() {
+  const [modal, setModal] = useState(false);
+  const [meta, setMeta] = useState([]);
+  const [charObj, setCharObj] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [avg, setAverage] = useState(0);
+  const [sort, setSort] = useState('relevant');
+  const [productID, setProductID] = useState(40348);
+  const [viewMore, setViewMore] = useState(false);
+  const [buttonText, setButtonText] = useState('View More');
 
-  componentDidMount() {
-    this.getMeta();
-    this.getReviews();
-  }
-
-  getMeta() {
-    axios.get(`api/reviews/meta/${this.state.productID}`)
+  useEffect(() => {
+    axios.get(`api/reviews/meta/${productID}`)
       .then((res) => {
-        this.setState({ meta: res.data });
+        setMeta(res.data);
+        setCharObj(res.data.characteristics);
       })
       .catch((err) => {
         // console.log('err');
       });
-  }
+  }, [productID]);
 
-  getReviews() {
-    axios.get(`api/all_reviews/${this.state.sortBy}/${this.state.productID}`)
+  useEffect(() => {
+    if (!Array.isArray(meta)) {
+      setAverage(getAvg(meta.ratings));
+    }
+  }, [meta]);
+
+  useEffect(() => {
+    axios.get(`api/all_reviews/${sort}/${productID}`)
       .then((res) => {
-        this.setState({ reviews: res.data });
+        setReviews(res.data);
       })
       .catch((err) => {
         // console.log('err');
       });
-  }
+  },[productID, sort]);
 
-  sort(value) {
-    this.setState({ sortBy: value });
-    this.getReviews();
-  }
+  const handleChange = (e) => {
+    setSort(e.target.value);
+  };
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    let newText = 'View More';
+    if (buttonText === 'View More') {
+      newText = 'View Less';
+    }
+    setViewMore(!viewMore);
+    setButtonText(newText);
+  };
 
-  render() {
-    return (
-      <div>
-      <div className={styles.reviewBorder}>
-        <Stats metaData={this.state.meta} />
-        <ReviewsList reviewsData={this.state.reviews} sort={this.state.sortBy} sortFunc={this.sort} />
+  return (
+    <div className={styles.topLevel}>
+      <div className={styles.reviewRatingsContainer}>
+        <Stats meta={meta} average = {avg} />
+        <ReviewsList
+          reviews={reviews}
+          sort={sort}
+          handleChange={handleChange}
+          text={buttonText}
+          viewMore={viewMore}
+          click={handleButtonClick}
+          setModal={setModal}
+        />
       </div>
-      </div>
-    );
-  }
+      {modal ? <Modal setModal={setModal} charObj={charObj} productID={productID} /> : null}
+    </div>
+  );
 }
 
 export default RatingsAndReviews;

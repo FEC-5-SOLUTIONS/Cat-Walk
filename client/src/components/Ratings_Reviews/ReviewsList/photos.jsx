@@ -6,7 +6,7 @@ function Photos( {pics} ) {
     <div>
       {pics.map((pic) => <Photo pic={pic} />)}
     </div>
-  )
+  );
 }
 
 export default Photos;
