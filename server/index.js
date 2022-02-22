@@ -30,6 +30,14 @@ app.get('/api/product', (req, res) => {
   }).then((axiosResponse) => res.send(axiosResponse.data));
 });
 
+app.get('/api/products', (req, res) => {
+  axios({
+    method: 'GET',
+    url: `${baseUrl}/products`,
+    headers,
+  }).then((axiosResponse) => res.send(axiosResponse.data));
+});
+
 // GET STYLES
 app.get('/api/styles', (req, res) => {
   axios({

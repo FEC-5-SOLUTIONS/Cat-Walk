@@ -1,14 +1,22 @@
 import React from 'react';
+<<<<<<< HEAD
 import axios from 'axios';
 import Overview from './Overview/Overview';
 import RatingsAndReviews from './Ratings_Reviews/Ratings_Reviews';
 import RelatedItems from './RelatedItems/RelatedItems';
 import Questions from './questions/Questions';
+=======
+import ProductCardsData from './RelatedItems/ProductCardsData';
+import Overview from './Overview/Overview';
+import RatingsAndReviews from './Ratings_Reviews/Ratings_Reviews';
+import Carousel from './RelatedItems/Carousel';
+>>>>>>> RelatedCard
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+<<<<<<< HEAD
       product: {},
       apiResponse: false,
     };
@@ -62,6 +70,23 @@ class App extends React.Component {
       );
     }
     return <div>{' '}</div>;
+=======
+      relatedProducts: ProductCardsData,
+    };
+  }
+
+  render() {
+    const { relatedProducts } = this.state;
+    return (
+      <div>
+        <div>
+          <Overview />
+          <Carousel relatedProducts={relatedProducts} />
+          <RatingsAndReviews />
+        </div>
+      </div>
+    );
+>>>>>>> RelatedCard
   }
 }
 
