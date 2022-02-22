@@ -12,6 +12,15 @@ app.use(express.json({ extended: true }));
 const headers = { authorization: auth.key };
 const baseUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
 
+// GET ALL PRODUCTS
+app.get('/api/all_products', (req, res) => {
+  axios({
+    method: 'GET',
+    url: `${baseUrl}/products/`,
+    headers,
+  }).then((axiosResponse) => res.send(axiosResponse.data));
+});
+
 // GET PRODUCT
 app.get('/api/product', (req, res) => {
   axios({
