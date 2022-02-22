@@ -142,7 +142,7 @@
   margin: 5px;
 }
 .ThumbCarousel {
-  grid-area: image;
+  grid-area: thumb;
   position:relative;
   display:flex;
   justify-content:center;

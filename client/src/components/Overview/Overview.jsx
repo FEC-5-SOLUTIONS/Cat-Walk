@@ -82,26 +82,17 @@ function Overview() {
   return (
     <div id="Overview" className={style.Overview}>
       <div id="Overview-Grid" className={style.Overview_Grid} >
-      {/* <div id="Overview-Top" className={style.Overview_Top}> */}
-        <div id="Display-Section" className={style.DisplaySection}>
-          <ThumbCarousel variant={selectedVariant} />
-          <BigCarousel variant={selectedVariant} />
-          {/* <FeaturedImage variant={selectedVariant} /> */}
-        </div>
-        {/* <div id="Info-Section" className={style.Info_Section}> */}
-          <ProductInfo product={product} variant={selectedVariant} />
-          <StylesList
-            variants={variants}
-            selectedVariant={selectedVariant}
-            setSelectedVariant={setSelectedVariant}
-          />
-          <Actions />
-        {/* </div> */}
-      {/* </div> */}
-      {/* <div id="Overview-Bottom" className={style.Overview_Bottom}> */}
+        <ThumbCarousel variant={selectedVariant} />
+        <BigCarousel variant={selectedVariant} />
+        <ProductInfo product={product} variant={selectedVariant} />
+        <StylesList
+          variants={variants}
+          selectedVariant={selectedVariant}
+          setSelectedVariant={setSelectedVariant}
+        />
+        <Actions />
         <Description product={product} />
         <FeaturesList product={product} />
-      {/* </div> */}
       </div>
     </div>
   );
@@ -222,7 +213,7 @@ function BigCarousel(props) {
   };
 
   return (
-    <div className={style.BigCarousel}>
+    <div className={style.BigCarousel} id="Big Carousel">
       <div className={style.BigCarousel_Viewport}>
         <div className={style.BigCarousel_Controls}>
           <button onClick={() => { updateIndex(activeIndex - 1); }}>←</button>
