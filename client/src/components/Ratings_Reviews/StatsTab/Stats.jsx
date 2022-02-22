@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Stars from '../../Shared/StarsUni';
 import Recommended from './recommended';
 import RatingBars from './RatingBars';
-import Characteristics from './Characteristics';
+import Characteristics from './characteristics';
 import getAvg from '../../utils/getAvg';
 import styles from '../Ratings.module.css';
 
@@ -20,7 +20,7 @@ function Stats({ meta, average }) {
         <RatingBars meta={meta} />
       </div>
       <div className={styles.statsFit}>
-        <Characteristics meta={meta} />
+        <Characteristics meta={meta.Characteristics} />
       </div>
     </div>
   );
