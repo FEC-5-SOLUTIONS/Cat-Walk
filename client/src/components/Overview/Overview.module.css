@@ -1,54 +1,64 @@
-.Overview > div {
+.Overview {
+  display:flex;
+  justify-content:center;
+}
+.Overview_Grid {
+  display: grid;
+  grid-template-areas:
+    "thumb image info"
+    "thumb image style"
+    "thumb image actions"
+    ". description features";
+  grid-template-rows: 90px 120px 60px 80px;
+  grid-template-columns: 35px 250px 250px;
+}
+.Overview_Grid > div {
+  margin:5px;
   font-family: Arial, Helvetica, sans-serif;
   font-size:8px;
-  /* color: blue; */
 }
-.Overview_Top {
-  display:flex;
-  justify-content: center;
-}
-.Overview_Bottom {
-  display:flex;
-  justify-content: center;
-}
-.info_BigText{
+.info_BigText {
   font-size:20px;
   font-weight:bold;
 }
-.info_SmallText{
+.info_SmallText {
   font-size:8px;
   text-transform:uppercase;
 }
-.price_onSale{
+.price_onSale {
   font-size:8px;
   text-transform:uppercase;
   text-decoration:line-through;
 }
-.price_salePrice{
+.price_salePrice {
   font-size:8px;
   text-transform:uppercase;
   color: red;
   font-weight: bold;
 }
-.ProductInfo > div {
-  padding: 5px;
+.ProductInfo {
+  grid-area: info;
 }
-.desc_BigText{
+.ProductInfo > div {
+  padding: 2.5px;
+}
+.desc_BigText {
   font-size:12px;
   font-weight:bold;
 }
-.desc_SmallText{
+.desc_SmallText {
   font-size:8px;
 }
-.Description{
+.Description {
+  grid-area: description;
   display:flex;
   flex-direction:column;
-  width: 200px;
   position: relative;
   align-items:flex-start;
   justify-content:center;
 }
-.FeaturesList{
+.FeaturesList {
+  grid-area: features;
   display:flex;
   flex-direction:column;
   width: 200px;
@@ -57,14 +67,15 @@
   justify-content:center;
   padding:1%;
 }
-.StyleButtonContainer {
+.StyleSelector {
+  grid-area: style;
   display: flex;
   flex-direction: row;
   width: 200px;
   flex-wrap: wrap;
   padding: 10px;
 }
-.StyleButtonContainer > div {
+.StyleSelector > div {
   display:flex;
   flex-direction: row-reverse;
   z-index:1;
@@ -79,7 +90,7 @@
 .StyleButton:hover {
   cursor: pointer;
 }
-.Check{
+.Check {
   position:absolute;
   justify-content: right;
   align-items: top;
@@ -90,6 +101,9 @@
 .DisplaySection {
   display: inline-flex;
   flex-direction: row;
+}
+.BigCarousel {
+  grid-area: image;
 }
 .BigCarousel_Viewport {
   overflow: hidden;
@@ -128,6 +142,7 @@
   margin: 5px;
 }
 .ThumbCarousel {
+  grid-area: thumb;
   position:relative;
   display:flex;
   justify-content:center;
@@ -154,17 +169,16 @@
   align-items:center;
   width: 25px;
   height: 25px;
-  padding:5px;
+  margin:5px;
 }
 .ThumbCarousel_Image {
   object-fit:cover;
   width:25px;
+  height:auto;
   opacity:0.8;
 }
 .ThumbCarousel_Controls {
   position: absolute;
-
-  /* top: 100%; */
   height:225px;
   z-index:1;
   display: flex;
@@ -175,8 +189,8 @@
 .ThumbCarousel_Controls > button {
   margin: 1px;
 }
-
 .Actions {
+  grid-area: actions;
   display: flex;
   flex-direction: column;
 }

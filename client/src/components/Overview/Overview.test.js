@@ -20,6 +20,7 @@ const product = {
   created_at: '2021-08-13T14:38:44.509Z',
   updated_at: '2021-08-13T14:38:44.509Z',
 };
+
 const variant = {
     style_id: 240500,
     name: 'Forest Green & Black',
