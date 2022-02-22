@@ -17,6 +17,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log('mounted')
     axios({
       method: 'GET',
       url: '/api/all_products',
@@ -35,8 +36,9 @@ class App extends React.Component {
       url: '/api/product',
       params: { product_id: id },
     }).then((response) => {
+      console.log('in set product response.data: ', response.data);
       this.setState({
-        product: response.data[0],
+        product: response.data,
         apiResponse: true,
       });
     });
