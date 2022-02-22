@@ -66,8 +66,7 @@ function Overview() {
           <BigCarousel variant={selectedVariant} />
           {/* <FeaturedImage variant={selectedVariant} /> */}
         </div>
-        <div id="Info-Section">
-          <div>{'<<placeholder - read all reviews>>'}</div>
+        <div id="Info-Section" className={style.Info_Section}>
           <ProductInfo product={product} variant={selectedVariant} />
           <StylesList
             variants={variants}
@@ -90,6 +89,7 @@ export default Overview;
 function ProductInfo(props) {
   return (
     <div className={style.ProductInfo}>
+      <div>{'★★★★☆'}</div>
       <div className={style.info_SmallText}>{props.product.category}</div>
       <div className={style.info_BigText}>{props.product.name}</div>
       <div><Price variant={props.variant} /></div>
