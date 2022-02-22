@@ -8,31 +8,10 @@ import StyleSelector from './ov_StyleSelector';
 import { ThumbCarousel, BigCarousel } from './ov_Carousels';
 import Actions from './ov_Actions';
 
-const product = {
-  id: 40344,
-  campus: 'hr-rfp',
-  name: 'Camo Onesie',
-  slogan: 'Blend in to your crowd',
-  description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-  category: 'Jackets',
-  default_price: '140.00',
-  created_at: '2021-08-13T14:38:44.509Z',
-  updated_at: '2021-08-13T14:38:44.509Z',
-  features: [
-    {
-      feature: 'Fabric',
-      value: 'Canvas',
-    },
-    {
-      feature: 'Buttons',
-      value: 'Brass',
-    },
-  ],
-};
+function Overview(props) {
+  const product = props.product;
+  const product_id = props.product.id;
 
-const product_id = product.id;
-
-function Overview() {
   const [variants, setVariants] = useState([]);
   const [selectedVariant, setSelectedVariant] = useState({ });
   const [info, setInfo] = useState(false);
@@ -115,8 +94,8 @@ function FeaturesList(props) {
   return (
     <div className={style.FeaturesList}>
       {
-        props.product.features.map((feature) =>
-          <div>{` ✓ ${feature.feature}: ${feature.value}`}</div>)
+        props.product.features.map((feature, i) =>
+          <div key={i}>{` ✓ ${feature.feature}: ${feature.value}`}</div>)
       }
     </div>
   );
