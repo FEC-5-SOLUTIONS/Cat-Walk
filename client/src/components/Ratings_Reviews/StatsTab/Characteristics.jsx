@@ -21,15 +21,15 @@ const bars = (obj) => {
   return returnJSX;
 }
 
-function Characteristics({metaData}) {
+function Characteristics({meta}) {
   let barList = [];
-  if (metaData.characteristics) {
+  if (meta.characteristics) {
     // console.log('characteristics: ', metaData.characteristics);
-    barList = bars(metaData.characteristics);
+    barList = bars(meta.characteristics);
     // console.log(barList);
   }
 
-  return !metaData.characteristics ? null : (
+  return !meta.characteristics ? null : (
     <div>
       {barList.map((bar) => bar)}
     </div>

@@ -1,0 +1,89 @@
+.modalBackground {
+  width: 100vw;
+  height: 50vw;
+  background-color: rgba(200, 200, 200);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer {
+  width: 50%;
+  height: fit-content;
+  align-self: auto;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.starsAndRec {
+  display: flex;
+  flex-direction: column;
+}
+.recommend {
+  display: flex;
+  justify-content: space-between;
+}
+
+.radios {
+  display: flex;
+  flex-direction: column;
+}
+
+.cat {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.catRadios {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.indRadios {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  width: 20%;
+  justify-content: flex-end;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-bottom: 1px;
+  padding-top: 1px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 20px;
+}
+.submit{
+  padding:10px 15px 10px 15px;
+  font-size: 25px;
+  background-color: rgb(10, 90, 194);
+  color:white;
+  border-radius: 15px;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
+
+.cancel{
+  padding:10px 15px 10px 15px;
+  font-size: 25px;
+  background-color: rgb(230, 122, 79);
+  color:white;
+  border-radius: 15px;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
