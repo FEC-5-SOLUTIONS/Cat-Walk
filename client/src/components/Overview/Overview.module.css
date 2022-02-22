@@ -169,11 +169,12 @@
   align-items:center;
   width: 25px;
   height: 25px;
-  padding:5px;
+  margin:5px;
 }
 .ThumbCarousel_Image {
   object-fit:cover;
   width:25px;
+  height:auto;
   opacity:0.8;
 }
 .ThumbCarousel_Controls {
