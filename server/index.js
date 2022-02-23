@@ -7,10 +7,19 @@ const PORT = 3000 || process.env.PORT;
 
 app.use(express.static('client/dist'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json({ extended: true }));
 
 const headers = { authorization: auth.key };
 const baseUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
+
+// GET ALL PRODUCTS
+app.get('/api/all_products', (req, res) => {
+  axios({
+    method: 'GET',
+    url: `${baseUrl}/products/`,
+    headers,
+  }).then((axiosResponse) => res.send(axiosResponse.data));
+});
 
 // GET PRODUCT
 app.get('/api/product', (req, res) => {
@@ -56,6 +65,39 @@ app.get('/api/all_reviews/:sort/:productID', (req, res) => {
     url: `${baseUrl}/reviews/?product_id=${req.params.productID}&sort=${req.params.sort}&count=100`,
     headers,
   }).then((axiosResponse) => res.send(axiosResponse.data));
+});
+
+// helpful click
+app.put('/api/reviews/:id', (req, res) => {
+  console.log(req.params.id);
+  console.log(`${baseUrl}/reviews/${req.params.id}/helpful`);
+  axios({
+    method: 'PUT',
+    url: `${baseUrl}/reviews/${req.params.id}/helpful`,
+    headers,
+  })
+    .then((result) => res.status(204).send())
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send();
+    });
+})
+
+// POST REVIEWS
+app.post('/api/reviews', (req, res) => {
+  console.log('entered');
+  console.log('req.body: ', req.body);
+  axios({
+    method: 'POST',
+    url: `${baseUrl}/reviews`,
+    data: req.body,
+    headers,
+  })
+    .then((result)=> res.status(201).send())
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send();
+    });
 });
 
 // GET QUESTIONS

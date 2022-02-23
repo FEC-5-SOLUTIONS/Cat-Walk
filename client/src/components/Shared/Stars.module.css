@@ -1,8 +1,24 @@
-.star{
+/* .star{
   cursor: pointer;
   transition: color 200ms;
 }
 
 .starButton{
   display: none;
+} */
+
+
+
+.star{
+  font-size: 25px;
+  overflow: hidden;
+  position: relative;
+}
+
+.star .darkStar{
+  color: gold;
+  position: absolute;;
+  overflow: hidden;
+  top: 0;
+
 }

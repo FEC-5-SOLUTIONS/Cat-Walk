@@ -1,27 +1,28 @@
-import React from 'react';
-import Stars from '../../Shared/Stars';
+import React, { useState } from 'react';
+import Stars from '../../Shared/StarsUni';
 import Recommended from './recommended';
 import RatingBars from './RatingBars';
 import Characteristics from './Characteristics';
+import getAvg from '../../utils/getAvg';
 import styles from '../Ratings.module.css';
 
-function Stats({ metaData }) {
-  return (
-    <div className={`${styles.statsTab} ${styles.statsFlex}`}>
+function Stats({ meta, average }) {
+  return !meta ? null : (
+    <div className={styles.statsTab}>
       <div className={styles.statsStars}>
-        <Stars metaData={metaData} />
+        {String(average).slice(0, 4)}
+        <Stars average={average} />
       </div>
       <div className={styles.statsRec}>
-        <Recommended metaData={metaData} />
+        <Recommended meta={meta} />
       </div>
       <div className={styles.statsBars}>
-        <RatingBars metaData={metaData} />
+        <RatingBars meta={meta} />
       </div>
       <div className={styles.statsFit}>
-        <Characteristics metaData={metaData} />
+        <Characteristics meta={meta} />
       </div>
     </div>
   );
 }
-
 export default Stats;
