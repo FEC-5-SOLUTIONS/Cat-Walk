@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
@@ -5,11 +6,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import classes from './RelatedItems.module.css';
+import ItemCard from './ItemCard';
+import Compare from './Compare';
 
 function OutfitCard(props) {
-  const { product, j } = props;
-  const [styles, setStyles] = useState([]);
-  const [info, setInfo] = useState(false);
+  const { product, j, selectProduct } = props;
+  const [image, setImage] = useState('');
+  const [noImage, setReplacement] = useState('https://bit.ly/2Tg8g4s');
+  const [showCompare, setCompare] = useState(false);
+
   const product_id = product.id;
 
   useEffect(() => {
@@ -19,26 +24,54 @@ function OutfitCard(props) {
       params: { product_id },
     })
       .then((response) => {
-        setStyles(response.data.results);
-        setInfo(true);
+        const item = response.data;
+        const thumbnail = item.results[0].photos[0].thumbnail_url;
+        setImage(thumbnail);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-  }, [info]);
-  console.log('productId :', product_id);
-  console.log('STYLES outfit:', styles);
-  // const imageURL = product.styles[0].photos[0].thumbnail_url;
+  }, []);
+
+  const handleClickOnItem = () => {
+    selectProduct(product_id);
+  };
+
+  const handleCompareButton = () => {
+    setCompare(!showCompare);
+  };
+
+  const handleCloseModal = () => {
+    setCompare(!showCompare);
+  };
 
   return (
     <div className={classes.carouselItem} id={`carouselItemOutfit${j}`}>
+      {showCompare
+        ? (
+          <Compare
+            key={product.id - 0.1}
+            id={product.id}
+            // parentId={product.parentId}
+            name={product.name}
+            showModal={handleCloseModal}
+            product={product}
+          />
+        ) : null}
       <div>
         <IoMdCloseCircleOutline className="action-btn" />
-        {/* <div className="card-item"><img className={classes.carouselItemImage} alt="outfit-card" src={imageURL !== null ? imageURL : 'https://bit.ly/2Tg8g4s'} /></div> */}
-        <div className="card-item text category">{ product.category }</div>
-        <div className="card-item text name">{ product.name }</div>
-        <div className="card-item text">
-          $
-          { product.price }
-        </div>
-        <div className="card-item text rating">{ product.rating }</div>
+        <ItemCard
+          key={product.id - 0.25}
+          id={product.id}
+          // parentId={product.parentId}
+          category={product.category}
+          name={product.name}
+          price={product.default_price}
+          image={image}
+          noImage={noImage}
+          clickOnItem={handleClickOnItem}
+          compareModal={handleCompareButton}
+        />
       </div>
     </div>
   );

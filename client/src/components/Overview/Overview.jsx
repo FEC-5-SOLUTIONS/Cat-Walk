@@ -16,7 +16,7 @@ function Overview(props) {
   // const info = true;
 
   const [variants, setVariants] = useState([]);
-  const [selectedVariant, setSelectedVariant] = useState({  });
+  const [selectedVariant, setSelectedVariant] = useState({ });
   const [info, setInfo] = useState(false);
 
   useEffect(() => {

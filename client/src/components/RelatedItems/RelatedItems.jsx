@@ -14,30 +14,15 @@ import OutfitHeader from './OutfitHeader';
 const widthSpan = 100;
 
 function RelatedItems(props) {
-  // const [variants, setVariants] = useState([]);
-  // const [info, setInfo] = useState(false);
   const [sliderPositionRelated, setSliderPositionRelated] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(0);
-  const { product } = props;
+  const { relatedProducts, selectProduct } = props;
   // const productId = relatedProducts.id;
-  console.log('PRODUCT :', product);
-
-  // useEffect(() => {
-  //   axios({
-  //     method: 'GET',
-  //     url: '/api/styles/',
-  //     params: { productId },
-  //   })
-  //     .then((response) => {
-  //       setVariants(response.data.results);
-  //       setInfo(true);
-  //     });
-  // }, [info]);
-  // console.log('PHOTOS :', variants);
+  console.log('PRODUCT :', relatedProducts);
 
   const translateFullSlidesRelated = (newPosition) => {
     const toTranslate = -widthSpan * newPosition;
-    for (let i = 0; i < product.length; `${i += 1}`) {
+    for (let i = 0; i < relatedProducts.length; `${i += 1}`) {
       const elem = document.getElementById(`carouselItemRelated${i}`);
       elem.style.transform = `translateX(${toTranslate}%)`;
     }
@@ -54,7 +39,7 @@ function RelatedItems(props) {
 
   const nextSlideHandlerRelated = () => {
     let newPosition = sliderPositionRelated;
-    if (newPosition < product.length - 1) {
+    if (newPosition < relatedProducts.length - 1) {
       newPosition += 1;
     }
     translateFullSlidesRelated(newPosition);
@@ -63,8 +48,8 @@ function RelatedItems(props) {
 
   const translateFullSlidesOutfit = (newPosition) => {
     const toTranslate = -widthSpan * newPosition;
-    for (let i = 0; i < product.length; `${i += 1}`) {
-      const elem = document.getElementById(`carouselItemOutfit${i}`);
+    for (let j = 0; j < relatedProducts.length; `${j += 1}`) {
+      const elem = document.getElementById(`carouselItemOutfit${j}`);
       elem.style.transform = `translateX(${toTranslate}%)`;
     }
   };
@@ -80,7 +65,7 @@ function RelatedItems(props) {
 
   const nextSlideHandlerOutfit = () => {
     let newPosition = sliderPosition;
-    if (newPosition < product.length - 1) {
+    if (newPosition < relatedProducts.length - 1) {
       newPosition += 1;
     }
     translateFullSlidesOutfit(newPosition);
@@ -88,12 +73,12 @@ function RelatedItems(props) {
   };
 
   // eslint-disable-next-line max-len
-  const displayItemsRelated = product.map((p, index) => <RelatedItemsCard prod={p} i={index} className={classes.carouselItem} id={`carouselItemRelated${index}`} />);
-  const displayItemsOutfit = product.map((p, index) => <OutfitCard prod={p} j={index} className={classes.carouselItem} id={`carouselItemOutfit${index}`} />);
+  const displayItemsRelated = relatedProducts.map((product, index) => <RelatedItemsCard product={product} selectProduct={selectProduct} i={index} className={classes.carouselItem} id={`carouselItemRelated${index}`} />);
+  const displayItemsOutfit = relatedProducts.map((product, index) => <OutfitCard product={product} selectProduct={selectProduct} j={index} className={classes.carouselItem} id={`carouselItemOutfit${index}`} />);
 
   return (
     <div>
-      <RelatedProductsHeader id="header" />
+      <RelatedProductsHeader className={classes.Header} />
       <section className={classes.Container}>
         <div>
           <MdKeyboardArrowLeft className={classes.leftArrow} onClick={prevSlideHandlerRelated} />

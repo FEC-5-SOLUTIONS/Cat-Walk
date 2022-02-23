@@ -2,7 +2,7 @@ import React from 'react';
 
 function RelatedProductsHeader() {
   return (
-    <div className="card-item text header">RELATED PRODUCTS</div>
+    <div id="header">RELATED PRODUCTS</div>
   );
 }
 
