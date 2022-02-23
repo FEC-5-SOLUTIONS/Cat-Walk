@@ -2,15 +2,15 @@ import React from 'react';
 import styles from '../Ratings.module.css';
 
 function Bar({ char, array, rating }) {
-  const percentage = (rating / 5) * 100;
+  const col = Math.round(rating);
   return (
     <div className={styles.reBar}>
-      <div className={styles.chaName}>
+      <div style={{ gridColumn: `${col}` }}>
         {char}
       </div>
       <div className={styles.BarHolders}>
-        <div>
-          <div>🔻</div>
+        <div className={styles.unitGrid}>
+          <div style={{ gridColumn: `${col}` }}>🔻</div>
         </div>
         <div className={styles.grayBar} />
       </div>

@@ -183,6 +183,10 @@
   display: flex;
   flex-direction: column;
 }
+.unitGrid{
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+}
 
 .chaName{
   font-weight: bold;
