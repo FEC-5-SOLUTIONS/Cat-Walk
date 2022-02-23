@@ -17,6 +17,8 @@ export default function Questions() {
   function getTwoQuestions() {
     const params = {
       product_id: productId,
+      page: 1,
+      count: 100,
     };
     axios.get('/api/questions', { params })
       .then((res) => {
@@ -36,6 +38,8 @@ export default function Questions() {
     e.preventDefault();
     const params = {
       product_id: productId,
+      page: 1,
+      count: 100,
     };
     axios.get('/api/questions', { params })
       .then((res) => {
@@ -100,7 +104,11 @@ export default function Questions() {
           </button>
         );
       } else {
-        button = <div />;
+        button = (
+          <button type="submit" onClick={getTwoQuestions}>
+            COLLAPSE QUESTIONS
+          </button>
+        );
       }
     } else {
       button = <div />;

@@ -34,6 +34,12 @@
   margin-left: -800px;
 }
 
+.questions_list {
+  max-height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
 .user_photo {
   width: 120px;
   height: 100px;
@@ -52,4 +58,9 @@
   background: rgb(224, 224, 224);
   width: 70%;
   height: auto;
+}
+
+.thumbnails {
+  height: 40px;
+  margin: 5px;
 }

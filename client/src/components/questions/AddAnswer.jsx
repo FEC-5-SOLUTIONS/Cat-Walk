@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import styles from './Questions.module.css';
 import SubmitError from './SubmitError';
+import UploadError from './UploadError';
 
 export default function AddAnswer({ question, handleClick, postAnswer }) {
   const [state, setState] = useState({
     body: '',
     name: '',
     email: '',
-    photos: [],
   });
   const [validEmail, setValidEmail] = useState(true);
   const [photos, setPhotos] = useState([]);
+  const [files, setFiles] = useState([]);
+  const [hasFive, setHasFive] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [errorField, setErrorField] = useState([]);
 
@@ -21,6 +24,7 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
       name: '',
       email: '',
     });
+    setPhotos([]);
   }
 
   function closeModal(e) {
@@ -50,25 +54,33 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
   }
 
   function selectImg(e) {
-    // e.preventDefault();
-    // const types = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-    const temp = [];
-    // if (state.photos.length < 5 && types.test(e.target.files[0])) {
-    //   temp.push(URL.createObjectURL(e.target.files[0]));
-    // }
-    // setState({
-    //   ...state,
-    //   photos: e.target.files[0],
-    // });
-    if (state.photos.length < 5) {
-      temp.push(e.target.files[0]);
+    setHasError(false);
+    const img = e.target.files[0];
+    if (!hasFive) {
+      if (img) {
+        const imgType = `.${img.type.split('/')[1]}`;
+        const validTypes = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+        if (validTypes.test(imgType)) {
+          setPhotos((prev) => [...prev, URL.createObjectURL(img)]);
+          setFiles((prev) => [...prev, img]);
+        } else {
+          setHasError(true);
+        }
+      }
     }
-    setPhotos(temp);
   }
 
   function upload(e) {
     e.preventDefault();
-    console.log('cliciked');
+    // const fd = new FormData();
+    // fd.append('image', files[0], files[0].name);
+    // axios.post('https://api.cloudinary.com/v1_1/demo/image/upload', fd)
+    //   .then((res) => {
+    //     console.log(res, 'res');
+    //   })
+    //   .catch((err) => {
+    //     console.log(err, 'err');
+    //   });
   }
 
   function handleSubmit() {
@@ -138,9 +150,19 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
       <br />
       For authentication reasons, you will not be emailed
       <br />
-      <img src={state.photos} alt="" multiple />
-      <input type="file" onChange={selectImg} />
-      <button type="submit" onClick={upload}>Upload</button>
+      <input
+        // className={hasFive ? styles.hide : styles.show}
+        type="file"
+        onChange={selectImg}
+        multiple
+      />
+      {photos && photos.map((item) => <img className={styles.thumbnails} src={item} alt="" />)}
+      <div className={hasError ? styles.show : styles.hide}>
+        <UploadError err="jpg, jpeg, png, gif only" />
+      </div>
+      <button type="submit" onClick={upload}>
+        Upload
+      </button>
       <br />
       <div className={hasError ? styles.show : styles.hide}>
         <SubmitError errorField={errorField} />
