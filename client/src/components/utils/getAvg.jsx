@@ -12,3 +12,4 @@ export default function getAvg(obj) {
   }
   return totalSum / totalCount;
 };
+

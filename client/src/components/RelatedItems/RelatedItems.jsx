@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
 import classes from './RelatedItems.module.css';
