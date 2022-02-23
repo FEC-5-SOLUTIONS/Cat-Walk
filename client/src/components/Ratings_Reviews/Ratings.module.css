@@ -179,6 +179,45 @@
   margin-right: 5px;
 }
 
+.reBar {
+  display: flex;
+  flex-direction: column;
+}
+
+.chaName{
+  font-weight: bold;
+}
+
+.BarHolders{
+  width: 99%;
+  display: flex;
+  flex-direction: column;
+}
+
+.marginBar{
+  font-size: 25px;
+  /* margin-right: 20px; */
+  width: 75%;
+  /* margin-left: -5%; */
+  margin-left: auto;
+}
+
+
+.grayBar{
+  width: 100%;
+  height: 15px;
+  background: gray;
+  padding-right: 10px;
+  border-right-width: 5px;
+}
+
+.charArrayHolder{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .blueText {
   color: blue;
 }
