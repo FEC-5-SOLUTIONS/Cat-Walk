@@ -51,7 +51,7 @@ function Overview(props) {
           selectedVariant={selectedVariant}
           setSelectedVariant={setSelectedVariant}
         />
-        <Actions selectedVariant={selectedVariant}/>
+        <Actions selectedVariant={selectedVariant} />
         <Description product={product} />
         <FeaturesList product={product} />
       </div>

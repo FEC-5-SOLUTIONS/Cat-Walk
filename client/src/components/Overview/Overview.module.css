@@ -203,3 +203,19 @@
 .Actions_Row > div {
   padding: 2px;
 }
+.SocialsIconContainer {
+  padding: 5px;
+  display: inline-flex;
+  justify-content:space-around;
+}
+.Socials_Icon {
+  width: 25px;
+  height: 25px;
+  margin: 10px;
+  object-fit: cover;
+  opacity: 0.6;
+  border-radius: 20%;
+}
+.Socials_Icon > hover {
+  opacity: 1;
+}
