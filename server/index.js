@@ -62,7 +62,7 @@ app.get('/api/all_reviews/:sort/:productID', (req, res) => {
   // console.log('here')
   axios({
     method: 'GET',
-    url: `${baseUrl}/reviews/?product_id=${req.params.productID}&sort=${req.params.sort}&count=100`,
+    url: `${baseUrl}/reviews/?product_id=${req.params.productID}&sort=${req.params.sort}&count=109`,
     headers,
   }).then((axiosResponse) => res.send(axiosResponse.data));
 });
