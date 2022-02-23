@@ -49,15 +49,15 @@ const bars = (obj) => {
 };
 
 
-function RatingBars({ metaData }) {
+function RatingBars({ meta }) {
   let barList = [];
-  if (metaData.ratings) {
+  if (meta.ratings) {
     // console.log('ratings: ', metaData.ratings);
-    barList = bars(metaData.ratings);
+    barList = bars(meta.ratings);
     // console.log(barList);
   }
 
-  return !metaData.ratings ? null : (
+  return !meta.ratings ? null : (
     <div>
       {barList.map((bar) => bar)}
     </div>

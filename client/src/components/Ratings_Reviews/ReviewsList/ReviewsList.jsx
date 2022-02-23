@@ -1,51 +1,33 @@
-import React from 'react';
-import ReviewList from './ReviewList'
+import React, { useState } from 'react';
+import ReviewList from './ReviewList';
+// import Modal from '../Modal/Modal';
 import styles from '../Ratings.module.css';
 
-class ReviewsList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      viewMore: false,
-      buttonText: 'View More',
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleClick (e) {
-    // e.preventDefault();
-    this.setState({
-      viewMore: !this.state.viewMore,
-      buttonText: 'View Less',
-    });
-  }
-
-  handleChange(e) {
-    this.props.sortFunc(e.target.value);
-  }
-
-  render() {
-    return !this.props.reviewsData.results ? <div>nothing to see</div> : (
-      <div>
+function ReviewsList({
+  reviews, sort, handleChange, text, viewMore, click, setModal
+}) {
+  return !reviews.results ?
+    <div>nothing to see</div> : (
+      <div className={styles.reviewsContainer}>
         <div>
-          {this.props.reviewsData.results.length} Reviews sorted by
-          <select value={this.props.sort} onChange={this.handleChange}>
+          {reviews.results.length}
+          Reviews sorted by
+          <select value={sort} onChange={handleChange}>
             <option value="relevant">relevant</option>
             <option value="newest">newest</option>
             <option value="helpful">helpful</option>
           </select>
         </div>
-        <div>
-        {!this.state.viewMore ?
-        <ReviewList data = {this.props.reviewsData.results.slice(0,2)} /> : <ReviewList data = {this.props.reviewsData.results} />}
+        <div className={styles.reviewList}>
+          {!viewMore ? <ReviewList data={reviews.results.slice(0, 2)} /> :
+          <ReviewList data={reviews.results} />}
         </div>
-        <div>
-          <button onClick={()=> this.handleClick()}>{this.state.buttonText}</button>
+        <div className={styles.buttons}>
+          <button onClick={click} className={styles.viewButton}>{text}</button>
+          <button onClick={()=>{setModal(true)}} className={styles.addButton}>Add A review! </button>
         </div>
-
       </div>
     );
-  }
 }
 
 export default ReviewsList;
