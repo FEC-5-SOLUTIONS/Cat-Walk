@@ -10,7 +10,10 @@ function Bar({ char, array, rating }) {
       </div>
       <div className={styles.BarHolders}>
         <div className={styles.unitGrid}>
-          <div style={{ gridColumn: `${col}` }}>🔻</div>
+          <div style={{
+            gridColumn: `${col}`,
+            fontSize: '25px',
+            color: 'green' }}>🔻</div>
         </div>
         <div className={styles.grayBar} />
       </div>

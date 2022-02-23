@@ -27,7 +27,7 @@ const fitArray = ['Runs tight',
   'Runs long',
 ];
 
-function Modal({ setModal, charObj, productID}) {
+function Modal({ setModal, charObj, productID, name }) {
   const [starRating, setStarRating] = useState(0);
   const [recRating, setRecRating] = useState(2);
   const [sizeRating, setSizeRating] = useState(0);
@@ -141,6 +141,9 @@ function Modal({ setModal, charObj, productID}) {
   return (
     <div className={styles.modalBackground}>
       <div className={styles.modalContainer}>
+        <div>
+          <h1>Write your review about {name} here!</h1>
+        </div>
         <div className={styles.starsAndRec}>
           <Stars starRating={starRating} setStarRating={setStarRating} />
           <div className={styles.recommend}>
@@ -184,13 +187,13 @@ function Modal({ setModal, charObj, productID}) {
           })}
         </div>
         <div className={styles.form}>
-          Please enter a sumText:
+        <p>Please enter a sumText:</p>
           <input type="text" maxLength="60" placeholder="Example: Best Purchase Ever!"
             onChange={(e) => setSumText(e.target.value)}
           />
         </div>
         <div className={styles.form}>
-          Please enter a Review:
+        <p>Please enter a Review:</p>
           <input type="text"
             maxLength="1000"
             placeholder="Why did you like the product or not?"
@@ -198,20 +201,22 @@ function Modal({ setModal, charObj, productID}) {
           />
         </div>
         <div className={styles.form}>
-          What is your nickname:
+          <p>What is your nickname:</p>
           <input type="text"
             maxLength="60"
             placeholder="Please enter a nickname"
             onChange={(e) => setNickname(e.target.value)}
           />
+          <p>For privacy reasons, do not use your full name or email address</p>
         </div>
         <div className={styles.form}>
-          Please enter your eMail:
+          <p>Please enter your eMail:</p>
           <input type="text"
             maxLength="60"
             placeholder="Please enter your eMail"
             onChange={(e) => setEMail(e.target.value)}
           />
+          <p>For authentication reasons, you will not be emailed</p>
         </div>
         <div className={styles.buttons}>
           <button onClick={handleSubmit} className={styles.submit}>Submit</button>

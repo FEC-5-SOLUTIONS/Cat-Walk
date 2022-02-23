@@ -21,7 +21,7 @@ const bars = (obj) => {
             {i}
           </div>
           <div className={styles.barBar}>
-            <div style = {{ background: 'black',
+            <div style = {{ background: 'green',
             width: `${percentage}%`,
             height: '100%',
             }}> </div>

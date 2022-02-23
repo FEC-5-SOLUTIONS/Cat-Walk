@@ -86,7 +86,7 @@
   padding-left: 10%;
 }
 .barBar{
-  border: solid;
+  background: grey;
   grid-column: 2 / 5
 }
 

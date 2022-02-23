@@ -52,7 +52,14 @@ function RatingsAndReviews({ product, meta, avg }) {
         />
       </div>
       { modal
-        ? <Modal setModal={setModal} charObj={meta.characteristics} productID={product.id} />
+        ? (
+          <Modal
+            setModal={setModal}
+            charObj={meta.characteristics}
+            productID={product.id}
+            name={product.name}
+          />
+        )
         : null}
     </div>
   );
