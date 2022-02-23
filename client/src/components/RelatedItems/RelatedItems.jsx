@@ -13,14 +13,14 @@ import OutfitHeader from './OutfitHeader';
 
 const widthSpan = 100;
 
-function Carousel(props) {
+function RelatedItems(props) {
   // const [variants, setVariants] = useState([]);
   // const [info, setInfo] = useState(false);
   const [sliderPositionRelated, setSliderPositionRelated] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(0);
-  const { relatedProducts } = props;
+  const { product } = props;
   // const productId = relatedProducts.id;
-  // console.log('PROPS :', props);
+  console.log('PRODUCT :', product);
 
   // useEffect(() => {
   //   axios({
@@ -37,7 +37,7 @@ function Carousel(props) {
 
   const translateFullSlidesRelated = (newPosition) => {
     const toTranslate = -widthSpan * newPosition;
-    for (let i = 0; i < relatedProducts.length; `${i += 1}`) {
+    for (let i = 0; i < product.length; `${i += 1}`) {
       const elem = document.getElementById(`carouselItemRelated${i}`);
       elem.style.transform = `translateX(${toTranslate}%)`;
     }
@@ -54,7 +54,7 @@ function Carousel(props) {
 
   const nextSlideHandlerRelated = () => {
     let newPosition = sliderPositionRelated;
-    if (newPosition < relatedProducts.length - 1) {
+    if (newPosition < product.length - 1) {
       newPosition += 1;
     }
     translateFullSlidesRelated(newPosition);
@@ -63,7 +63,7 @@ function Carousel(props) {
 
   const translateFullSlidesOutfit = (newPosition) => {
     const toTranslate = -widthSpan * newPosition;
-    for (let i = 0; i < relatedProducts.length; `${i += 1}`) {
+    for (let i = 0; i < product.length; `${i += 1}`) {
       const elem = document.getElementById(`carouselItemOutfit${i}`);
       elem.style.transform = `translateX(${toTranslate}%)`;
     }
@@ -80,7 +80,7 @@ function Carousel(props) {
 
   const nextSlideHandlerOutfit = () => {
     let newPosition = sliderPosition;
-    if (newPosition < relatedProducts.length - 1) {
+    if (newPosition < product.length - 1) {
       newPosition += 1;
     }
     translateFullSlidesOutfit(newPosition);
@@ -88,8 +88,8 @@ function Carousel(props) {
   };
 
   // eslint-disable-next-line max-len
-  const displayItemsRelated = relatedProducts.map((product, index) => <RelatedItemsCard product={product} i={index} className={classes.carouselItem} id={`carouselItemRelated${index}`} />);
-  const displayItemsOutfit = relatedProducts.map((product, index) => <OutfitCard product={product} j={index} className={classes.carouselItem} id={`carouselItemOutfit${index}`} />);
+  const displayItemsRelated = product.map((p, index) => <RelatedItemsCard prod={p} i={index} className={classes.carouselItem} id={`carouselItemRelated${index}`} />);
+  const displayItemsOutfit = product.map((p, index) => <OutfitCard prod={p} j={index} className={classes.carouselItem} id={`carouselItemOutfit${index}`} />);
 
   return (
     <div>
@@ -125,4 +125,4 @@ function Carousel(props) {
   );
 }
 
-export default Carousel;
+export default RelatedItems;
