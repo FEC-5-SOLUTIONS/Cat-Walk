@@ -11,9 +11,12 @@ import Actions from './ov_Actions';
 function Overview(props) {
   const product = props.product;
   const product_id = props.product.id;
+  // const variants = [props.variant];
+  // const selectedVariant = props.variant;
+  // const info = true;
 
   const [variants, setVariants] = useState([]);
-  const [selectedVariant, setSelectedVariant] = useState({ });
+  const [selectedVariant, setSelectedVariant] = useState({  });
   const [info, setInfo] = useState(false);
 
   useEffect(() => {
@@ -38,7 +41,7 @@ function Overview(props) {
   if (!selectedVariant.name) { return <div>overview</div>; }
 
   return (
-    <div id="Overview" className={style.Overview}>
+    <div id="Overview" className={style.Overview} data-testid="Overview">
       <div id="Overview-Grid" className={style.Overview_Grid} >
         <ThumbCarousel variant={selectedVariant} />
         <BigCarousel variant={selectedVariant} />
@@ -55,8 +58,6 @@ function Overview(props) {
     </div>
   );
 }
-
-export default Overview;
 
 function ProductInfo(props) {
   return (
@@ -100,3 +101,6 @@ function FeaturesList(props) {
     </div>
   );
 }
+
+export default Overview;
+export { Overview, ProductInfo };
