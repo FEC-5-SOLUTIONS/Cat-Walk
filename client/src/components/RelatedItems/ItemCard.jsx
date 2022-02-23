@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -6,6 +7,7 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { MdCompareArrows } from 'react-icons/md';
 // import StarRating from './StarRating.jsx';
 import classes from './RelatedItems.module.css';
 
@@ -15,8 +17,8 @@ function ItemCard(props) {
     image, name, noImage, price, clickOnItem, compareModal,
   } = props;
   { return (
-    <div>
-      <div onClick={clickOnItem}>
+    <div classes={classes.carouselItem} onClick={clickOnItem}>
+      <div>
         {image === undefined
           ? (
             <div className={classes}>
@@ -24,14 +26,19 @@ function ItemCard(props) {
             </div>
           )
           : <img className={classes.image} src={image === null ? noImage : image} />}
-        <h4 className="card-item text category">{category}</h4>
-        <h2 className={classes.nameTitle}>{name}</h2>
-        <p className={classes.par}>{`$${price}`}</p>
-        {/* <StarRating
+        <div className={classes.productCardInfo}>
+          <div className={classes.productMsgInfo}>
+            <h4 className={classes.productCardSubtitle}>{category}</h4>
+            <h2 className={classes.productCardTitle}>{name}</h2>
+          </div>
+          <p className={classes.par}>{`$${price}`}</p>
+          <span onClick={compareModal}><MdCompareArrows className="action-btn" /></span>
+          {/* <StarRating
             id={id}
             parentId={parentId}
           /> */}
-        <button className={classes.buttonCompare} onClick={compareModal}>Compare</button>
+          {/* <button className={classes.buttonCompare} onClick={compareModal}>Compare</button> */}
+        </div>
       </div>
     </div>
   );

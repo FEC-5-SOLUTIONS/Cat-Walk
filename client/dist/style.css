@@ -51,6 +51,11 @@
   box-shadow: 3px 2px 2px rgb(26, 25, 25);
 }
 
+.action-btn:hover
+{
+    transform: scale(1.5);
+}
+
 .leftArrow {
   /* position: relative;
   top: 50%;

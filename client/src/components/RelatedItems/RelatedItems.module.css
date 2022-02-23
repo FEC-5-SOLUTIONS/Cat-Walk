@@ -3,6 +3,7 @@
 #header {
   position:relative;
   left: 12px;
+  margin: 42px 42px 12px 12px;
   /* font-size: 26px;
   float: right; */
 }
@@ -29,7 +30,6 @@
 
 #menu-bar{
   font: "Lucida Console", "Courier New", monospace;
-
 }
 
 .carouselItem.text {
@@ -71,7 +71,7 @@
   white-space: nowrap;
   z-index: 1;
   caret-color: transparent;
-  /* overflow: hidden; */
+  overflow: hidden;
   position: relative;
   left:-280px;
   background-image: linear-gradient(to left, transparent, #bbccdd);
@@ -148,17 +148,12 @@
 /* --------- CAROUSEL ITEM ---------- */
 
 .carouselItem{
-  /* touch-action: none;
-  height: 100%;
-  width: 100%;
-  display: inline-block;
-  vertical-align: top; */
   position: relative;
   display: grid;
   grid-template-rows: 4fr 1fr 1fr 1fr 1fr;
   width: 12vw;
   height: 40vh;
-  border: 2px solid;
+  /* border: 1px solid; */
   cursor: pointer;
   display: inline-block;
   margin: 10px 10px 10px 10px;
@@ -212,6 +207,64 @@
   font-size: 1vw;
 }
 
+/* --------- PRODUCT CARD INFO ---------- */
+
+.productCardInfo {
+  position: relative;
+  padding: 12px 0px 2px;
+  min-height: 185px;
+  font-size: 16px;
+}
+
+.productMsgInfo {
+  display: inline-block;
+  line-height: 1.5em;
+  padding-left: 12px;
+}
+
+.productCardTitle {
+  color: rgb(17, 17, 17);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.productCardTitle:hover
+{
+    transform: scale(1.2);
+}
+
+.productCardSubtitle {
+  color: rgb(117, 117, 117);
+  font-size: 16px;
+}
+
+.product-card__price-wrapper {
+  vertical-align: top;
+  text-align: left;
+  width: 100%;
+}
+
+.product-card__price {
+  font-size: 16px;
+  padding-right: 16px;
+}
+
+.buttonCompare {
+  font-family: var(--font-family);
+  width: calc(60%);
+  height: calc(40%);
+  margin: 1% 1%;
+  padding: 7px;
+  background-color: var(--theme-background-color);
+  border-radius: 5px;
+  border: 2px solid rgb(238, 225, 225);
+  color: #222;
+  font-weight: bold;
+  text-shadow: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 1vw;
+}
 
 
 

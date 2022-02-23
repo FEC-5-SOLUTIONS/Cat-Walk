@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
 import classes from './RelatedItems.module.css';
@@ -11,7 +11,7 @@ import OutfitCard from './OutfitCard';
 import RelatedProductsHeader from './RelatedProductsHeader';
 import OutfitHeader from './OutfitHeader';
 
-const widthSpan = 100;
+const widthSpan = 50;
 
 function RelatedItems(props) {
   const [sliderPositionRelated, setSliderPositionRelated] = useState(0);
