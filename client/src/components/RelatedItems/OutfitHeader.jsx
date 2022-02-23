@@ -2,7 +2,7 @@ import React from 'react';
 
 function OutfitHeader() {
   return (
-    <div className="card-item text header">YOUR OUTFIT</div>
+    <div id="header">YOUR OUTFIT</div>
   );
 }
 

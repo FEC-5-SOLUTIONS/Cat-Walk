@@ -14,9 +14,26 @@ import OutfitHeader from './OutfitHeader';
 const widthSpan = 100;
 
 function Carousel(props) {
+  // const [variants, setVariants] = useState([]);
+  // const [info, setInfo] = useState(false);
   const [sliderPositionRelated, setSliderPositionRelated] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(0);
   const { relatedProducts } = props;
+  // const productId = relatedProducts.id;
+  // console.log('PROPS :', props);
+
+  // useEffect(() => {
+  //   axios({
+  //     method: 'GET',
+  //     url: '/api/styles/',
+  //     params: { productId },
+  //   })
+  //     .then((response) => {
+  //       setVariants(response.data.results);
+  //       setInfo(true);
+  //     });
+  // }, [info]);
+  // console.log('PHOTOS :', variants);
 
   const translateFullSlidesRelated = (newPosition) => {
     const toTranslate = -widthSpan * newPosition;

@@ -1,24 +1,18 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
-<<<<<<< HEAD
 import axios from 'axios';
 import Overview from './Overview/Overview';
 import RatingsAndReviews from './Ratings_Reviews/Ratings_Reviews';
-import RelatedItems from './RelatedItems/RelatedItems';
-import Questions from './questions/Questions';
-=======
-import ProductCardsData from './RelatedItems/ProductCardsData';
-import Overview from './Overview/Overview';
-import RatingsAndReviews from './Ratings_Reviews/Ratings_Reviews';
 import Carousel from './RelatedItems/Carousel';
->>>>>>> RelatedCard
+import Questions from './questions/Questions';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
       product: {},
       apiResponse: false,
+      relatedProducts: {},
     };
 
     this.setProduct = this.setProduct.bind(this);
@@ -33,6 +27,8 @@ class App extends React.Component {
         count: 10,
       },
     }).then((response) => {
+      this.setState({ relatedProducts: response.data });
+      console.log('relatedProducts', this.state.relatedProducts);
       this.setProduct(response.data[0].id);
     });
   }
@@ -57,8 +53,8 @@ class App extends React.Component {
           <Overview
             product={this.state.product}
           />
-          <RelatedItems
-            product={this.state.product}
+          <Carousel
+            relatedProducts={this.state.relatedProducts}
           />
           <Questions
             product={this.state.product}
@@ -70,23 +66,6 @@ class App extends React.Component {
       );
     }
     return <div>{' '}</div>;
-=======
-      relatedProducts: ProductCardsData,
-    };
-  }
-
-  render() {
-    const { relatedProducts } = this.state;
-    return (
-      <div>
-        <div>
-          <Overview />
-          <Carousel relatedProducts={relatedProducts} />
-          <RatingsAndReviews />
-        </div>
-      </div>
-    );
->>>>>>> RelatedCard
   }
 }
 

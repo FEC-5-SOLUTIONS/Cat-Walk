@@ -1,10 +1,8 @@
 /* --------- RELATED PRODUCTS ---------- */
 
 #header {
-  /* position:relative;
-  right: 22px; */
-  font: 26px Arial, sans-serif;
-  float: right;
+  /* font: 14px "Times New Roman", Times, serif;;
+  float: left; */
 }
 
 .card-inner-container {
