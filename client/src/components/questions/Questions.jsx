@@ -11,11 +11,12 @@ export default function Questions() {
   const [moreQ, setMoreQ] = useState(false);
   const [moreThanTwo, setMoreThanTwo] = useState(false);
   const [showAddQuestion, setShowAddQuestion] = useState(false);
+  const productId = 40348;
 
   // GET FIRST TWO QUESTIONS
   function getTwoQuestions() {
     const params = {
-      product_id: 40348,
+      product_id: productId,
     };
     axios.get('/api/questions', { params })
       .then((res) => {
@@ -34,7 +35,7 @@ export default function Questions() {
   function getAllQuestions(e) {
     e.preventDefault();
     const params = {
-      product_id: 40348,
+      product_id: productId,
     };
     axios.get('/api/questions', { params })
       .then((res) => {
@@ -116,7 +117,7 @@ export default function Questions() {
       body,
       name,
       email,
-      product_id: 40348,
+      product_id: productId,
     };
     axios.post('/api/questions', data);
   };
@@ -134,7 +135,7 @@ export default function Questions() {
       >
         ADD A QUESTION +
       </button>
-      <div className={showAddQuestion ? styles.show_modal : styles.hide_modal}>
+      <div className={showAddQuestion ? styles.show : styles.hide}>
         <AddQuestion
           handleClick={addQuestion}
           postQuestion={postQuestion}

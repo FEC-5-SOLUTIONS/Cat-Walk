@@ -124,20 +124,17 @@ export default function QuestionItem({
     return button;
   }
 
-  const addAnswer = (status) => {
-    if (status) {
-      setShowAddAnswer(status);
-    } else {
-      setShowAddAnswer(!showAddAnswer);
-    }
+  const addAnswer = () => {
+    setShowAddAnswer(!showAddAnswer);
   };
 
-  const postAnswer = (body, name, email) => {
+  const postAnswer = (body, name, email, photos) => {
     const data = {
       question_id: qId,
       body,
       name,
       email,
+      photos,
     };
     axios.post(`/api/answers/${qId}`, data)
       .then(() => {
@@ -166,7 +163,7 @@ export default function QuestionItem({
       <button type="submit" onClick={addAnswer}>
         Add Answer
       </button>
-      <div className={showAddAnswer ? styles.show_modal : styles.hide_modal}>
+      <div className={showAddAnswer ? styles.show : styles.hide}>
         <AddAnswer
           question={question}
           handleClick={addAnswer}

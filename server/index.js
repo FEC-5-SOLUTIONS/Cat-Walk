@@ -133,6 +133,7 @@ app.put('/api/answers/:id/report', (req, res) => {
 
 // POST AN ANSWER
 app.post('/api/answers/:id', (req, res) => {
+  console.log(req.body, 'req.body');
   axios({
     method: 'POST',
     url: `${baseUrl}/qa/questions/${req.body.question_id}/answers`,
