@@ -5,9 +5,9 @@
 .Overview_Grid {
   display: grid;
   grid-template-areas:
-    "thumb image info"
-    "thumb image style"
-    "thumb image actions"
+    "display display info"
+    "display display style"
+    "display display actions"
     ". description features";
   grid-template-rows: 90px 120px 60px 80px;
   grid-template-columns: 35px 250px 250px;
@@ -165,11 +165,14 @@
   transition: transform 0.3s;
 }
 .ThumbCarousel_ImageContainer {
+  background: none;
+  border: none;
   display:flex;
   align-items:center;
   width: 25px;
   height: 25px;
   margin:5px;
+  z-index:2;
 }
 .ThumbCarousel_Image {
   object-fit:cover;

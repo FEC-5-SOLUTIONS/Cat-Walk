@@ -5,7 +5,7 @@ import axios from 'axios';
 import style from './Overview.module.css';
 
 import StyleSelector from './ov_StyleSelector';
-import { ThumbCarousel, BigCarousel } from './ov_Carousels';
+import { DisplaySection, ThumbCarousel, BigCarousel } from './ov_Carousels';
 import Actions from './ov_Actions';
 
 function Overview(props) {
@@ -43,8 +43,9 @@ function Overview(props) {
   return (
     <div id="Overview" className={style.Overview} data-testid="Overview">
       <div id="Overview-Grid" className={style.Overview_Grid} >
-        <ThumbCarousel variant={selectedVariant} />
-        <BigCarousel variant={selectedVariant} />
+        <DisplaySection variant={selectedVariant} />
+        {/* <ThumbCarousel variant={selectedVariant} />
+        <BigCarousel variant={selectedVariant} /> */}
         <ProductInfo product={product} variant={selectedVariant} />
         <StyleSelector
           variants={variants}
