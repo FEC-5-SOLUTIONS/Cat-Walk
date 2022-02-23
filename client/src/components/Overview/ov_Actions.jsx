@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import style from './Overview.module.css';
 
-// const quantities = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-// const sizes = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'];
-
 function Actions(props) {
-  // const [variant, setVariant] = useState(props.selectedVariant);
-  const [selectedSKU, setSelectedSKU] = useState();
-  const [selectedQTY, setSelectedQTY] = useState();
+  const [selectedSKU, setSelectedSKU] = useState(0);
+  const [selectedQTY, setSelectedQTY] = useState(0);
 
   const variant = props.selectedVariant;
 
@@ -15,11 +11,19 @@ function Actions(props) {
     console.log(`add ${selectedQTY} of sku: ${selectedSKU}`);
   };
 
+  const quantity = variant.skus[selectedSKU] ? variant.skus[selectedSKU].quantity : 0;
+
   return (
     <div className={style.Actions}>
       <div className={style.Actions_Row}>
-        <SizeOptions variant={variant} setSelectedSKU={(s) => setSelectedSKU(s)}/>
-        <QuantityOptions variant={variant} />
+        <SizeOptions
+          variant={variant}
+          setSelectedSKU={(s) => setSelectedSKU(s)}
+        />
+        <QuantityOptions
+          quantity={quantity}
+          setSelectedQTY={(q) => setSelectedQTY(q)}
+        />
       </div>
       <div className={style.Actions_Row}>
         <div id="addToBag"><button type="submit" onClick={handleClick}>add to bag</button></div>
@@ -35,7 +39,7 @@ function SizeOptions(props) {
       <select onChange={(event) => props.setSelectedSKU(event.target.value)}>
         <option hidden>{'--'}</option>
         {
-          Object.entries(props.variant.skus).map( (unit, i) => {
+          Object.entries(props.variant.skus).map((unit, i) => {
             if (unit[1].quantity > 0) {
               let size = unit[1].size;
               let sku = unit[0];
@@ -49,14 +53,19 @@ function SizeOptions(props) {
 }
 
 function QuantityOptions(props) {
+  const qty = props.quantity < 15 ? props.quantity : 15;
   return (
     <div id="quantity">
-
-
-      {/* <select>
-        { quantities.map((q, i) => <option key={i} value={q}>{q}</option>) }
-      </select> */}
-
+      <select onChange={(event) => props.setSelectedQTY(event.target.value)}>
+        <option hidden>{'--'}</option>
+        {
+          [...Array(qty).keys()]
+            .map((i) => {
+              let j = i + 1;
+              return <option key={j} value={j}>{j}</option>;
+            })
+        }
+      </select>
     </div>
   );
 }
