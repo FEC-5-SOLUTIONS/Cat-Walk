@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import style from './Overview.module.css';
 
 // to-do: conditional rendering of arrows
-// to-do: click handling of thumbnails
-// to-do: selected thumbnail highlights
+// to-do: improve look of buttons
 
 function DisplaySection(props) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -11,11 +10,6 @@ function DisplaySection(props) {
   const { length } = props.variant.photos;
 
   const updateIndex = (newIndex) => {
-    // if (newIndex < 0) {
-    //   newIndex = length - itemsInView;
-    // } else if (newIndex >= length - itemsInView + 1) {
-    //   newIndex = 0;
-    // }
     setActiveIndex((newIndex + length) % length);
   };
 
@@ -40,18 +34,20 @@ function DisplaySection(props) {
 }
 
 function ThumbCarousel(props) {
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  const updateThumbCarouselPosition = (newIndex) => {
+    let length = props.length;
+    setCarouselIndex((newIndex + length) % length);
+  };
 
   return (
     <div id="ThumbCarousel" className={style.ThumbCarousel}>
-      <div id="ThumbCarousel-Controls" className={style.ThumbCarousel_Controls}>
-        <button onClick={() => { props.updateIndex(props.activeIndex - 1); }}>↑</button>
-        <button onClick={() => { props.updateIndex(props.activeIndex + 1); }}>↓</button>
-      </div>
       <div id="ThumbCarousel-ViewPort" className={style.ThumbCarousel_Viewport}>
         <div
           id="ThumbCarousel-Inner"
           className={style.ThumbCarousel_Inner}
-          style={{ transform: `translateY(-${props.activeIndex * (100 * length ** -1)}%` }}
+          style={{ transform: `translateY(-${carouselIndex * (100 * props.length ** -1)}%` }}
         > {
             props.variant.photos.map((v, i) => (
               <button
@@ -64,7 +60,10 @@ function ThumbCarousel(props) {
                 <img
                   id="ThumbCarousel-Image"
                   key={i}
-                  className={style.ThumbCarousel_Image}
+                  className={
+                    i === props.activeIndex ?
+                      style.ThumbCarousel_Image_Selected :
+                      style.ThumbCarousel_Image }
                   src={v.thumbnail_url}
                   alt={v.name}
                   style={{ height: '100%' }}
@@ -74,23 +73,15 @@ function ThumbCarousel(props) {
           }
         </div>
       </div>
+      <div id="ThumbCarousel-Controls" className={style.ThumbCarousel_Controls}>
+        <button onClick={() => { updateThumbCarouselPosition(carouselIndex - 1); }}>↑</button>
+        <button onClick={() => { updateThumbCarouselPosition(carouselIndex + 1); }}>↓</button>
+      </div>
     </div>
   );
 }
 
 function BigCarousel(props) {
-  // const [activeIndex, setActiveIndex] = useState(0);
-  // const { length } = props.variant.photos;
-
-  // const updateIndex = (newIndex) => {
-  //   if (newIndex < 0) {
-  //     newIndex = length - 1;
-  //   } else if (newIndex >= length) {
-  //     newIndex = 0;
-  //   }
-  //   setActiveIndex(newIndex);
-  // };
-
   return (
     <div className={style.BigCarousel} id="Big Carousel">
       <div className={style.BigCarousel_Viewport}>

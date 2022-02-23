@@ -148,6 +148,7 @@
   justify-content:center;
   width:35px;
   height:235px;
+
 }
 .ThumbCarousel_Viewport {
   overflow: hidden;
@@ -155,6 +156,8 @@
   top:25px;
   width: 35px;
   height: 175px;
+  z-index:2;
+
 }
 .ThumbCarousel_Inner {
   white-space: nowrap;
@@ -172,18 +175,22 @@
   width: 25px;
   height: 25px;
   margin:5px;
-  z-index:2;
 }
 .ThumbCarousel_Image {
   object-fit:cover;
   width:25px;
   height:auto;
-  opacity:0.8;
+  opacity:0.6;
+}
+.ThumbCarousel_Image_Selected {
+  object-fit:cover;
+  width:25px;
+  height:auto;
+  opacity:1;
 }
 .ThumbCarousel_Controls {
   position: absolute;
   height:225px;
-  z-index:1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
