@@ -84,7 +84,8 @@ function App() {
         selectProduct={selectProduct}
       />
       <Questions
-        product={product}
+        productId={product.id}
+        productName={product.name}
       />
       <RatingsAndReviews
         product={product}

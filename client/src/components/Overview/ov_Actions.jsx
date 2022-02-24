@@ -1,34 +1,85 @@
 import React, { useState } from 'react';
 import style from './Overview.module.css';
 
-const quantities = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const sizes = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'];
+// current bug: size dropdown does not reset either on style change or on addToCart/Outfit
+const socialIconPinterest = "https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Pinterest2_svg-512.png";
+const socialIconInstagram = "https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Instagram_svg-512.png";
+const socialIconFacebook = "https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Facebook_svg-512.png";
+const socialIconTwitter = "https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Twitter5_svg-512.png";
 
 function Actions(props) {
-  const [variant, setVariant] = useState(props.selectedVariant);
+  const [selectedSKU, setSelectedSKU] = useState(0);
+  const [selectedQTY, setSelectedQTY] = useState(0);
+
+  const variant = props.selectedVariant;
+
+  const handleClick = () => {
+    console.log(`add ${selectedQTY} of sku: ${selectedSKU}`);
+  };
+
+  const quantity = variant.skus[selectedSKU] ? variant.skus[selectedSKU].quantity : 0;
 
   return (
     <div className={style.Actions}>
       <div className={style.Actions_Row}>
-        <div id="size">
-          <select>
-            {
-            sizes.map((s, i) => <option key={i} value={s}>{s}</option>)
-            }
-          </select>
-        </div>
-        <div id="quantity">
-          <select>
-            {
-            quantities.map((q, i) => <option key={i} value={q}>{q}</option>)
-            }
-          </select>
-        </div>
+        <SizeOptions
+          variant={variant}
+          setSelectedSKU={(s) => setSelectedSKU(s)}
+        />
+        <QuantityOptions
+          quantity={quantity}
+          setSelectedQTY={(q) => setSelectedQTY(q)}
+        />
       </div>
       <div className={style.Actions_Row}>
-        <div id="addToBag"><button type="submit">add to bag</button></div>
-        <div id="addToOutfit"><button type="submit">add to outfit</button></div>
+        <div id="addToBag"><button type="submit" onClick={handleClick}>add to bag</button></div>
+        <div id="addToOutfit"><button type="submit" onClick={handleClick}>add to outfit</button></div>
       </div>
+      <div className={style.Actions_Row}>
+        <div id="Socials" className={style.SocialsIconContainer}>
+            <img className={style.Socials_Icon} src={socialIconPinterest} />
+            <img className={style.Socials_Icon} src={socialIconInstagram} />
+            <img className={style.Socials_Icon} src={socialIconFacebook} />
+            <img className={style.Socials_Icon} src={socialIconTwitter} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SizeOptions(props) {
+  return (
+    <div id="size">
+      <select onChange={(event) => props.setSelectedSKU(event.target.value)}>
+        <option hidden>{'--'}</option>
+        {
+          Object.entries(props.variant.skus).map((unit, i) => {
+            if (unit[1].quantity > 0) {
+              let size = unit[1].size;
+              let sku = unit[0];
+              return <option key={i} value={sku}>{size}</option>;
+            }
+          })
+        }
+      </select>
+    </div>
+  );
+}
+
+function QuantityOptions(props) {
+  const qty = props.quantity < 15 ? props.quantity : 15;
+  return (
+    <div id="quantity">
+      <select onChange={(event) => props.setSelectedQTY(event.target.value)}>
+        <option hidden>{'--'}</option>
+        {
+          [...Array(qty).keys()]
+            .map((i) => {
+              let j = i + 1;
+              return <option key={j} value={j}>{j}</option>;
+            })
+        }
+      </select>
     </div>
   );
 }
