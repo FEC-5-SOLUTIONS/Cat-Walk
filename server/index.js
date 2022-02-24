@@ -81,7 +81,7 @@ app.put('/api/reviews/:id', (req, res) => {
       console.log(err);
       res.status(400).send();
     });
-})
+});
 
 // POST REVIEWS
 app.post('/api/reviews', (req, res) => {

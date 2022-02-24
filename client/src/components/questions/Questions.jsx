@@ -56,6 +56,16 @@ export default function Questions() {
     }
   });
 
+  const search = (userInput) => {
+    if (userInput.length > 2) {
+      const temp = questions.filter((item) => {
+        const q = item.question_body.toLowerCase();
+        return q.includes(userInput.toLowerCase());
+      });
+      setQuestions(temp);
+    }
+  };
+
   // UPVOTE A QUESTION
   const upvoteQuestion = (qId) => {
     const data = {
@@ -133,7 +143,7 @@ export default function Questions() {
   return (
     <div className={styles.qna}>
       QUESTIONS & ANSWERS
-      <Search />
+      <Search handleClick={search} />
       {displayQuestions()}
       {loadButton()}
       {' '}
