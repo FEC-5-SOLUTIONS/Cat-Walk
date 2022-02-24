@@ -39,6 +39,8 @@ function Modal({ setModal, charObj, productID, name }) {
   const [show, setShow] = useState(false);
   const [thanks, setThanks] = useState(false);
 
+  const photosArray = [];
+
   const [eMail, setEMail] = useState(0);
   const [sumText, setSumText] = useState(0);
   const [nickname, setNickname] = useState(0);

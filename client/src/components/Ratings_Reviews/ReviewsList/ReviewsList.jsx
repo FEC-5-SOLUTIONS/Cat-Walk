@@ -4,7 +4,7 @@ import ReviewList from './ReviewList';
 import styles from '../Ratings.module.css';
 
 function ReviewsList({
-  reviews, sort, handleChange, text, maxView, click, setModal, slice
+  reviews, sort, handleChange, text, maxView, click, setModal, slice, setUrl
 
 }) {
   let reviewNum;
@@ -27,7 +27,7 @@ function ReviewsList({
           </select>
         </div>
         <div className={styles.reviewList}>
-          <ReviewList data={reviews.results.slice(0, slice)} />
+          <ReviewList data={reviews.results.slice(0, slice)} setUrl={setUrl} />
           {/* {!viewMore ? <ReviewList data={reviews.results.slice(0, 2)} /> :
             <ReviewList data={reviews.results} />} */}
         </div>

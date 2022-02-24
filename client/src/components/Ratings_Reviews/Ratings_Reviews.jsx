@@ -3,6 +3,7 @@ import axios from 'axios';
 import Stats from './StatsTab/Stats';
 import ReviewsList from './ReviewsList/ReviewsList';
 import Modal from './Modal/Modal';
+import PicModal from './Modal/PicModal';
 import styles from './Ratings.module.css';
 
 function RatingsAndReviews({ product, meta, avg }) {
@@ -12,6 +13,7 @@ function RatingsAndReviews({ product, meta, avg }) {
   const [maxView, setMaxView] = useState(false);
   const [buttonText, setButtonText] = useState('View More');
   const [slice, setSlice] = useState(2);
+  const [modalUrl, setModalUrl] = useState(null);
 
   useEffect(() => {
     if (product) {
@@ -25,6 +27,9 @@ function RatingsAndReviews({ product, meta, avg }) {
     }
   }, [product, sort]);
 
+  const setUrl = (url) => {
+    setModalUrl(url);
+  };
   const handleChange = (e) => {
     setSort(e.target.value);
   };
@@ -63,6 +68,7 @@ function RatingsAndReviews({ product, meta, avg }) {
           click={handleButtonClick}
           setModal={setModal}
           slice={slice}
+          setUrl={setUrl}
         />
       </div>
       { modal
@@ -75,6 +81,7 @@ function RatingsAndReviews({ product, meta, avg }) {
           />
         )
         : null}
+      {!modalUrl ? null : <PicModal url={modalUrl} setModalUrl={setModalUrl} />}
     </div>
   );
 }

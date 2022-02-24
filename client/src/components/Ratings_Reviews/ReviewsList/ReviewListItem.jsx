@@ -4,7 +4,7 @@ import Photos from './photos';
 import Stars from '../../Shared/StarsUni';
 import styles from '../Ratings.module.css';
 
-function ReviewListItem({ review }) {
+function ReviewListItem({ review, setUrl }) {
   const [viewMore, setViewMore] = useState(false);
   const [helpBool, setHelpBool] = useState(false);
   const [reportBool, setReportBool] = useState(false);
@@ -67,7 +67,7 @@ function ReviewListItem({ review }) {
       <div>posted by : {review.reviewer_name}</div>
       {!review.recommend ? null : <div>✓ Recommended!</div>}
       {review.photos.length > 0 ?
-        <Photos pics={review.photos} /> : null}
+        <Photos pics={review.photos} setUrl={setUrl} /> : null}
       {review.response ?
         <div>{review.response}</div> : null}
       <div className={styles.help}>

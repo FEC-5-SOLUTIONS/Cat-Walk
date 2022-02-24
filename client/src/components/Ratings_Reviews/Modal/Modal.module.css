@@ -95,3 +95,7 @@
 .nameform{
   width:25%
 }
+
+.picModal{
+  position: absolute;
+}

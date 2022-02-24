@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReviewListItem from './ReviewListItem';
 import styles from '../Ratings.module.css';
 
-function ReviewList({ data }) {
+function ReviewList({ data, setUrl }) {
+  // const [viewPic, setViewPic] = useState(false);
   let datas = [];
   if (data) {
     datas = data;
@@ -10,9 +11,7 @@ function ReviewList({ data }) {
   }
   return !data ? null : (
     <div className={styles.reviewListContainer}>
-      {datas.map((review) =>
-      <ReviewListItem review={review} />
-      )}
+      {datas.map((review) => <ReviewListItem review={review} setUrl={setUrl} />)}
     </div>
   );
 }
