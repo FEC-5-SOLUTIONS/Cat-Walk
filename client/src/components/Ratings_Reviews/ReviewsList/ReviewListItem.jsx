@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Photos from './photos';
 import Stars from '../../Shared/StarsUni';
 import styles from '../Ratings.module.css';
 
 function ReviewListItem({ review }) {
+
+  const [helpBool, setHelpBool] = useState(false);
+  const [reportBool, setReportBool] = useState(false);
+
   let dateString = 'date';
   if (review.date) {
     const convertedDate = new Date(review.date);
@@ -13,11 +17,26 @@ function ReviewListItem({ review }) {
 
   function helpful() {
     // make axsios put request here
-    const id = review.review_id
-    axios.put(`/api/reviews/${id}`)
-      .then((res) => {
-        console.log('success');
-      })
+    if (!helpBool) {
+      const id = review.review_id
+      axios.put(`/api/reviews/${id}`)
+        .then((res) => {
+          //console.log('success');
+          setHelpBool(true);
+        });
+    }
+  }
+
+  function report() {
+    // make axsios put request here
+    if (!reportBool) {
+      const id = review.review_id
+      axios.put(`/api/report/${id}`)
+        .then((res) => {
+          //console.log('success');
+          setReportBool(true);
+        });
+    }
   }
 
   return (
@@ -36,7 +55,11 @@ function ReviewListItem({ review }) {
         <Photos pics={review.photos} /> : null}
       {review.response ?
         <div>{review.response}</div> : null}
-      <div onClick={helpful}>helpful?({review.helpfulness})</div>
+      <div className={styles.help}>
+        <div>Helpful?</div>
+        <div onClick={helpful}>{`Yes (${review.helpfulness}) | `}</div>
+        <div onClick={report}>No</div>
+      </div>
     </div>
   );
 }

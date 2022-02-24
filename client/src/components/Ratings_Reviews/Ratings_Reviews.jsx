@@ -9,8 +9,9 @@ function RatingsAndReviews({ product, meta, avg }) {
   const [modal, setModal] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [sort, setSort] = useState('relevant');
-  const [viewMore, setViewMore] = useState(false);
+  const [maxView, setMaxView] = useState(false);
   const [buttonText, setButtonText] = useState('View More');
+  const [slice, setSlice] = useState(2);
 
   useEffect(() => {
     if (product) {
@@ -29,12 +30,24 @@ function RatingsAndReviews({ product, meta, avg }) {
   };
   const handleButtonClick = (e) => {
     e.preventDefault();
-    let newText = 'View More';
-    if (buttonText === 'View More') {
-      newText = 'View Less';
+    // let newText = 'View More';
+    // if (buttonText === 'View More') {
+    //   newText = 'View Less';
+    // }
+    // setViewMore(!viewMore);
+    // setButtonText(newText);
+
+    // let newSlice=slice + 2;
+    const diff = reviews.results.length - slice;
+    if (diff > 2) {
+      setSlice(slice + 2);
+    } else if (diff <= 2 && diff > 0) {
+      setSlice(slice + 2);
+      setButtonText('Collapse');
+    }else{
+      setSlice(2);
+      setButtonText('View More');
     }
-    setViewMore(!viewMore);
-    setButtonText(newText);
   };
 
   return !product ? <div>Ratings and Reviews loading...</div> : (
@@ -46,9 +59,10 @@ function RatingsAndReviews({ product, meta, avg }) {
           sort={sort}
           handleChange={handleChange}
           text={buttonText}
-          viewMore={viewMore}
+          maxView={maxView}
           click={handleButtonClick}
           setModal={setModal}
+          slice={slice}
         />
       </div>
       { modal

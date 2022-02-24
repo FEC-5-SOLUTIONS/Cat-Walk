@@ -69,8 +69,8 @@ app.get('/api/all_reviews/:sort/:productID', (req, res) => {
 
 // helpful click
 app.put('/api/reviews/:id', (req, res) => {
-  console.log(req.params.id);
-  console.log(`${baseUrl}/reviews/${req.params.id}/helpful`);
+  // console.log(req.params.id);
+  // console.log(`${baseUrl}/reviews/${req.params.id}/helpful`);
   axios({
     method: 'PUT',
     url: `${baseUrl}/reviews/${req.params.id}/helpful`,
@@ -81,7 +81,23 @@ app.put('/api/reviews/:id', (req, res) => {
       console.log(err);
       res.status(400).send();
     });
-})
+});
+
+// report click
+app.put('/api/report/:id', (req, res) => {
+  // console.log(req.params.id);
+  // console.log(`${baseUrl}/reviews/${req.params.id}/helpful`);
+  axios({
+    method: 'PUT',
+    url: `${baseUrl}/reviews/${req.params.id}/report`,
+    headers,
+  })
+    .then((result) => res.status(204).send())
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send();
+    });
+});
 
 // POST REVIEWS
 app.post('/api/reviews', (req, res) => {
