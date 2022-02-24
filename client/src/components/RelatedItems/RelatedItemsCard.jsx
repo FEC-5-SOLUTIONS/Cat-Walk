@@ -64,7 +64,7 @@ function RelatedItemsCard(props) {
   // };
   // grabbing the meta obj whenever product state is changed
   useEffect(() => {
-    if (product) {
+    if (product.id) {
       axios.get(`api/reviews/meta/${product.id}`)
         .then((res) => {
           // setMeta state accordingly
