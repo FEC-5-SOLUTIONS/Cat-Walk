@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-plusplus */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
@@ -14,11 +15,15 @@ import OutfitHeader from './OutfitHeader';
 const widthSpan = 50;
 
 function RelatedItems(props) {
+  // const [productWithRating, setProductWithRating] = useState({});
   const [sliderPositionRelated, setSliderPositionRelated] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(0);
+
   const { relatedProducts, selectProduct } = props;
+  // console.log('productId', productId);
+
   // const productId = relatedProducts.id;
-  console.log('PRODUCT :', relatedProducts);
+  // console.log('PRODUCT :', relatedProducts);
 
   const translateFullSlidesRelated = (newPosition) => {
     const toTranslate = -widthSpan * newPosition;
@@ -72,8 +77,16 @@ function RelatedItems(props) {
     setSliderPosition(newPosition);
   };
 
+  // const deleteOutfit = (id) => {
+  //   const allOutfits = { ...relatedProducts };
+  //   delete allOutfits[id];
+  //   setOutfits(allOutfits);
+  //   window.localStorage.removeItem('myThreads');
+  //   window.localStorage.setItem('myThreads', JSON.stringify(allOutfits));
+  // };
+
   // eslint-disable-next-line max-len
-  const displayItemsRelated = relatedProducts.map((product, index) => <RelatedItemsCard product={product} selectProduct={selectProduct} i={index} className={classes.carouselItem} id={`carouselItemRelated${index}`} />);
+  const displayItemsRelated = relatedProducts.map((product, index) => <RelatedItemsCard product={product} products={relatedProducts} selectProduct={selectProduct} i={index} className={classes.carouselItem} id={`carouselItemRelated${index}`} />);
   const displayItemsOutfit = relatedProducts.map((product, index) => <OutfitCard product={product} selectProduct={selectProduct} j={index} className={classes.carouselItem} id={`carouselItemOutfit${index}`} />);
 
   return (

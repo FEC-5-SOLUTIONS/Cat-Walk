@@ -31,7 +31,9 @@ function ItemCard(props) {
             <h4 className={classes.productCardSubtitle}>{category}</h4>
             <h2 className={classes.productCardTitle}>{name}</h2>
           </div>
-          <p className={classes.par}>{`$${price}`}</p>
+          <div className={classes.productCardAnimationWrapper}>
+            <p className={classes.par}>{`$${price}`}</p>
+          </div>
           <span onClick={compareModal}><MdCompareArrows className="action-btn" /></span>
           {/* <StarRating
             id={id}

@@ -84,12 +84,12 @@ app.put('/api/reviews/:id', (req, res) => {
     url: `${baseUrl}/reviews/${req.params.id}/helpful`,
     headers,
   })
-    .then((result) => res.status(204).send())
+    .then((response) => response.status(204).send())
     .catch((err) => {
       console.log(err);
       res.status(400).send();
     });
-})
+});
 
 // POST REVIEWS
 app.post('/api/reviews', (req, res) => {
@@ -101,7 +101,7 @@ app.post('/api/reviews', (req, res) => {
     data: req.body,
     headers,
   })
-    .then((result)=> res.status(201).send())
+    .then((result) => result.status(201).send())
     .catch((err) => {
       console.log(err);
       res.status(400).send();
