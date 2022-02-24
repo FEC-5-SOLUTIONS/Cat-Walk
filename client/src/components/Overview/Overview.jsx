@@ -41,13 +41,15 @@ function Overview(props) {
     <div id="Overview" className={style.Overview} data-testid="Overview">
       <div id="Overview-Grid" className={style.Overview_Grid}>
         <DisplaySection variant={selectedVariant} />
-        <ProductInfo product={product} variant={selectedVariant} />
-        <StyleSelector
-          variants={variants}
-          selectedVariant={selectedVariant}
-          setSelectedVariant={setSelectedVariant}
-        />
-        <Actions selectedVariant={selectedVariant} />
+        <div id={"Details"} className={style.Details}>
+          <ProductInfo product={product} variant={selectedVariant} />
+          <StyleSelector
+            variants={variants}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+          />
+          <Actions selectedVariant={selectedVariant} />
+        </div>
         <Description product={product} />
         <FeaturesList product={product} />
       </div>
