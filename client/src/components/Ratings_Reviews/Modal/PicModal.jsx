@@ -4,7 +4,7 @@ import Stars from '../../Shared/StarsRedo';
 import Chars from './Characteristics';
 import styles from './Modal.module.css';
 
-function PicModal ( {url , setModalUrl} ) {
+function PicModal( {url , setModalUrl} ) {
   return (
     <div className={styles.modalBackground}>
       <div className={styles.modalContainer}>
