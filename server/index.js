@@ -30,6 +30,14 @@ app.get('/api/product', (req, res) => {
   }).then((axiosResponse) => res.send(axiosResponse.data));
 });
 
+app.get('/api/products', (req, res) => {
+  axios({
+    method: 'GET',
+    url: `${baseUrl}/products`,
+    headers,
+  }).then((axiosResponse) => res.send(axiosResponse.data));
+});
+
 // GET STYLES
 app.get('/api/styles', (req, res) => {
   axios({
@@ -76,7 +84,7 @@ app.put('/api/reviews/:id', (req, res) => {
     url: `${baseUrl}/reviews/${req.params.id}/helpful`,
     headers,
   })
-    .then((result) => res.status(204).send())
+    .then((response) => response.status(204).send())
     .catch((err) => {
       console.log(err);
       res.status(400).send();
@@ -109,7 +117,7 @@ app.post('/api/reviews', (req, res) => {
     data: req.body,
     headers,
   })
-    .then((result)=> res.status(201).send())
+    .then((result) => result.status(201).send())
     .catch((err) => {
       console.log(err);
       res.status(400).send();
@@ -136,6 +144,8 @@ app.get('/api/answers', (req, res) => {
     method: 'GET',
     url: `${baseUrl}/qa/questions/${req.query.question_id}/answers`,
     params: {
+      page: req.query.page || 1,
+      count: req.query.count || 5,
       question_id: req.query.question_id,
     },
     headers,
@@ -168,7 +178,7 @@ app.put('/api/answers/:id/helpful', (req, res) => {
       res.sendStatus(204);
     })
     .catch(() => {
-      res.sendStatus(204);
+      res.sendStatus(400);
     });
 });
 
@@ -183,7 +193,40 @@ app.put('/api/answers/:id/report', (req, res) => {
       res.sendStatus(204);
     })
     .catch(() => {
-      res.sendStatus(204);
+      res.sendStatus(400);
+    });
+});
+
+// POST AN ANSWER
+app.post('/api/answers/:id', (req, res) => {
+  console.log(req.body, 'req.body');
+  axios({
+    method: 'POST',
+    url: `${baseUrl}/qa/questions/${req.body.question_id}/answers`,
+    headers,
+    data: req.body,
+  })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(() => {
+      res.sendStatus(400);
+    });
+});
+
+// POST A QUESTION
+app.post('/api/questions', (req, res) => {
+  axios({
+    method: 'POST',
+    url: `${baseUrl}/qa/questions`,
+    headers,
+    data: req.body,
+  })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(() => {
+      res.sendStatus(400);
     });
 });
 
