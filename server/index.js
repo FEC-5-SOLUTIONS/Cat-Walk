@@ -81,7 +81,7 @@ app.put('/api/reviews/:id', (req, res) => {
       console.log(err);
       res.status(400).send();
     });
-})
+});
 
 // POST REVIEWS
 app.post('/api/reviews', (req, res) => {
@@ -120,6 +120,8 @@ app.get('/api/answers', (req, res) => {
     method: 'GET',
     url: `${baseUrl}/qa/questions/${req.query.question_id}/answers`,
     params: {
+      page: req.query.page || 1,
+      count: req.query.count || 5,
       question_id: req.query.question_id,
     },
     headers,
@@ -152,7 +154,7 @@ app.put('/api/answers/:id/helpful', (req, res) => {
       res.sendStatus(204);
     })
     .catch(() => {
-      res.sendStatus(204);
+      res.sendStatus(400);
     });
 });
 
@@ -167,7 +169,40 @@ app.put('/api/answers/:id/report', (req, res) => {
       res.sendStatus(204);
     })
     .catch(() => {
-      res.sendStatus(204);
+      res.sendStatus(400);
+    });
+});
+
+// POST AN ANSWER
+app.post('/api/answers/:id', (req, res) => {
+  console.log(req.body, 'req.body');
+  axios({
+    method: 'POST',
+    url: `${baseUrl}/qa/questions/${req.body.question_id}/answers`,
+    headers,
+    data: req.body,
+  })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(() => {
+      res.sendStatus(400);
+    });
+});
+
+// POST A QUESTION
+app.post('/api/questions', (req, res) => {
+  axios({
+    method: 'POST',
+    url: `${baseUrl}/qa/questions`,
+    headers,
+    data: req.body,
+  })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(() => {
+      res.sendStatus(400);
     });
 });
 
