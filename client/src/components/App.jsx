@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+// eslint-disable-next-line import/no-named-as-default
 import Overview from './Overview/Overview';
 import RatingsAndReviews from './Ratings_Reviews/Ratings_Reviews';
 import RelatedItems from './RelatedItems/RelatedItems';
@@ -8,10 +9,24 @@ import getAvg from './utils/getAvg';
 
 function App() {
   // set the states required
+  const [relatedProducts, setRelatedProducts] = useState(0);
   const [product, setProduct] = useState({});
   const [apiResponse, setApiResponse] = useState(false);
   const [meta, setMeta] = useState([]);
   const [average, setAvg] = useState(0);
+
+  useEffect(() => {
+    if (relatedProducts.length !== 0) {
+      axios.get('api/products')
+        .then((res) => {
+          // set state accordingly
+          setRelatedProducts(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [relatedProducts]);
 
   const selectProduct = (id) => {
     axios({
@@ -42,8 +57,8 @@ function App() {
           // setMeta state accordingly
           setMeta(res.data);
         })
-        .catch(() => {
-        // console.log('err');
+        .catch((err) => {
+          console.log(err);
         });
     }
   }, [product]);
@@ -65,7 +80,7 @@ function App() {
         average={average}
       />
       <RelatedItems
-        product={product}
+        relatedProducts={relatedProducts}
         selectProduct={selectProduct}
       />
       <Questions

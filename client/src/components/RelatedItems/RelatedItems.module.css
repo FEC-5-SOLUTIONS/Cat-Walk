@@ -1,0 +1,283 @@
+/* ------------ RELATED PRODUCTS ---------- */
+
+#header {
+  position:relative;
+  left: 12px;
+  margin: 42px 42px 12px 12px;
+  /* font-size: 26px;
+  float: right; */
+}
+
+.card-container {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr;
+  width: 16vw;
+  height: 40vh;
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+.card-inner-container {
+  position: relative;
+  display: grid;
+  grid-template-rows: 5fr 1fr 1fr 1fr 1fr;
+  width: 16vw;
+  height: 40vh;
+  box-shadow: 3px 2px 2px grey;
+  border: 1px solid;
+}
+
+#menu-bar{
+  font: "Lucida Console", "Courier New", monospace;
+}
+
+.carouselItem.text {
+  margin: 6px 12px 8px 12px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.carouselItem.nameTitle {
+  margin: 6px 12px 8px 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.cardItem.text.rating {
+  margin-top: 0;
+}
+
+.card-image {
+  width: 100%;
+  height: 22vh;
+  object-fit: cover;
+}
+
+
+/* --------- CAROUSEL ---------- */
+
+.displayFrame {
+  touch-action: none;
+  border-radius: 10px;
+  width: 65vw;
+  height: calc(95vw * 0.5625);
+  max-height: 43vh;
+  max-width: calc(50vh * 1.78);
+  margin: auto;
+  text-align: left;
+  font: "Lucida Console", "Courier New", monospace;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  z-index: 1;
+  caret-color: transparent;
+  overflow: hidden;
+  position: relative;
+  left:-280px;
+  background-image: linear-gradient(to left, transparent, #bbccdd);
+}
+
+.display-Frame::-webkit-scrollbar{
+  display: none;
+}
+
+.leftArrow {
+  position: absolute;
+  left: 6%;
+  padding-left: 76px;
+  padding-right: 0.1px;
+  font-size: xx-large;
+  color: black;
+  user-select: none;
+  z-index: 2;
+}
+
+.leftArrow:hover{
+  color: #bbccdd;
+}
+
+.leftArrow:active{
+  color: #206ebd;
+}
+
+.rightArrow {
+  position: absolute;
+  right: 30%;
+  padding-left: 0.1px;
+  padding-right: 76px;
+  font-size: xx-large;
+  color: black;
+  user-select: none;
+  z-index: 2;
+}
+
+.rightArrow:hover{
+  color: #bbccdd;
+}
+
+.rightArrow:active{
+  color: #206ebd;
+}
+
+.Container{
+  position: relative;
+  display: flex;
+  vertical-align: middle;
+  overflow: hidden;
+  width: auto;
+  align-items: center;
+  margin-left: 0px;
+  padding-left: 0.6px;
+  padding-right: 0.6px;
+  position: relative;
+  left:-80px;
+  /* color: none; */
+}
+
+.action-btn {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 3px;
+  right: 6px;
+  cursor: pointer;
+  opacity: .75;
+  border-radius: 2rem;
+  box-shadow: 3px 2px 2px rgb(26, 25, 25);
+}
+
+/* --------- CAROUSEL ITEM ---------- */
+
+.carouselItem{
+  position: relative;
+  display: grid;
+  grid-template-rows: 4fr 1fr 1fr 1fr 1fr;
+  width: 12vw;
+  height: 40vh;
+  /* border: 1px solid; */
+  cursor: pointer;
+  display: inline-block;
+  margin: 10px 10px 10px 10px;
+  vertical-align: top;
+}
+
+.carouselItemImage{
+  height: calc(45vw * 0.5625);
+  max-width: 100%;
+  background-color: none;
+}
+
+.h4 {
+  margin-top: auto;
+  margin-bottom: 0;
+  padding: 5px;
+  text-transform: uppercase;
+  font-size: 1vw;
+}
+
+.image {
+  width: 100%;
+  height: 29vh;
+  object-fit: cover;
+}
+
+.item_title {
+  font-size: 1.5vw;
+  margin-bottom: 0.15em;
+  line-height: 1.2;
+  margin-top: 5px;
+  height: 71px;
+  cursor: pointer;
+}
+
+.par {
+  color: #222;
+  font-size: 0.8vw;
+  margin-bottom: 1em;
+  line-height: 1.1;
+  padding-left: 12px;
+}
+
+.inner {
+  font-family: var(--font-family);
+  color: var(--font-color);
+  text-align: center;
+  max-height: 100%;
+  padding: 1em 1em 0.65em;
+  background-color: var( --theme-background-color);
+  font-size: 1vw;
+}
+
+/* --------- PRODUCT CARD INFO ---------- */
+
+.productCardInfo {
+  position: relative;
+  padding: 12px 0px 2px;
+  min-height: 185px;
+  font-size: 16px;
+}
+
+.productMsgInfo {
+  display: inline-block;
+  line-height: 1.5em;
+  padding-left: 12px;
+}
+
+.productCardTitle {
+  color: rgb(17, 17, 17);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.productCardTitle:hover
+{
+    transform: scale(1.2);
+}
+
+.productCardSubtitle {
+  color: rgb(117, 117, 117);
+  font-size: 16px;
+}
+
+.productCardPriceWrapper {
+  vertical-align: top;
+  text-align: left;
+  width: 100%;
+}
+
+.product-card__price {
+  font-size: 16px;
+  padding-right: 16px;
+}
+
+.buttonCompare {
+  font-family: var(--font-family);
+  width: calc(60%);
+  height: calc(40%);
+  margin: 1% 1%;
+  padding: 7px;
+  background-color: var(--theme-background-color);
+  border-radius: 5px;
+  border: 2px solid rgb(238, 225, 225);
+  color: #222;
+  font-weight: bold;
+  text-shadow: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 1vw;
+}
+
+.productCardAnimationWrapper {
+  -webkit-animation: animation-16aoq79 0.25s;
+    animation: animation-16aoq79 0.25s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+
+
+
+
+
+
+
+
