@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from './Questions.module.css';
 import Search from './Search';
 import QuestionItem from './QuestionItem';
+import AddQuestion from './AddQuestion';
 
-export default function Questions() {
+export default function Questions({ productId, productName }) {
   const mounted = useRef(false);
   const [questions, setQuestions] = useState([]);
   const [moreQ, setMoreQ] = useState(false);
   const [moreThanTwo, setMoreThanTwo] = useState(false);
+  const [showAddQuestion, setShowAddQuestion] = useState(false);
 
   // GET FIRST TWO QUESTIONS
   function getTwoQuestions() {
     const params = {
-      product_id: 40348,
+      product_id: productId,
+      page: 1,
+      count: 100,
     };
     axios.get('/api/questions', { params })
       .then((res) => {
@@ -32,7 +37,9 @@ export default function Questions() {
   function getAllQuestions(e) {
     e.preventDefault();
     const params = {
-      product_id: 40348,
+      product_id: productId,
+      page: 1,
+      count: 100,
     };
     axios.get('/api/questions', { params })
       .then((res) => {
@@ -48,6 +55,16 @@ export default function Questions() {
       getTwoQuestions();
     }
   });
+
+  const search = (userInput) => {
+    if (userInput.length > 2) {
+      const temp = questions.filter((item) => {
+        const q = item.question_body.toLowerCase();
+        return q.includes(userInput.toLowerCase());
+      });
+      setQuestions(temp);
+    }
+  };
 
   // UPVOTE A QUESTION
   const upvoteQuestion = (qId) => {
@@ -92,12 +109,16 @@ export default function Questions() {
     if (moreThanTwo) {
       if (!moreQ) {
         button = (
-          <button type="submit" onClick={getAllQuestions}>
+          <button className={styles.qna_button} type="submit" onClick={getAllQuestions}>
             MORE ANSWERED QUESTIONS
           </button>
         );
       } else {
-        button = <div />;
+        button = (
+          <button className={styles.qna_button} type="submit" onClick={getTwoQuestions}>
+            COLLAPSE QUESTIONS
+          </button>
+        );
       }
     } else {
       button = <div />;
@@ -105,16 +126,47 @@ export default function Questions() {
     return button;
   }
 
+  const addQuestion = () => {
+    setShowAddQuestion(!showAddQuestion);
+  };
+
+  const postQuestion = (body, name, email) => {
+    const data = {
+      body,
+      name,
+      email,
+      product_id: productId,
+    };
+    axios.post('/api/questions', data);
+  };
+
   return (
     <div className={styles.qna}>
-      QUESTIONS & ANSWERS
-      <Search />
+      <div className={styles.title}>
+        QUESTIONS & ANSWERS
+      </div>
+      <Search handleClick={search} />
       {displayQuestions()}
-      <form className={styles.buttons}>
-        {loadButton()}
-        {' '}
-        <button type="submit">ADD A QUESTION +</button>
-      </form>
+      {loadButton()}
+      {' '}
+      <button
+        className={styles.qna_button}
+        type="submit"
+        onClick={addQuestion}
+      >
+        ADD A QUESTION +
+      </button>
+      <div className={showAddQuestion ? styles.show : styles.hide}>
+        <AddQuestion
+          productName={productName}
+          handleClick={addQuestion}
+          postQuestion={postQuestion}
+        />
+      </div>
     </div>
   );
 }
+Questions.propTypes = {
+  productId: PropTypes.number.isRequired,
+  productName: PropTypes.string.isRequired,
+};

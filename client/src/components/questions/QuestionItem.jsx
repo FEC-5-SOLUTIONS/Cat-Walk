@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import styles from './Questions.module.css';
 import AnswerItem from './AnswerItem';
+import AddAnswer from './AddAnswer';
 
 export default function QuestionItem({
   question, helpfulness, qId, handleClick,
@@ -11,6 +13,19 @@ export default function QuestionItem({
   const [moreThanTwo, setMoreThanTwo] = useState(false);
   const [helpful, setHelpful] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
+  const [showAddAnswer, setShowAddAnswer] = useState(false);
+
+  // SEPERATE ANSWERS
+  function sortAnswers(a) {
+    const seller = [];
+    for (let i = 0; i < a.length; i += 1) {
+      if (a[i].answerer_name === 'Seller') {
+        seller.push(a[i]);
+        a.splice(i, 1);
+      }
+    }
+    return seller.concat(a);
+  }
 
   // GET FIRST TWO ANSWERS
   function getTwoAnswers() {
@@ -20,10 +35,10 @@ export default function QuestionItem({
     axios.get('/api/answers', { params })
       .then((res) => {
         if (res.data.results.length > 2) {
-          setAnswers(res.data.results.slice(0, 2));
+          setAnswers(sortAnswers(res.data.results).slice(0, 2));
           setMoreThanTwo(true);
         } else {
-          setAnswers(res.data.results);
+          setAnswers(sortAnswers(res.data.results));
           setMoreThanTwo(false);
         }
         setLoadMore(false);
@@ -34,12 +49,13 @@ export default function QuestionItem({
   function getAllAnswers() {
     const params = {
       question_id: qId,
+      count: 100,
+      page: 1,
     };
     axios.get('/api/answers', { params })
       .then((res) => {
-        setAnswers(res.data.results);
+        setAnswers(sortAnswers(res.data.results));
         setLoadMore(true);
-        setMoreThanTwo(true);
       });
   }
 
@@ -75,7 +91,7 @@ export default function QuestionItem({
 
   function loadAnswers(selectedAnswers) {
     return (
-      <div>
+      <div className={styles.answers_list}>
         {selectedAnswers.map((item) => (
           <AnswerItem
             id={item.answer_id}
@@ -96,6 +112,13 @@ export default function QuestionItem({
     if (answers.length < 1) {
       return 'NO ANSWERS';
     }
+    // const seller = [];
+    // for (let i = 0; i < answers.length; i += 1) {
+    //   if (answers[i].answerer_name === 'Seller') {
+    //     seller.push(answers[i]);
+    //     answers.splice(i, 1);
+    //   }
+    // }
     return loadAnswers(answers);
   }
 
@@ -121,27 +144,56 @@ export default function QuestionItem({
     return button;
   }
 
+  const addAnswer = () => {
+    setShowAddAnswer(!showAddAnswer);
+  };
+
+  const postAnswer = (body, name, email, photos) => {
+    const data = {
+      question_id: qId,
+      body,
+      name,
+      email,
+      photos,
+    };
+    axios.post(`/api/answers/${qId}`, data)
+      .then(() => {
+        getTwoAnswers();
+      });
+  };
+
   return (
-    <div>
-      <br />
-      Q:
-      {' '}
-      {question}
-      {' '}
-      Helpful?
-      {' '}
-      <button type="submit" onClick={upvoteQuestion}>
-        Yes
-      </button>
-      (
-      {helpfulness}
-      )
-      {' '}
-      |
-      {' '}
-      <button type="submit">
-        Add Answer
-      </button>
+    <div className={styles.question_item}>
+      <div className={styles.question_line}>
+        <div className={styles.question}>
+          Q:
+          {' '}
+          {question}
+        </div>
+        <div className={styles.q_vote}>
+          Helpful?
+          {' '}
+          <button type="submit" onClick={upvoteQuestion}>
+            Yes
+          </button>
+          (
+          {helpfulness}
+          )
+          {' '}
+          |
+          {' '}
+          <button type="submit" onClick={addAnswer}>
+            Add Answer
+          </button>
+        </div>
+      </div>
+      <div className={showAddAnswer ? styles.show : styles.hide}>
+        <AddAnswer
+          question={question}
+          handleClick={addAnswer}
+          postAnswer={postAnswer}
+        />
+      </div>
       <br />
       {displayAnswers()}
       {loadButton()}
