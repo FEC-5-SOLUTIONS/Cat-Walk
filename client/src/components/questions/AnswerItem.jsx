@@ -27,7 +27,9 @@ export default function AnswerItem({
       <br />
       by
       {' '}
-      {user}
+      <p className={user === 'Seller' ? styles.seller_answer : styles.user_answer}>
+        {user}
+      </p>
       ,
       {' '}
       {moment(date).format('MMMM Do, YYYY')}

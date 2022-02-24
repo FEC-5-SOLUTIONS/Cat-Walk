@@ -15,6 +15,18 @@ export default function QuestionItem({
   const [loadMore, setLoadMore] = useState(false);
   const [showAddAnswer, setShowAddAnswer] = useState(false);
 
+  // SEPERATE ANSWERS
+  function sortAnswers(a) {
+    const seller = [];
+    for (let i = 0; i < a.length; i += 1) {
+      if (a[i].answerer_name === 'Seller') {
+        seller.push(a[i]);
+        a.splice(i, 1);
+      }
+    }
+    return seller.concat(a);
+  }
+
   // GET FIRST TWO ANSWERS
   function getTwoAnswers() {
     const params = {
@@ -23,10 +35,10 @@ export default function QuestionItem({
     axios.get('/api/answers', { params })
       .then((res) => {
         if (res.data.results.length > 2) {
-          setAnswers(res.data.results.slice(0, 2));
+          setAnswers(sortAnswers(res.data.results).slice(0, 2));
           setMoreThanTwo(true);
         } else {
-          setAnswers(res.data.results);
+          setAnswers(sortAnswers(res.data.results));
           setMoreThanTwo(false);
         }
         setLoadMore(false);
@@ -37,12 +49,13 @@ export default function QuestionItem({
   function getAllAnswers() {
     const params = {
       question_id: qId,
+      count: 100,
+      page: 1,
     };
     axios.get('/api/answers', { params })
       .then((res) => {
-        setAnswers(res.data.results);
+        setAnswers(sortAnswers(res.data.results));
         setLoadMore(true);
-        setMoreThanTwo(true);
       });
   }
 
@@ -99,6 +112,13 @@ export default function QuestionItem({
     if (answers.length < 1) {
       return 'NO ANSWERS';
     }
+    // const seller = [];
+    // for (let i = 0; i < answers.length; i += 1) {
+    //   if (answers[i].answerer_name === 'Seller') {
+    //     seller.push(answers[i]);
+    //     answers.splice(i, 1);
+    //   }
+    // }
     return loadAnswers(answers);
   }
 
