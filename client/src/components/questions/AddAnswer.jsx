@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import styles from './Questions.module.css';
 import SubmitError from './SubmitError';
 import UploadError from './UploadError';
@@ -160,9 +159,9 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
       <div className={hasError ? styles.show : styles.hide}>
         <UploadError err="jpg, jpeg, png, gif only" />
       </div>
-      <button type="submit" onClick={upload}>
+      {/* <button type="submit" onClick={upload}>
         Upload
-      </button>
+      </button> */}
       <br />
       <div className={hasError ? styles.show : styles.hide}>
         <SubmitError errorField={errorField} />

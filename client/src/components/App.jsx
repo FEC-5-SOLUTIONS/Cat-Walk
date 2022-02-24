@@ -25,7 +25,7 @@ function App() {
       // using getProduct function
       setProduct(response.data);
     });
-  }
+  };
   // useEffect that functions like component did mount
   // empty dependecy array ensures that this only runs once
 
@@ -42,7 +42,7 @@ function App() {
           // setMeta state accordingly
           setMeta(res.data);
         })
-        .catch((err) => {
+        .catch(() => {
         // console.log('err');
         });
     }
@@ -69,7 +69,8 @@ function App() {
         selectProduct={selectProduct}
       />
       <Questions
-        product={product}
+        productId={product.id}
+        productName={product.name}
       />
       <RatingsAndReviews
         product={product}

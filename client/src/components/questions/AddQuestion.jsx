@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './Questions.module.css';
 import SubmitError from './SubmitError';
 
-export default function AddQuestion({ handleClick, postQuestion }) {
+export default function AddQuestion({ productName, handleClick, postQuestion }) {
   const [state, setState] = useState({
     body: '',
     name: '',
@@ -82,7 +82,7 @@ export default function AddQuestion({ handleClick, postQuestion }) {
         </button>
       </div>
       <div>
-        About the Heir Force Ones
+        {productName}
       </div>
       Your Question (*)
       <input
@@ -133,6 +133,7 @@ export default function AddQuestion({ handleClick, postQuestion }) {
   );
 }
 AddQuestion.propTypes = {
+  productName: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
   postQuestion: PropTypes.func.isRequired,
 };

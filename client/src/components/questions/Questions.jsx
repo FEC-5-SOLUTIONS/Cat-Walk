@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from './Questions.module.css';
 import Search from './Search';
 import QuestionItem from './QuestionItem';
 import AddQuestion from './AddQuestion';
 
-export default function Questions() {
+export default function Questions({ productId, productName }) {
   const mounted = useRef(false);
   const [questions, setQuestions] = useState([]);
   const [moreQ, setMoreQ] = useState(false);
   const [moreThanTwo, setMoreThanTwo] = useState(false);
   const [showAddQuestion, setShowAddQuestion] = useState(false);
-  const productId = 40348;
 
   // GET FIRST TWO QUESTIONS
   function getTwoQuestions() {
@@ -109,13 +109,13 @@ export default function Questions() {
     if (moreThanTwo) {
       if (!moreQ) {
         button = (
-          <button type="submit" onClick={getAllQuestions}>
+          <button className={styles.qna_button} type="submit" onClick={getAllQuestions}>
             MORE ANSWERED QUESTIONS
           </button>
         );
       } else {
         button = (
-          <button type="submit" onClick={getTwoQuestions}>
+          <button className={styles.qna_button} type="submit" onClick={getTwoQuestions}>
             COLLAPSE QUESTIONS
           </button>
         );
@@ -142,12 +142,15 @@ export default function Questions() {
 
   return (
     <div className={styles.qna}>
-      QUESTIONS & ANSWERS
+      <div className={styles.title}>
+        QUESTIONS & ANSWERS
+      </div>
       <Search handleClick={search} />
       {displayQuestions()}
       {loadButton()}
       {' '}
       <button
+        className={styles.qna_button}
         type="submit"
         onClick={addQuestion}
       >
@@ -155,6 +158,7 @@ export default function Questions() {
       </button>
       <div className={showAddQuestion ? styles.show : styles.hide}>
         <AddQuestion
+          productName={productName}
           handleClick={addQuestion}
           postQuestion={postQuestion}
         />
@@ -162,3 +166,7 @@ export default function Questions() {
     </div>
   );
 }
+Questions.propTypes = {
+  productId: PropTypes.number.isRequired,
+  productName: PropTypes.string.isRequired,
+};

@@ -91,7 +91,7 @@ export default function QuestionItem({
 
   function loadAnswers(selectedAnswers) {
     return (
-      <div>
+      <div className={styles.answers_list}>
         {selectedAnswers.map((item) => (
           <AnswerItem
             id={item.answer_id}
@@ -163,26 +163,30 @@ export default function QuestionItem({
   };
 
   return (
-    <div>
-      <br />
-      Q:
-      {' '}
-      {question}
-      {' '}
-      Helpful?
-      {' '}
-      <button type="submit" onClick={upvoteQuestion}>
-        Yes
-      </button>
-      (
-      {helpfulness}
-      )
-      {' '}
-      |
-      {' '}
-      <button type="submit" onClick={addAnswer}>
-        Add Answer
-      </button>
+    <div className={styles.question_item}>
+      <div className={styles.question_line}>
+        <div className={styles.question}>
+          Q:
+          {' '}
+          {question}
+        </div>
+        <div className={styles.q_vote}>
+          Helpful?
+          {' '}
+          <button type="submit" onClick={upvoteQuestion}>
+            Yes
+          </button>
+          (
+          {helpfulness}
+          )
+          {' '}
+          |
+          {' '}
+          <button type="submit" onClick={addAnswer}>
+            Add Answer
+          </button>
+        </div>
+      </div>
       <div className={showAddAnswer ? styles.show : styles.hide}>
         <AddAnswer
           question={question}
