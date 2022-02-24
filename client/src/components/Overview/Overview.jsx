@@ -77,7 +77,7 @@ function Price(props) {
       </div>
     );
   }
-  return <sp className={style.info_SmallText}>{`$${props.variant.original_price}`}</sp>;
+  return <div className={style.info_SmallText}>{`$${props.variant.original_price}`}</div>;
 }
 
 function Description(props) {
@@ -94,7 +94,7 @@ function FeaturesList(props) {
     <div className={style.FeaturesList}>
       {
         props.product.features.map((feature) =>
-          <div key={feature}>{` ✓ ${feature.feature}: ${feature.value}`}</div>)
+          <div key={`${feature.feature}${feature.value}`}>{` ✓ ${feature.feature}: ${feature.value}`}</div>)
       }
     </div>
   );

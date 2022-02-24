@@ -11,7 +11,7 @@ function StyleSelector(props) {
       {
         props.variants.map((variant) => (
           <StyleButton
-            key={variant}
+            key={variant.name}
             variant={variant}
             selectedVariant={props.selectedVariant}
             setSelectedVariant={setSelectedVariant}

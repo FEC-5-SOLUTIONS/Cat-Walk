@@ -60,19 +60,19 @@ function ThumbCarousel(props) {
             props.variant.photos.map((v, i) => (
               <button
                 id="ThumbCarousel-ImageContainer"
-                key={v}
+                key={`button-${v.url}`}
                 className={style.ThumbCarousel_ImageContainer}
                 onClick={() => props.updateIndex(i)}
                 type="button"
               >
                 <img
                   id="ThumbCarousel-Image"
-                  key={`${v}${i}`}
+                  key={`image-${v.url}`}
                   className={
                     i === props.activeIndex
                       ? style.ThumbCarousel_Image_Selected
                       : style.ThumbCarousel_Image
-}
+                  }
                   src={v.thumbnail_url}
                   alt={v.name}
                   style={{ height: '100%' }}
