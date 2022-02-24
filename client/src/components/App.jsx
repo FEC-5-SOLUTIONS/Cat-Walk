@@ -9,24 +9,25 @@ import getAvg from './utils/getAvg';
 
 function App() {
   // set the states required
-  const [relatedProducts, setRelatedProducts] = useState(0);
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [product, setProduct] = useState({});
   const [apiResponse, setApiResponse] = useState(false);
   const [meta, setMeta] = useState([]);
   const [average, setAvg] = useState(0);
 
   useEffect(() => {
-    if (relatedProducts.length !== 0) {
-      axios.get('api/products')
-        .then((res) => {
-          // set state accordingly
-          setRelatedProducts(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [relatedProducts]);
+    // if (relatedProducts.length !== 0) {
+    // if (product.id) {
+    axios.get('api/products')
+      .then((res) => {
+        // set state accordingly
+        setRelatedProducts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // }
+  }, [product]);
 
   const selectProduct = (id) => {
     axios({
@@ -51,7 +52,7 @@ function App() {
 
   // grabbing the meta obj whenever product state is changed
   useEffect(() => {
-    if (product) {
+    if (product.id) {
       axios.get(`api/reviews/meta/${product.id}`)
         .then((res) => {
           // setMeta state accordingly
