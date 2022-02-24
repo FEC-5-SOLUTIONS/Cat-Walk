@@ -7,12 +7,13 @@ function Photos({ pic, setUrl}) {
     setUrl(pic.url);
   }
   return (
-    <img
-      src={pic.url}
-      alt=" pic here"
-      className={styles.photo}
-      onClick={handleClick}
-    />
+    <button onClick={handleClick} type="button" className={styles.imageButton}>
+      <img
+        src={pic.url}
+        alt=" pic here"
+        className={styles.photo}
+      />
+    </button>
   );
 }
 
