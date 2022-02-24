@@ -5,7 +5,7 @@ import Stars from '../../Shared/StarsUni';
 import styles from '../Ratings.module.css';
 
 function ReviewListItem({ review }) {
-
+  const [viewMore, setViewMore] = useState(false);
   const [helpBool, setHelpBool] = useState(false);
   const [reportBool, setReportBool] = useState(false);
 
@@ -13,6 +13,10 @@ function ReviewListItem({ review }) {
   if (review.date) {
     const convertedDate = new Date(review.date);
     dateString = convertedDate.toDateString();
+  }
+
+  function view() {
+    setViewMore(!viewMore);
   }
 
   function helpful() {
@@ -48,7 +52,18 @@ function ReviewListItem({ review }) {
         {dateString}
       </div>
       <div className={styles.reviewSum}>{review.summary}</div>
-      <div className={styles.reviewBod}>{review.body}</div>
+      {(viewMore === false && review.body.length > 250) ? (
+        <div>
+          <div className={styles.reviewBod}>
+            {review.body.slice(0, 250)}
+          </div>
+          <p onClick={view} className={styles.paraP}>expand...</p>
+        </div>
+      ) : (
+        <div className={styles.reviewBod}>
+          {review.body}
+        </div>
+      )}
       <div>posted by : {review.reviewer_name}</div>
       {!review.recommend ? null : <div>✓ Recommended!</div>}
       {review.photos.length > 0 ?
