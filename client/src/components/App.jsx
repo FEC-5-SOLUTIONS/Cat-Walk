@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import Overview from './Overview/Overview';
+// eslint-disable-next-line import/no-named-as-default
+import Overview from './Overview/Overview';
 import RatingsAndReviews from './Ratings_Reviews/Ratings_Reviews';
 import RelatedItems from './RelatedItems/RelatedItems';
 import Questions from './questions/Questions';
@@ -74,10 +75,10 @@ function App() {
 
   return !apiResponse ? <div>Loading...</div> : (
     <div id="App" className="App">
-      {/* <Overview
+      <Overview
         product={product}
         average={average}
-      /> */}
+      />
       <RelatedItems
         relatedProducts={relatedProducts}
         selectProduct={selectProduct}

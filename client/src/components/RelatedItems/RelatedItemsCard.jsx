@@ -74,6 +74,7 @@ function RelatedItemsCard(props) {
     // const allOutfits = { ...outfits };
     // const prod = allOutfits[i];
     console.log('Product to add', product);
+    console.log('Outfits', outfits);
     // const movies = allOutfits[product_id] ? [...[allOutfits], product] : product;
     const movies = [...outfits, product];
     // const movies = ([...[allOutfits]] === {}) ? [product] : [...[allOutfits], product];
