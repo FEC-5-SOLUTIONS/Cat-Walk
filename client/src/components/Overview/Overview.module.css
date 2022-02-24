@@ -140,7 +140,23 @@
 }
 .BigCarousel_Controls > button {
   margin: 5px;
+  background: none;
+  border: none;
+  /* object-fit:contain; */
 }
+.BigCarousel_Controls > button > img {
+  object-fit:contain;
+  width: 15px;
+  height: 15px;
+  filter:invert(66%);
+
+  /* opacity: 0.4; */
+}
+/* .BigCarousel_Controls > button > img > hover {
+  opacity: 1;
+  background-color: white;
+  border-radius: 40%;
+} */
 .ThumbCarousel {
   grid-area: thumb;
   position:relative;
@@ -157,7 +173,6 @@
   width: 35px;
   height: 175px;
   z-index:2;
-
 }
 .ThumbCarousel_Inner {
   white-space: nowrap;
@@ -197,7 +212,16 @@
   align-items:center;
 }
 .ThumbCarousel_Controls > button {
-  margin: 1px;
+  background: none;
+  border: none;
+}
+.ThumbCarousel_Controls > button > img {
+  /* margin: 1px; */
+  object-fit:contain;
+  width: 15px;
+  height: 15px;
+  filter:invert(66%);
+  /* opacity: 0.4; */
 }
 .Actions {
   grid-area: actions;
@@ -213,19 +237,35 @@
 .Actions_Row > div {
   padding: 2px;
 }
+.Actions_Row > div > button {
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 20px;
+  font-variant: small-caps;
+  background-color:#CFCFD1;
+  border: none;
+  border-radius:5px;
+}
+.Actions_Row > div > select {
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 20px;
+  font-variant: small-caps;
+  background-color:#CFCFD1;
+  border: none;
+  border-radius:5px;
+}
 .SocialsIconContainer {
   padding: 5px;
   display: inline-flex;
   justify-content:space-around;
 }
 .Socials_Icon {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   margin: 10px;
   object-fit: cover;
-  opacity: 0.6;
+  /* opacity: 0.6; */
   border-radius: 20%;
-}
-.Socials_Icon > hover {
-  opacity: 1;
+  filter:invert(50%);
 }

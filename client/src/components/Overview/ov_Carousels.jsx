@@ -3,6 +3,12 @@ import style from './Overview.module.css';
 
 // to-do: conditional rendering of arrows
 // to-do: improve look of buttons
+const arrows = {
+  left: 'https://img.icons8.com/external-jumpicon-line-ayub-irawan/50/000000/external-arrow-arrows-jumpicon-line-jumpicon-line-ayub-irawan-40.png',
+  right: 'https://img.icons8.com/external-jumpicon-line-ayub-irawan/50/000000/external-arrow-arrows-jumpicon-line-jumpicon-line-ayub-irawan-13.png',
+  up: 'https://img.icons8.com/external-jumpicon-line-ayub-irawan/50/000000/external-arrow-arrows-jumpicon-line-jumpicon-line-ayub-irawan-10.png',
+  down: 'https://img.icons8.com/external-jumpicon-line-ayub-irawan/50/000000/external-arrow-arrows-jumpicon-line-jumpicon-line-ayub-irawan-44.png',
+};
 
 function DisplaySection(props) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -37,7 +43,7 @@ function ThumbCarousel(props) {
   const [carouselIndex, setCarouselIndex] = useState(0);
 
   const updateThumbCarouselPosition = (newIndex) => {
-    let length = props.length;
+    const { length } = props;
     setCarouselIndex((newIndex + length) % length);
   };
 
@@ -48,22 +54,25 @@ function ThumbCarousel(props) {
           id="ThumbCarousel-Inner"
           className={style.ThumbCarousel_Inner}
           style={{ transform: `translateY(-${carouselIndex * (100 * props.length ** -1)}%` }}
-        > {
+        >
+          {' '}
+          {
             props.variant.photos.map((v, i) => (
               <button
                 id="ThumbCarousel-ImageContainer"
-                key={i}
+                key={v}
                 className={style.ThumbCarousel_ImageContainer}
                 onClick={() => props.updateIndex(i)}
                 type="button"
               >
                 <img
                   id="ThumbCarousel-Image"
-                  key={i}
+                  key={`${v}${i}`}
                   className={
-                    i === props.activeIndex ?
-                      style.ThumbCarousel_Image_Selected :
-                      style.ThumbCarousel_Image }
+                    i === props.activeIndex
+                      ? style.ThumbCarousel_Image_Selected
+                      : style.ThumbCarousel_Image
+}
                   src={v.thumbnail_url}
                   alt={v.name}
                   style={{ height: '100%' }}
@@ -74,8 +83,8 @@ function ThumbCarousel(props) {
         </div>
       </div>
       <div id="ThumbCarousel-Controls" className={style.ThumbCarousel_Controls}>
-        <button onClick={() => { updateThumbCarouselPosition(carouselIndex - 1); }}>↑</button>
-        <button onClick={() => { updateThumbCarouselPosition(carouselIndex + 1); }}>↓</button>
+        <button onClick={() => { updateThumbCarouselPosition(carouselIndex - 1); }}><img src={arrows.up} /></button>
+        <button onClick={() => { updateThumbCarouselPosition(carouselIndex + 1); }}><img src={arrows.down} /></button>
       </div>
     </div>
   );
@@ -86,8 +95,8 @@ function BigCarousel(props) {
     <div className={style.BigCarousel} id="Big Carousel">
       <div className={style.BigCarousel_Viewport}>
         <div className={style.BigCarousel_Controls}>
-          <button onClick={() => { props.updateIndex(props.activeIndex - 1); }}>←</button>
-          <button onClick={() => { props.updateIndex(props.activeIndex + 1); }}>→</button>
+          <button onClick={() => { props.updateIndex(props.activeIndex - 1); }}><img src={arrows.left} /></button>
+          <button onClick={() => { props.updateIndex(props.activeIndex + 1); }}><img src={arrows.right} /></button>
         </div>
         <div
           className={style.BigCarousel_Inner}
@@ -95,9 +104,9 @@ function BigCarousel(props) {
         >
           {
             props.variant.photos.map((v, i) => (
-              <div key={i} className={style.BigCarousel_ImageContainer}>
+              <div key={`${v.name}${i}`} className={style.BigCarousel_ImageContainer}>
                 <img
-                  key={i}
+                  key={v.name}
                   className={style.BigCarousel_Image}
                   src={v.url}
                   alt={v.name}
@@ -109,6 +118,6 @@ function BigCarousel(props) {
       </div>
     </div>
   );
-};
+}
 
 export { DisplaySection, ThumbCarousel, BigCarousel };

@@ -11,12 +11,9 @@ import Actions from './ov_Actions';
 function Overview(props) {
   const product = props.product;
   const product_id = props.product.id;
-  // const variants = [props.variant];
-  // const selectedVariant = props.variant;
-  // const info = true;
 
   const [variants, setVariants] = useState([]);
-  const [selectedVariant, setSelectedVariant] = useState({  });
+  const [selectedVariant, setSelectedVariant] = useState({ });
   const [info, setInfo] = useState(false);
 
   useEffect(() => {
@@ -42,10 +39,8 @@ function Overview(props) {
 
   return (
     <div id="Overview" className={style.Overview} data-testid="Overview">
-      <div id="Overview-Grid" className={style.Overview_Grid} >
+      <div id="Overview-Grid" className={style.Overview_Grid}>
         <DisplaySection variant={selectedVariant} />
-        {/* <ThumbCarousel variant={selectedVariant} />
-        <BigCarousel variant={selectedVariant} /> */}
         <ProductInfo product={product} variant={selectedVariant} />
         <StyleSelector
           variants={variants}
@@ -96,8 +91,8 @@ function FeaturesList(props) {
   return (
     <div className={style.FeaturesList}>
       {
-        props.product.features.map((feature, i) =>
-          <div key={i}>{` ✓ ${feature.feature}: ${feature.value}`}</div>)
+        props.product.features.map((feature) =>
+          <div key={feature}>{` ✓ ${feature.feature}: ${feature.value}`}</div>)
       }
     </div>
   );
