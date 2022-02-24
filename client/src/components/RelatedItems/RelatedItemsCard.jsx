@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MdStarBorder } from 'react-icons/md';
 import classes from './RelatedItems.module.css';
+import getAvg from '../utils/getAvg';
 import ItemCard from './ItemCard';
 import Compare from './Compare';
 
@@ -21,6 +22,8 @@ function RelatedItemsCard(props) {
   const [image, setImage] = useState('');
   const [noImage, setReplacement] = useState('https://bit.ly/2Tg8g4s');
   const [showCompare, setCompare] = useState(false);
+  const [meta, setMeta] = useState([]);
+  const [average, setAvg] = useState([]);
   // const [variants, setVariants] = useState([]);
   const [info, setInfo] = useState(false);
 
@@ -59,6 +62,23 @@ function RelatedItemsCard(props) {
 
   //   return [savedOutfits, setSavedOutfits];
   // };
+  // grabbing the meta obj whenever product state is changed
+  useEffect(() => {
+    if (product) {
+      axios.get(`api/reviews/meta/${product.id}`)
+        .then((res) => {
+          // setMeta state accordingly
+          setMeta(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [product]);
+
+  useEffect(() => {
+    // console.log('META :', meta);
+  });
 
   // get saved outfits on inital render
   useEffect(() => {
