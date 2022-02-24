@@ -9,9 +9,9 @@ function StyleSelector(props) {
   return (
     <div className={style.StyleSelector}>
       {
-        props.variants.map((variant, i) => (
+        props.variants.map((variant) => (
           <StyleButton
-            key={i}
+            key={variant.name}
             variant={variant}
             selectedVariant={props.selectedVariant}
             setSelectedVariant={setSelectedVariant}
