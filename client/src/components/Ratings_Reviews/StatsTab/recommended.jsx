@@ -4,7 +4,7 @@ import React from 'react';
 const recPer = (obj) => {
   // console.log(obj.true);
   const percentage = (Number(obj.true)) / (Number(obj.true) + Number(obj.false));
-  return(Math.round(percentage * 10000) / 100);
+  return (Math.round(percentage * 10000) / 100);
 };
 
 function Recommended({ meta }) {

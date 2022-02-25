@@ -44,23 +44,23 @@ function ReviewListItem({ review, setUrl }) {
   }
 
   return (
-    <div className={styles.reviewItem}>
-      <div className={styles.reviewTopRow}>
-        <div style={{ width: 'fit-content' }}>
+    <div className={styles.reviewItem} id="reviewItem">
+      <div className={styles.reviewTopRow} id="reviewTopRow">
+        <div style={{ width: 'fit-content' }} id="inlineRLI">
           <Stars average={review.rating} />
         </div>
         {dateString}
       </div>
-      <div className={styles.reviewSum}>{review.summary}</div>
+      <div className={styles.reviewSum} id="reviewSum">{review.summary}</div>
       {(viewMore === false && review.body.length > 250) ? (
         <div>
-          <div className={styles.reviewBod}>
+          <div className={styles.reviewBod} id="reviewBod">
             {review.body.slice(0, 250)}
           </div>
-          <p onClick={view} className={styles.paraP}>expand...</p>
+          <p onClick={view} className={styles.paraP} id="paraP">expand...</p>
         </div>
       ) : (
-        <div className={styles.reviewBod}>
+        <div className={styles.reviewBod} id="reviewBod">
           {review.body}
         </div>
       )}

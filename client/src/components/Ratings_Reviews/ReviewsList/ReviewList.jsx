@@ -10,7 +10,7 @@ function ReviewList({ data, setUrl }) {
     // console.log('datas: ', data);
   }
   return !data ? null : (
-    <div className={styles.reviewListContainer}>
+    <div className={styles.reviewListContainer} id="reviewListContainer">
       {datas.map((review) => <ReviewListItem review={review} setUrl={setUrl} />)}
     </div>
   );
