@@ -14,22 +14,25 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
   const [photos, setPhotos] = useState([]);
   const [files, setFiles] = useState([]);
   const [hasFive, setHasFive] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+  const [imgError, setImgError] = useState(false);
   const [errorField, setErrorField] = useState([]);
 
   function clearUpFields() {
+    setPhotos([]);
     setState({
       body: '',
       name: '',
       email: '',
     });
-    setPhotos([]);
   }
 
   function closeModal(e) {
     e.preventDefault();
     handleClick(false);
     clearUpFields();
+    setSubmitError(false);
+    setImgError(false);
   }
 
   function handleInput(e) {
@@ -53,7 +56,7 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
   }
 
   function selectImg(e) {
-    setHasError(false);
+    setImgError(false);
     const img = e.target.files[0];
     if (!hasFive) {
       if (img) {
@@ -63,7 +66,7 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
           setPhotos((prev) => [...prev, URL.createObjectURL(img)]);
           setFiles((prev) => [...prev, img]);
         } else {
-          setHasError(true);
+          setImgError(true);
         }
       }
     }
@@ -98,9 +101,9 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
     });
     if (temp.length > 0) {
       setErrorField(temp);
-      setHasError(true);
+      setSubmitError(true);
     } else {
-      setHasError(false);
+      setSubmitError(false);
       handleSubmit();
     }
   }
@@ -156,14 +159,14 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
         multiple
       />
       {photos && photos.map((item) => <img className={styles.thumbnails} src={item} alt="" />)}
-      <div className={hasError ? styles.show : styles.hide}>
+      <div className={imgError ? styles.show : styles.hide}>
         <UploadError err="jpg, jpeg, png, gif only" />
       </div>
       {/* <button type="submit" onClick={upload}>
         Upload
       </button> */}
       <br />
-      <div className={hasError ? styles.show : styles.hide}>
+      <div className={submitError ? styles.show : styles.hide}>
         <SubmitError errorField={errorField} />
       </div>
       <button
