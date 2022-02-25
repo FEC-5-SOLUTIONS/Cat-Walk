@@ -169,7 +169,7 @@ function RelatedItemsCard(props) {
           />
         ) : null}
       <div>
-        <MdStarBorder className="action-btn" onClick={saveOutfit} />
+        <MdStarBorder className={classes.actionBtn} onClick={saveOutfit} />
         <ItemCard
           key={product.id - 0.25}
           id={product.id}

@@ -57,7 +57,7 @@
 }
 
 .leftArrow {
-  /* position: relative;
+  position: relative;
   top: 50%;
   visibility: visible;
   opacity: .5;
@@ -67,11 +67,11 @@
   width: auto;
   color: black;
   height: 30px;
-  font-weight: bold; */
+  font-weight: bold;
 }
 
 .rightArrow {
-  /* position: relative;
+  position: relative;
   top: 50%;
   visibility: visible;
   opacity: .5;
@@ -80,7 +80,7 @@
   left: -1.25rem;
   width: 30px;
   color: black;
-  height: 30px; */
+  height: 30px;
 }
 
 .leftArrow:hover, .rightArrow:hover {

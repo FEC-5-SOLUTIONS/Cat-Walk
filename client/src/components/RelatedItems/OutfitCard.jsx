@@ -59,7 +59,7 @@ function OutfitCard(props) {
           />
         ) : null}
       <div>
-        <IoMdCloseCircleOutline className="action-btn" />
+        <IoMdCloseCircleOutline className={classes.actionBtn} />
         <ItemCard
           key={product.id - 0.25}
           id={product.id}
