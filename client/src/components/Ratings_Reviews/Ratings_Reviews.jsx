@@ -10,7 +10,8 @@ function RatingsAndReviews({ product, meta, avg }) {
   const [modal, setModal] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [sort, setSort] = useState('relevant');
-  const [maxView, setMaxView] = useState(false);
+  const [filter, setFilter] = useState([]);
+  const [inFilter, setInFilter] = useState([]);
   const [buttonText, setButtonText] = useState('View More');
   const [slice, setSlice] = useState(2);
   const [modalUrl, setModalUrl] = useState(null);
@@ -27,61 +28,90 @@ function RatingsAndReviews({ product, meta, avg }) {
     }
   }, [product, sort]);
 
+  const filterFunc = (rating) => {
+    console.log('enter filter func');
+    // console.log(rating);
+    const filterArray = filter.slice();
+    const inFilterArray = inFilter.slice();
+    let check = false;
+    reviews.results.forEach((result) => {
+      // console.log('result.rating', result.rating);
+      // console.log('rating', rating);
+      if (Number(result.rating) === Number(rating)) {
+        filterArray.push(result);
+        check = true;
+      }
+    });
+    if (check) {
+      inFilterArray.push(rating);
+      setInFilter(inFilterArray);
+    }
+    setFilter(filterArray);
+  };
+
   const setUrl = (url) => {
     setModalUrl(url);
   };
   const handleChange = (e) => {
     setSort(e.target.value);
   };
+
+  let passedData = {};
+  if (filter.length > 0) {
+    passedData = { results: filter };
+  } else {
+    passedData = reviews;
+  }
+
   const handleButtonClick = (e) => {
     e.preventDefault();
-    // let newText = 'View More';
-    // if (buttonText === 'View More') {
-    //   newText = 'View Less';
-    // }
-    // setViewMore(!viewMore);
-    // setButtonText(newText);
-
-    // let newSlice=slice + 2;
-    const diff = reviews.results.length - slice;
+    const diff = passedData.results.length - slice;
     if (diff > 2) {
       setSlice(slice + 2);
     } else if (diff <= 2 && diff > 0) {
       setSlice(slice + 2);
       setButtonText('Collapse');
-    }else{
+    } else {
       setSlice(2);
       setButtonText('View More');
     }
   };
 
   return !product ? <div>Ratings and Reviews loading...</div> : (
-    <div className={styles.topLevel}>
-      <div className={styles.reviewRatingsContainer}>
-        <Stats meta={meta} average={avg} />
+    <div className={styles.topLevel} id="topLevel">
+      <h1>Ratings & Reviews</h1>
+      <div className={styles.reviewRatingsContainer} id="reviewRatingsContainer">
+        <Stats
+          meta={meta}
+          average={avg}
+          filterFunc={filterFunc}
+          inFilter={inFilter}
+          setInFilter={setInFilter}
+          setFilter={setFilter}
+        />
         <ReviewsList
-          reviews={reviews}
+          reviews={passedData}
           sort={sort}
           handleChange={handleChange}
           text={buttonText}
-          maxView={maxView}
           click={handleButtonClick}
           setModal={setModal}
           slice={slice}
           setUrl={setUrl}
+          filter={filter}
         />
+        {modal
+          ? (
+            <Modal
+              setModal={setModal}
+              charObj={meta.characteristics}
+              productID={product.id}
+              name={product.name}
+            />
+          )
+          : null}
+        {!modalUrl ? null : <PicModal url={modalUrl} setModalUrl={setModalUrl} />}
       </div>
-      { modal
-        ? (
-          <Modal
-            setModal={setModal}
-            charObj={meta.characteristics}
-            productID={product.id}
-            name={product.name}
-          />
-        )
-        : null}
-      {!modalUrl ? null : <PicModal url={modalUrl} setModalUrl={setModalUrl} />}
     </div>
   );
 }

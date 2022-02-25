@@ -13,6 +13,8 @@ const comfortArray = ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comforta
 
 const qualityArray = ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'];
 
+const starRatingArray = ['Poor', 'Fair', 'Average', 'Good', 'Great!'];
+
 const lengthArray = ['Runs Short',
   'Runs slightly short',
   'Perfect',
@@ -36,8 +38,9 @@ function Modal({ setModal, charObj, productID, name }) {
   const [qualityRating, setQualityRating] = useState(0);
   const [lengthRating, setLengthRating] = useState(0);
   const [fitRating, setFitRating] = useState(0);
-  const [show, setShow] = useState(false);
-  const [thanks, setThanks] = useState(false);
+  const [errorText, setErrorText] = useState('');
+  // const [show, setShow] = useState(false);
+  // const [thanks, setThanks] = useState(false);
 
   const photosArray = [];
 
@@ -103,6 +106,7 @@ function Modal({ setModal, charObj, productID, name }) {
   // post request can now be submitted
   const isTrue = (subject) => subject !== 0;
   // the post request should be handled within here
+  const ind = starRating - 1;
 
   function handleSubmit() {
     if (postArray.every(isTrue) && chaToArray.every(objIsTrue)) {
@@ -114,7 +118,8 @@ function Modal({ setModal, charObj, productID, name }) {
           for (let i = 0; i < chaToArray.length; i++) {
             const currentChara = chaToArray[i];
             const currentID = charObj[currentChara].id;
-            characteristicObj[currentID] = Number(charRatingObj[currentChara]);
+            const stringID = String(currentID);
+            characteristicObj[stringID] = Number(charRatingObj[currentChara]);
           }
           const dataObj = {
             product_id: productID,
@@ -132,18 +137,21 @@ function Modal({ setModal, charObj, productID, name }) {
             url: '/api/reviews',
             data: dataObj,
           }).then(() => {
-            setShow(false);
-            setThanks(true);
+            alert('Thank you for your Review');
+            setErrorText('');
+            // setShow(false);
+            // setThanks(true);
           });
         }
         else {
-          setShow(true);
+          setErrorText('Your Review is too short, should be at least 50 characters');
+          // setShow(true);
         }
       } else {
-        console.log('missing something ');
+        setErrorText('Do you recommend the product?');
       }
     } else {
-      console.log('something missing');
+      setErrorText('Seems like you skipped something, Please check every field.');
     }
   }
 
@@ -151,14 +159,17 @@ function Modal({ setModal, charObj, productID, name }) {
   // call will be initiated by clicking the submit button
 
   return (
-    <div className={styles.modalBackground}>
-      <div className={styles.modalContainer}>
+    <div className={styles.modalBackground} id="modalBackground">
+      <div className={styles.modalContainer} id="modalContainer">
         <div>
           <h1>Write your review about {name} here!</h1>
         </div>
-        <div className={styles.starsAndRec}>
-          <Stars starRating={starRating} setStarRating={setStarRating} />
-          <div className={styles.recommend}>
+        <div className={styles.starsAndRec} id="modalStarsAndRec">
+          <div className={styles.starsText} id="modalStarsText">
+            <Stars starRating={starRating} setStarRating={setStarRating} />
+            {starRating === 0 ? null : <h1 style={{ marginLeft: '2px' }}>{starRatingArray[ind]}</h1>}
+          </div>
+          <div className={styles.recommend} id="modalRecommend">
             {'Do you recommend this product? '}
             <label>
               {' Yes: '}
@@ -181,7 +192,7 @@ function Modal({ setModal, charObj, productID, name }) {
             </label>
           </div>
         </div>
-        <div className={styles.radios}>
+        <div className={styles.radios} id="modalRadios">
           {(chaToArray).map((char) => {
             if (char === 'Comfort') {
               return <Chars char={char} array={comfortArray} setComfortRating={setComfortRating} />;
@@ -198,13 +209,13 @@ function Modal({ setModal, charObj, productID, name }) {
             }
           })}
         </div>
-        <div className={styles.form}>
+        <div className={styles.form} id="modalForm">
           <p>Please enter a Summary:</p>
           <input type="text" maxLength="60" placeholder="Example: Best Purchase Ever!"
             onChange={(e) => setSumText(e.target.value)}
           />
         </div>
-        <div className={styles.form}>
+        <div className={styles.form} id="modalForm">
           <p>Please enter a Review:</p>
           <textArea
             type="text"
@@ -214,9 +225,10 @@ function Modal({ setModal, charObj, productID, name }) {
             onChange={(e) => setReview(e.target.value)}
           />
         </div>
-        <div className={styles.form}>
+        <div className={styles.form} id="modalForm">
           <p>What is your nickname:</p>
-          <input type="text"
+          <input
+            type="text"
             maxLength="60"
             placeholder="Please enter a nickname"
             onChange={(e) => setNickname(e.target.value)}
@@ -224,7 +236,7 @@ function Modal({ setModal, charObj, productID, name }) {
           />
           <p>For privacy reasons, do not use your full name or email address</p>
         </div>
-        <div className={styles.form}>
+        <div className={styles.form} id="modalForm">
           <p>Please enter your eMail:</p>
           <input
             type="text"
@@ -235,9 +247,10 @@ function Modal({ setModal, charObj, productID, name }) {
           />
           <p>For authentication reasons, you will not be emailed</p>
         </div>
-        <div className={styles.buttons}>
-          <button onClick={handleSubmit} className={styles.submit} type="submit">Submit</button>
-          <button onClick={() => { setModal(false); }} className={styles.cancel} type="button">Cancel</button>
+        {errorText.length < 2 ? null : <div className={styles.errorText}>{errorText}</div>}
+        <div className={styles.buttons} id="modalButtons">
+          <button onClick={handleSubmit} className={styles.submit} type="submit" id="modalSubmit">Submit</button>
+          <button onClick={() => { setModal(false); }} className={styles.cancel} type="button" id="modalCancel">Cancel</button>
         </div>
       </div>
     </div>

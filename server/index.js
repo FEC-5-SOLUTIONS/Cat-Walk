@@ -102,7 +102,7 @@ app.put('/api/report/:id', (req, res) => {
   })
     .then((result) => res.status(204).send())
     .catch((err) => {
-      console.log(err);
+      // console.log(err)
       res.status(400).send();
     });
 });
@@ -117,9 +117,9 @@ app.post('/api/reviews', (req, res) => {
     data: req.body,
     headers,
   })
-    .then((result) => result.status(201).send())
+    .then(() => res.send())
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
       res.status(400).send();
     });
 });

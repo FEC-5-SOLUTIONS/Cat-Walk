@@ -1,28 +1,39 @@
 .modalBackground {
-  width: 100vw;
-  height: 50vw;
+  width: 65%;
+  min-width: 880px;
+  height: 800px;
   background-color: rgba(200, 200, 200);
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 30px;
 }
 
 .modalContainer {
-  width: 50%;
-  height: fit-content;
-  align-self: auto;
+  width: fit-content;
+  height: 600px;
+  /* height: 50%; */
+  /* align-self: auto; */
   border-radius: 12px;
   background-color: white;
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
   display: flex;
   flex-direction: column;
   padding: 25px;
+  overflow-y: scroll;
+  margin: 40px;
+}
+.modalContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .starsAndRec {
   display: flex;
   flex-direction: column;
+}
+.starsText{
+  display: flex;
 }
 .recommend {
   display: flex;
@@ -76,26 +87,45 @@
   padding-top: 20px;
 }
 .submit{
-  padding:10px 15px 10px 15px;
-  font-size: 25px;
-  background-color: rgb(10, 90, 194);
-  color:white;
-  border-radius: 15px;
-  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  padding: 10px 15px 10px 15px;
+  font-size: 15px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  box-shadow: rgb(0 0 0 / 10%) 0px 5px 10px;
+}
+
+.submit:hover{
+  color: white;
+  background-color: darkgreen;
 }
 
 .cancel{
-  padding:10px 15px 10px 15px;
-  font-size: 25px;
-  background-color: rgb(230, 122, 79);
-  color:white;
-  border-radius: 15px;
-  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  padding: 10px 15px 10px 15px;
+  font-size: 15px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  box-shadow: rgb(0 0 0 / 10%) 0px 5px 10px;
 }
+
+.cancel:hover{
+  color: white;
+  background-color: darkgreen;
+}
+
 .nameform{
   width:25%
 }
 
 .picModal{
   position: absolute;
+}
+.picmodal{
+  height: -webkit-fill-available;
+}
+
+.errorText{
+  color: red;
+  font-style: italic;
 }
