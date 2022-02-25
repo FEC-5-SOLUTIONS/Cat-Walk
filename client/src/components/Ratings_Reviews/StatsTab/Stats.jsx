@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Stars from '../../Shared/StarsUni';
 import Recommended from './recommended';
 import RatingBars from './RatingBars';
-import Characteristics from './characteristics';
+import Characteristics from './Characteristics';
 // import getAvg from '../../utils/getAvg';
 import styles from '../Ratings.module.css';
 
