@@ -19,7 +19,7 @@ function ReviewsList({
     <div>nothing to see</div> : (
       <div className={styles.reviewsContainer} id="reviewsContainer">
         <div>
-          {`displaying ${reviewNum} of ${reviews.results.length} Reviews. Sorted by `}
+          {`displaying ${reviewNum} of ${reviews.results.length} Reviews from Page 1. Sorted by `}
           <select value={sort} onChange={handleChange}>
             <option value="relevant">relevant</option>
             <option value="newest">newest</option>

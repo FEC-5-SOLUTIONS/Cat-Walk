@@ -55,17 +55,17 @@ function RatingsAndReviews({ product, meta, avg }) {
   const handleChange = (e) => {
     setSort(e.target.value);
   };
+
+  let passedData = {};
+  if (filter.length > 0) {
+    passedData = { results: filter };
+  } else {
+    passedData = reviews;
+  }
+
   const handleButtonClick = (e) => {
     e.preventDefault();
-    // let newText = 'View More';
-    // if (buttonText === 'View More') {
-    //   newText = 'View Less';
-    // }
-    // setViewMore(!viewMore);
-    // setButtonText(newText);
-
-    // let newSlice=slice + 2;
-    const diff = reviews.results.length - slice;
+    const diff = passedData.results.length - slice;
     if (diff > 2) {
       setSlice(slice + 2);
     } else if (diff <= 2 && diff > 0) {
@@ -76,12 +76,6 @@ function RatingsAndReviews({ product, meta, avg }) {
       setButtonText('View More');
     }
   };
-  let passedData = {};
-  if (filter.length > 0) {
-    passedData = { results: filter };
-  } else {
-    passedData = reviews;
-  }
 
   return !product ? <div>Ratings and Reviews loading...</div> : (
     <div className={styles.topLevel} id="topLevel">
