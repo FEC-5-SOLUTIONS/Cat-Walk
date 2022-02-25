@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import style from './Overview.module.css';
 
 // current bug: size dropdown does not reset either on style change or on addToCart/Outfit
-const socialIconPinterest = "https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Pinterest2_svg-512.png";
-const socialIconInstagram = "https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Instagram_svg-512.png";
-const socialIconFacebook = "https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Facebook_svg-512.png";
-const socialIconTwitter = "https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Twitter5_svg-512.png";
+const socialMediaIcons = {
+  pinterest: "https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Pinterest2_svg-512.png",
+  instagram: "https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Instagram_svg-512.png",
+  facebook: "https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Facebook_svg-512.png",
+  twitter: "https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Twitter5_svg-512.png",
+};
 
 function Actions(props) {
   const [selectedSKU, setSelectedSKU] = useState(0);
@@ -32,16 +34,17 @@ function Actions(props) {
         />
       </div>
       <div className={style.Actions_Row}>
-        <div id="addToBag"><button type="submit" onClick={handleClick}>add to bag</button></div>
-        <div id="addToOutfit"><button type="submit" onClick={handleClick}>add to outfit</button></div>
+        <div id="addToBag"><button type="button" aria-label="add to cart" onClick={handleClick}>add to bag</button></div>
+        <div id="addToOutfit"><button type="button" aria-label="add to outfit" onClick={handleClick}>add to outfit</button></div>
       </div>
       <div className={style.Actions_Row}>
         <div id="Socials" className={style.SocialsIconContainer}>
-            <img className={style.Socials_Icon} src={socialIconPinterest} />
-            <img className={style.Socials_Icon} src={socialIconInstagram} />
-            <img className={style.Socials_Icon} src={socialIconFacebook} />
-            <img className={style.Socials_Icon} src={socialIconTwitter} />
-        </div>
+          {
+            Object.entries(socialMediaIcons).map((unit) => {
+              let [name, url] = unit;
+              return <img className={style.Socials_Icon} src={url} name={name} alt={name} key={name} /> })
+          }
+         </div>
       </div>
     </div>
   );
