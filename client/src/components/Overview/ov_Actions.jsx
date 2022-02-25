@@ -14,8 +14,20 @@ function Actions(props) {
 
   const variant = props.selectedVariant;
 
-  const handleClick = () => {
-    console.log(`add ${selectedQTY} of sku: ${selectedSKU}`);
+  const handleAddToCart = () => {
+    alert(
+      selectedSKU === 0 || selectedQTY === 0 ?
+      'Select a size and quantity before adding to Bag!' :
+      `Added ${selectedQTY} of sku: ${selectedSKU} to My Bag`
+      );
+  };
+
+  const handleAddToOutfit = () => {
+    alert(
+      selectedSKU === 0 || selectedQTY === 0 ?
+      'Select a size and quantity before adding to Outfit!' :
+      `Added ${selectedQTY} of sku: ${selectedSKU} to My Outfit`
+      );
   };
 
   const quantity = variant.skus[selectedSKU] ? variant.skus[selectedSKU].quantity : 0;
@@ -37,7 +49,7 @@ function Actions(props) {
           <button
             type="button"
             aria-label="add to cart"
-            onClick={handleClick}
+            onClick={handleAddToCart}
           >
             add to bag
           </button>
@@ -46,7 +58,7 @@ function Actions(props) {
           <button
             type="button"
             aria-label="add to outfit"
-            onClick={handleClick}
+            onClick={handleAddToOutfit}
           >
             add to outfit
           </button>

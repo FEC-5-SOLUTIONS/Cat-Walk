@@ -74,13 +74,13 @@ function ProductInfo(props) {
 function Price(props) {
   if (props.variant.sale_price) {
     return (
-      <div>
+      <div className={style.price}>
         <div className={style.price_onSale}>{`$${props.variant.original_price}`}</div>
         <div className={style.price_salePrice}>{`    $${props.variant.sale_price}`}</div>
       </div>
     );
   }
-  return <div className={style.info_SmallText}>{`$${props.variant.original_price}`}</div>;
+  return <div className={style.price}>{`$${props.variant.original_price}`}</div>;
 }
 
 function Description(props) {

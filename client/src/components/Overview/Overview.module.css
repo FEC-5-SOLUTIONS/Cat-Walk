@@ -56,16 +56,25 @@
   /* font-size:small; */
   text-transform:uppercase;
 }
+.price {
+  display: inline-flex;
+  flex-direction: row;
+  justify-items: flex-start;
+}
 .price_onSale {
   /* font-size:small; */
   text-transform:uppercase;
   text-decoration:line-through;
+  color:gray;
+  margin-right: 5%;
 }
 .price_salePrice {
   /* font-size:small; */
   text-transform:uppercase;
   color: red;
   font-weight: bold;
+  margin-right: 5%;
+
 }
 .ProductInfo > div {
   padding: 2.5px;
