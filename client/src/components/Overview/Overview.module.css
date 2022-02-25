@@ -6,6 +6,8 @@
   grid-template-rows: auto auto;
   grid-template-columns: auto auto;
   font-size:medium;
+  margin-top:20px;
+  margin-bottom:20px;
 
 }
 .Overview_Grid > div {
