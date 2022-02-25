@@ -15,17 +15,38 @@ function App() {
   const [meta, setMeta] = useState([]);
   const [average, setAvg] = useState(0);
 
+  // useEffect(() => {
+  //   // if (relatedProducts.length !== 0) {
+  //   // if (product.id) {
+  //   axios.get('api/products')
+  //     .then((res) => {
+  //       // set state accordingly
+  //       setRelatedProducts(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  //   // }
+  // }, [product]);
+
   useEffect(() => {
     // if (relatedProducts.length !== 0) {
     // if (product.id) {
-    axios.get('api/products')
-      .then((res) => {
+    if (product.id) {
+      axios({
+        method: 'GET',
+        url: '/api/related',
+        params: {
+          product_id: product.id,
+        },
+      }).then((res) => {
         // set state accordingly
         setRelatedProducts(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .catch((err) => {
+          console.log(err);
+        });
+    }
     // }
   }, [product]);
 
@@ -81,6 +102,7 @@ function App() {
         average={average}
       />
       <RelatedItems
+        product={product}
         relatedProducts={relatedProducts}
         selectProduct={selectProduct}
       />

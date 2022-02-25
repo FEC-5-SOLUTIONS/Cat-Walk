@@ -10,12 +10,12 @@ import ItemCard from './ItemCard';
 import Compare from './Compare';
 
 function OutfitCard(props) {
-  const { product, j, selectProduct } = props;
+  const { prod, j, selectProduct } = props;
   const [image, setImage] = useState('');
   const [noImage, setReplacement] = useState('https://bit.ly/2Tg8g4s');
   const [showCompare, setCompare] = useState(false);
 
-  const product_id = product.id;
+  const product_id = prod.id;
 
   useEffect(() => {
     axios({
@@ -50,23 +50,23 @@ function OutfitCard(props) {
       {showCompare
         ? (
           <Compare
-            key={product.id - 0.1}
-            id={product.id}
+            key={prod.id - 0.1}
+            id={prod.id}
             // parentId={product.parentId}
-            name={product.name}
+            name={prod.name}
             showModal={handleCloseModal}
-            product={product}
+            product={prod}
           />
         ) : null}
       <div>
         <IoMdCloseCircleOutline className="action-btn" />
         <ItemCard
-          key={product.id - 0.25}
-          id={product.id}
+          key={prod.id - 0.25}
+          id={prod.id}
           // parentId={product.parentId}
-          category={product.category}
-          name={product.name}
-          price={product.default_price}
+          category={prod.category}
+          name={prod.name}
+          price={prod.default_price}
           image={image}
           noImage={noImage}
           clickOnItem={handleClickOnItem}

@@ -19,11 +19,11 @@ function RelatedItems(props) {
   const [sliderPositionRelated, setSliderPositionRelated] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(0);
 
-  const { relatedProducts, selectProduct } = props;
+  const { product, relatedProducts, selectProduct } = props;
   // console.log('productId', productId);
 
   // const productId = relatedProducts.id;
-  // console.log('PRODUCT :', relatedProducts);
+  // console.log('REL PRODUCT :', relatedProducts);
 
   const translateFullSlidesRelated = (newPosition) => {
     const toTranslate = -widthSpan * newPosition;
@@ -86,8 +86,8 @@ function RelatedItems(props) {
   // };
 
   // eslint-disable-next-line max-len
-  const displayItemsRelated = relatedProducts.map((product, index) => <RelatedItemsCard product={product} products={relatedProducts} selectProduct={selectProduct} i={index} className={classes.carouselItem} id={`carouselItemRelated${index}`} />);
-  const displayItemsOutfit = relatedProducts.map((product, index) => <OutfitCard product={product} selectProduct={selectProduct} j={index} className={classes.carouselItem} id={`carouselItemOutfit${index}`} />);
+  const displayItemsRelated = relatedProducts.map((prod, index) => <RelatedItemsCard prod={product} products={relatedProducts} selectProduct={selectProduct} i={index} className={classes.carouselItem} id={`carouselItemRelated${index}`} />);
+  const displayItemsOutfit = relatedProducts.map((prod, index) => <OutfitCard prod={product} products={selectProduct} j={index} className={classes.carouselItem} id={`carouselItemOutfit${index}`} />);
 
   return (
     <div>
