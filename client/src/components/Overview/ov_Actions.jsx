@@ -32,8 +32,8 @@ function Actions(props) {
         />
       </div>
       <div className={style.Actions_Row}>
-        <div id="addToBag"><button type="submit" onClick={handleClick}>add to bag</button></div>
-        <div id="addToOutfit"><button type="submit" onClick={handleClick}>add to outfit</button></div>
+        <div id="addToBag" className={style.AddToBag}><button type="submit" onClick={handleClick}>add to bag</button></div>
+        <div id="addToOutfit" className={style.AddToOutfit}><button type="submit" onClick={handleClick}>add to outfit</button></div>
       </div>
       <div className={style.Actions_Row}>
         <div id="Socials" className={style.SocialsIconContainer}>
@@ -49,7 +49,7 @@ function Actions(props) {
 
 function SizeOptions(props) {
   return (
-    <div id="size">
+    <div id="size" className={style.SelectSize}>
       <select onChange={(event) => props.setSelectedSKU(event.target.value)}>
         <option hidden>{'--'}</option>
         {
@@ -69,7 +69,7 @@ function SizeOptions(props) {
 function QuantityOptions(props) {
   const qty = props.quantity < 15 ? props.quantity : 15;
   return (
-    <div id="quantity">
+    <div id="quantity" className={style.SelectQuantity}>
       <select onChange={(event) => props.setSelectedQTY(event.target.value)}>
         <option hidden>{'--'}</option>
         {

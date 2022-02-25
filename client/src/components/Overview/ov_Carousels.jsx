@@ -12,7 +12,7 @@ const arrows = {
 
 function DisplaySection(props) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const itemsInView = 5;
+  const itemsInView = 7;
   const { length } = props.variant.photos;
 
   const updateIndex = (newIndex) => {
