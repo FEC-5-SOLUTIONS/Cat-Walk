@@ -22,15 +22,15 @@ test('Overview component mounts', async () => {
   expect(screen.getByTestId("Overview")).toBeInTheDocument();
 });
 
-// test('Features List Component Mounts', () => {
-//   const { container, getByText } = render(<FeaturesList product={product} />);
-//   expect(getByText('✓ Fabric: Canvas')).toBeInTheDocument;
-// });
+test('Features List Component Mounts', () => {
+  const { container, getByText } = render(<FeaturesList product={product} />);
+  expect(getByText('✓ Fabric: Canvas')).toBeInTheDocument;
+});
 
-// test('Default product text mounts', () => {
-//   const { container, getByText } = render(<ProductInfo product={product} variant={productStyles} />);
-//   expect(getByText('Camo Onesie')).toBeInTheDocument();
-// });
+test('Default product text mounts', () => {
+  const { container, getByText } = render(<ProductInfo product={product} variant={productStyles} />);
+  expect(getByText('Camo Onesie')).toBeInTheDocument();
+});
 
 
 
