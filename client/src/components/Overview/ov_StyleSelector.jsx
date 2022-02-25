@@ -36,6 +36,7 @@ function StyleButton(props) {
         src={props.variant.photos[0].thumbnail_url}
         alt={props.variant.name}
         onClick={handleClick}
+        aria-label={`select the style ${props.variant.name}`}
       />
     </div>
   );
@@ -46,7 +47,7 @@ function CheckMark() {
     <img
       className={style.Check}
       src="https://cdn.pixabay.com/photo/2014/03/25/16/58/check-mark-297739_960_720.png"
-      // alt="✓"
+      alt="✓"
     />
   );
 }
