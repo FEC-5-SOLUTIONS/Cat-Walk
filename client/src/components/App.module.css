@@ -1,0 +1,9 @@
+.App {
+  width: 65%;
+  margin: auto;
+  min-width: 860px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+}
