@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
 }
 button {
   align-items: center;
@@ -10,10 +10,9 @@ button {
 }
 
 .qna {
-  margin: 40px auto;
-  padding-left: 50px;
-  max-width: 55%;
-  min-width: 40%;
+  width: 100%;
+  /* max-width: 55%;
+  min-width: 40%; */
 }
 
 .title {
@@ -49,6 +48,9 @@ button {
   max-height: 500px;
   overflow: hidden;
   overflow-y: scroll;
+}
+.questions_list::-webkit-scrollbar {
+  display: none;
 }
 
 .qna_button {

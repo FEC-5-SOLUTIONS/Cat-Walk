@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // eslint-disable-next-line import/no-named-as-default
+import styles from './App.module.css';
 import Overview from './Overview/Overview';
 import RatingsAndReviews from './Ratings_Reviews/Ratings_Reviews';
 import RelatedItems from './RelatedItems/RelatedItems';
@@ -75,7 +76,7 @@ function App() {
   }, [meta]);
 
   return !apiResponse ? <div>Loading...</div> : (
-    <div id="App" className="App">
+    <div id="App" className={styles.App}>
       <Overview
         product={product}
         average={average}
