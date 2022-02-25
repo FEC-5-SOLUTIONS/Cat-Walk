@@ -62,9 +62,15 @@
 
 .reviewList{
   border: black;
-  height: 300px;
+  min-height: 360px;
+  /* height: 360px; */
+  max-height: 670px;
   /* overflow: overlay; */
   overflow-y: scroll;
+}
+
+.reviewList::-webkit-scrollbar {
+  display: none;
 }
 
 .statsFlex {
@@ -170,9 +176,6 @@
   margin-bottom: 10px;
 }
 
-.paraP{
-
-}
 
 .paraP:hover{
   color: skyblue;
@@ -210,21 +213,31 @@
 }
 
 .viewButton{
-  padding:10px 15px 10px 15px;
+  padding: 10px 15px 10px 15px;
   font-size: 15px;
-  background-color: rgb(44, 235, 209);
-  color:white;
-  border-radius: 15px;
-  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  box-shadow: rgb(0 0 0 / 10%) 0px 5px 10px;
+}
+
+.viewButton:hover{
+  color: white;
+  background-color: darkgreen;
 }
 
 .addButton{
-  padding:10px 15px 10px 15px;
+  padding: 10px 15px 10px 15px;
   font-size: 15px;
-  background-color: rgb(10, 90, 194);
-  color:white;
-  border-radius: 15px;
-  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  box-shadow: rgb(0 0 0 / 10%) 0px 5px 10px;
+}
+
+.addButton:hover{
+  color: white;
+  background-color: darkgreen;
 }
 
 .photoList {

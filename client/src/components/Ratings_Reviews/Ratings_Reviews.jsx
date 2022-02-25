@@ -71,7 +71,7 @@ function RatingsAndReviews({ product, meta, avg }) {
     } else if (diff <= 2 && diff > 0) {
       setSlice(slice + 2);
       setButtonText('Collapse');
-    }else{
+    } else {
       setSlice(2);
       setButtonText('View More');
     }
@@ -85,7 +85,7 @@ function RatingsAndReviews({ product, meta, avg }) {
 
   return !product ? <div>Ratings and Reviews loading...</div> : (
     <div className={styles.topLevel} id="topLevel">
-      {/* <h1>Ratings & Reviews</h1> */}
+      <h1>Ratings & Reviews</h1>
       <div className={styles.reviewRatingsContainer} id="reviewRatingsContainer">
         <Stats
           meta={meta}
@@ -106,18 +106,18 @@ function RatingsAndReviews({ product, meta, avg }) {
           setUrl={setUrl}
           filter={filter}
         />
+        {modal
+          ? (
+            <Modal
+              setModal={setModal}
+              charObj={meta.characteristics}
+              productID={product.id}
+              name={product.name}
+            />
+          )
+          : null}
+        {!modalUrl ? null : <PicModal url={modalUrl} setModalUrl={setModalUrl} />}
       </div>
-      { modal
-        ? (
-          <Modal
-            setModal={setModal}
-            charObj={meta.characteristics}
-            productID={product.id}
-            name={product.name}
-          />
-        )
-        : null}
-      {!modalUrl ? null : <PicModal url={modalUrl} setModalUrl={setModalUrl} />}
     </div>
   );
 }

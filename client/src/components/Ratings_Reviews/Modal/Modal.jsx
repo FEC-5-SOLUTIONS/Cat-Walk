@@ -38,8 +38,9 @@ function Modal({ setModal, charObj, productID, name }) {
   const [qualityRating, setQualityRating] = useState(0);
   const [lengthRating, setLengthRating] = useState(0);
   const [fitRating, setFitRating] = useState(0);
-  const [show, setShow] = useState(false);
-  const [thanks, setThanks] = useState(false);
+  const [errorText, setErrorText] = useState('');
+  // const [show, setShow] = useState(false);
+  // const [thanks, setThanks] = useState(false);
 
   const photosArray = [];
 
@@ -117,7 +118,8 @@ function Modal({ setModal, charObj, productID, name }) {
           for (let i = 0; i < chaToArray.length; i++) {
             const currentChara = chaToArray[i];
             const currentID = charObj[currentChara].id;
-            characteristicObj[currentID] = Number(charRatingObj[currentChara]);
+            const stringID = String(currentID);
+            characteristicObj[stringID] = Number(charRatingObj[currentChara]);
           }
           const dataObj = {
             product_id: productID,
@@ -135,18 +137,21 @@ function Modal({ setModal, charObj, productID, name }) {
             url: '/api/reviews',
             data: dataObj,
           }).then(() => {
-            setShow(false);
-            setThanks(true);
+            alert('Thank you for your Review');
+            setErrorText('');
+            // setShow(false);
+            // setThanks(true);
           });
         }
         else {
-          setShow(true);
+          setErrorText('Your Review is too short, should be at least 50 characters');
+          // setShow(true);
         }
       } else {
-        console.log('missing something ');
+        setErrorText('Do you recommend the product?');
       }
     } else {
-      console.log('something missing');
+      setErrorText('Seems like you skipped something, Please check every field.');
     }
   }
 
@@ -242,6 +247,7 @@ function Modal({ setModal, charObj, productID, name }) {
           />
           <p>For authentication reasons, you will not be emailed</p>
         </div>
+        {errorText.length < 2 ? null : <div className={styles.errorText}>{errorText}</div>}
         <div className={styles.buttons} id="modalButtons">
           <button onClick={handleSubmit} className={styles.submit} type="submit" id="modalSubmit">Submit</button>
           <button onClick={() => { setModal(false); }} className={styles.cancel} type="button" id="modalCancel">Cancel</button>
