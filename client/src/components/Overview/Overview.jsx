@@ -7,10 +7,12 @@ import style from './Overview.module.css';
 import StyleSelector from './ov_StyleSelector';
 import { DisplaySection, ThumbCarousel, BigCarousel } from './ov_Carousels';
 import Actions from './ov_Actions';
+import Stars from '../Shared/StarsUni'
 
 function Overview(props) {
   const product = props.product;
   const product_id = props.product.id;
+  const average = props.average;
 
   const [variants, setVariants] = useState([]);
   const [selectedVariant, setSelectedVariant] = useState({ });
@@ -42,7 +44,7 @@ function Overview(props) {
       <div id="Overview-Grid" className={style.Overview_Grid}>
         <DisplaySection variant={selectedVariant} />
         <div id={"Details"} className={style.Details}>
-          <ProductInfo product={product} variant={selectedVariant} />
+          <ProductInfo product={product} variant={selectedVariant} average={average} />
           <StyleSelector
             variants={variants}
             selectedVariant={selectedVariant}
@@ -60,7 +62,8 @@ function Overview(props) {
 function ProductInfo(props) {
   return (
     <div className={style.ProductInfo}>
-      <div>★★★★☆</div>
+      {/* <div>★★★★☆</div> */}
+      <div style={{width:'fit-content'}}><Stars average={props.average}/></div>
       <div className={style.info_SmallText}>{props.product.category}</div>
       <div className={style.info_BigText}>{props.product.name}</div>
       <div><Price variant={props.variant} /></div>
