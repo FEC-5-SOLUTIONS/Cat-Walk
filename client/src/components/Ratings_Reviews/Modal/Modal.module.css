@@ -24,6 +24,9 @@
   display: flex;
   flex-direction: column;
 }
+.starsText{
+  display: flex;
+}
 .recommend {
   display: flex;
   justify-content: space-between;

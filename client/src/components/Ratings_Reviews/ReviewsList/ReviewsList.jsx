@@ -4,7 +4,7 @@ import ReviewList from './ReviewList';
 import styles from '../Ratings.module.css';
 
 function ReviewsList({
-  reviews, sort, handleChange, text, maxView, click, setModal, slice, setUrl
+  reviews, sort, handleChange, text, click, setModal, slice, setUrl, filter
 
 }) {
   let reviewNum;

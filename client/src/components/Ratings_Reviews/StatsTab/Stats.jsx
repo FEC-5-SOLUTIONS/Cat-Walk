@@ -6,7 +6,9 @@ import Characteristics from './Characteristics';
 // import getAvg from '../../utils/getAvg';
 import styles from '../Ratings.module.css';
 
-function Stats({ meta, average }) {
+function Stats({
+  meta, average, filterFunc, inFilter, setInFilter, setFilter
+}) {
   return !meta ? null : (
     <div className={styles.statsTab}>
       <div className={styles.statsStars}>
@@ -17,7 +19,13 @@ function Stats({ meta, average }) {
         <Recommended meta={meta} />
       </div>
       <div className={styles.statsBars}>
-        <RatingBars meta={meta} />
+        <RatingBars
+          meta={meta}
+          filterFunc={filterFunc}
+          inFilter={inFilter}
+          setInFilter={setInFilter}
+          setFilter={setFilter}
+        />
       </div>
       <div className={styles.statsFit}>
         <Characteristics meta={meta.characteristics} />

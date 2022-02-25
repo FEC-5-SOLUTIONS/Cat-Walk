@@ -13,6 +13,8 @@ const comfortArray = ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comforta
 
 const qualityArray = ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'];
 
+const starRatingArray = ['Poor', 'Fair', 'Average', 'Good', 'Great!'];
+
 const lengthArray = ['Runs Short',
   'Runs slightly short',
   'Perfect',
@@ -103,6 +105,7 @@ function Modal({ setModal, charObj, productID, name }) {
   // post request can now be submitted
   const isTrue = (subject) => subject !== 0;
   // the post request should be handled within here
+  const ind = starRating - 1;
 
   function handleSubmit() {
     if (postArray.every(isTrue) && chaToArray.every(objIsTrue)) {
@@ -157,7 +160,10 @@ function Modal({ setModal, charObj, productID, name }) {
           <h1>Write your review about {name} here!</h1>
         </div>
         <div className={styles.starsAndRec}>
-          <Stars starRating={starRating} setStarRating={setStarRating} />
+          <div className={styles.starsText}>
+            <Stars starRating={starRating} setStarRating={setStarRating} />
+            {starRating === 0 ? null : <h1 style={{ marginLeft: '2px' }}>{starRatingArray[ind]}</h1>}
+          </div>
           <div className={styles.recommend}>
             {'Do you recommend this product? '}
             <label>
