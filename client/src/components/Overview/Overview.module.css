@@ -1,60 +1,36 @@
-.Overview {
-  display:flex;
-  justify-content:center;
-}
 .Overview_Grid {
   display: grid;
   grid-template-areas:
-
-    "display display info"
-    ". description features";
+  "display info"
+  "description features";
   grid-template-rows: auto auto;
-  grid-template-columns: 50px 250px 250px;
+  grid-template-columns: auto auto;
+  font-size:medium;
+  margin-top:20px;
+  margin-bottom:20px;
+
 }
 .Overview_Grid > div {
   margin:5px;
   font-family: Arial, Helvetica, sans-serif;
-  font-size:8px;
+}
+.DisplaySection {
+  grid-area: display;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 .Details {
   grid-area: info;
   display: flex;
   flex-direction: column;
-}
-.info_BigText {
-  font-size:20px;
-  font-weight:bold;
-}
-.info_SmallText {
-  font-size:8px;
-  text-transform:uppercase;
-}
-.price_onSale {
-  font-size:8px;
-  text-transform:uppercase;
-  text-decoration:line-through;
-}
-.price_salePrice {
-  font-size:8px;
-  text-transform:uppercase;
-  color: red;
-  font-weight: bold;
-}
-/* .ProductInfo {
-  grid-area: info;
-} */
-.ProductInfo > div {
-  padding: 2.5px;
-}
-.desc_BigText {
-  font-size:12px;
-  font-weight:bold;
-}
-.desc_SmallText {
-  font-size:8px;
+  justify-content:center;
 }
 .Description {
   grid-area: description;
+  width: 70%;
+  left: 25%;
   display:flex;
   flex-direction:column;
   position: relative;
@@ -62,6 +38,7 @@
   justify-content:center;
 }
 .FeaturesList {
+  border-left: 2px solid black;
   grid-area: features;
   display:flex;
   flex-direction:column;
@@ -69,15 +46,50 @@
   position: relative;
   align-items:flex-start;
   justify-content:center;
-  padding:1%;
+  padding:5%;
+}
+.info_BigText {
+  font-size:xxx-large;
+  font-weight:bold;
+}
+.info_SmallText {
+  /* font-size:small; */
+  text-transform:uppercase;
+}
+.price {
+  display: inline-flex;
+  flex-direction: row;
+  justify-items: flex-start;
+}
+.price_onSale {
+  /* font-size:small; */
+  text-transform:uppercase;
+  text-decoration:line-through;
+  color:gray;
+  margin-right: 5%;
+}
+.price_salePrice {
+  /* font-size:small; */
+  text-transform:uppercase;
+  color: red;
+  font-weight: bold;
+  margin-right: 5%;
+
+}
+.ProductInfo > div {
+  padding: 2.5px;
+}
+.desc_BigText {
+  font-size:x-large;
+  font-weight:bold;
+  margin-bottom:5%;
 }
 .StyleSelector {
-  /* grid-area: style; */
   display: flex;
   flex-direction: row;
-  width: 200px;
   flex-wrap: wrap;
   padding: 10px;
+  width: 300px;
 }
 .StyleSelector > div {
   display:flex;
@@ -85,9 +97,9 @@
   z-index:1;
 }
 .StyleButton {
-  width: 40px;
-  height: 40px;
-  padding: 4px;
+  width: 60px;
+  height: 60px;
+  padding: 6px;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -102,20 +114,10 @@
   height: 15px;
   object-fit: cover;
 }
-.DisplaySection {
-  grid-area: display;
-  padding: 10px;
-  display: inline-flex;
-  flex-direction: row;
-  justify-content:space-around;
-}
-/* .BigCarousel {
-  grid-area: image;
-} */
 .BigCarousel_Viewport {
   overflow: hidden;
-  width: 250px;
-  height: 250px;
+  width: 500px;
+  height: 500px;
   position: relative;
 }
 .BigCarousel_Inner {
@@ -125,14 +127,13 @@
 }
 .BigCarousel_ImageContainer {
   overflow:hidden;
-  width:250px;
-  height:250px;
+  width:500px;
+  height:500px;
   display:flex;
   align-items:center;
   object-fit:contain;
 }
 .BigCarousel_Image {
-  /* width:250px; */
   width:100%;
   height:100%;
   object-fit: contain;
@@ -149,36 +150,26 @@
   margin: 5px;
   background: none;
   border: none;
-  /* object-fit:contain; */
 }
 .BigCarousel_Controls > button > img {
   object-fit:contain;
   width: 15px;
   height: 15px;
   filter:invert(66%);
-
-  /* opacity: 0.4; */
 }
-/* .BigCarousel_Controls > button > img > hover {
-  opacity: 1;
-  background-color: white;
-  border-radius: 40%;
-} */
 .ThumbCarousel {
-  /* grid-area: thumb; */
   position:relative;
   display:flex;
   justify-content:center;
-  width:35px;
-  height:235px;
-
+  width:60px;
+  height:400px;
 }
 .ThumbCarousel_Viewport {
+  top: 5%;
   overflow: hidden;
   position:relative;
-  top:25px;
-  width: 35px;
-  height: 175px;
+  width: 60px;
+  height: 400px;
   z-index:2;
 }
 .ThumbCarousel_Inner {
@@ -194,25 +185,23 @@
   border: none;
   display:flex;
   align-items:center;
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   margin:5px;
 }
 .ThumbCarousel_Image {
   object-fit:cover;
-  width:25px;
-  height:auto;
+  width:100%;
   opacity:0.6;
 }
 .ThumbCarousel_Image_Selected {
   object-fit:cover;
-  width:25px;
-  height:auto;
+  width: 100%;
   opacity:1;
 }
 .ThumbCarousel_Controls {
   position: absolute;
-  height:225px;
+  height:90%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -223,56 +212,69 @@
   border: none;
 }
 .ThumbCarousel_Controls > button > img {
-  /* margin: 1px; */
   object-fit:contain;
   width: 15px;
   height: 15px;
   filter:invert(66%);
-  /* opacity: 0.4; */
 }
 .Actions {
-  /* grid-area: actions; */
+  padding:5px;
   display: flex;
   flex-direction: column;
 }
 .Actions_Row{
+  padding: 2px;
+  /* padding-left:7%;
+  padding-right:7%; */
   display: flex;
   flex-direction: row;
   justify-content:flex-start;
-  align-items:stretch;
+  width: 80%;
+  height: 40px;
+  font-variant: small-caps;
 }
 .Actions_Row > div {
-  padding: 2px;
+  padding: 2.5px;
 }
 .Actions_Row > div > button {
-  padding-left: 5px;
-  padding-right: 5px;
-  height: 20px;
+  width: 100%;
+  height: 100%;
+  font-size: medium;
   font-variant: small-caps;
-  background-color:#CFCFD1;
-  border: none;
+  border: 1px solid gray;
   border-radius:5px;
 }
+.AddToBag{
+  width: 40%;
+}
+.AddToOutfit{
+  width: 60%;
+}
+.SelectSize{
+  width: 60%;
+}
+.SelectQuantity {
+  width: 40%;
+}
 .Actions_Row > div > select {
-  padding-left: 5px;
-  padding-right: 5px;
-  height: 20px;
-  font-variant: small-caps;
-  background-color:#CFCFD1;
-  border: none;
+  width: 100%;
+  height: 100%;
+  /* border: none; */
+  background: none;
+  border: 1px solid gray;
   border-radius:5px;
 }
 .SocialsIconContainer {
   padding: 10px;
+  width: 100%;
   display: inline-flex;
   justify-content:space-around;
 }
 .Socials_Icon {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   margin: 10px;
   object-fit: cover;
-  /* opacity: 0.6; */
   border-radius: 20%;
-  filter:invert(50%);
+  filter:invert(25%);
 }

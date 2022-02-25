@@ -12,7 +12,7 @@ const arrows = {
 
 function DisplaySection(props) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const itemsInView = 5;
+  const itemsInView = 7;
   const { length } = props.variant.photos;
 
   const updateIndex = (newIndex) => {
@@ -59,22 +59,24 @@ function ThumbCarousel(props) {
           {
             props.variant.photos.map((v, i) => (
               <button
-                id="ThumbCarousel-ImageContainer"
+                id={`ThumbCarousel-ImageContainer-unit${i}`}
                 key={`button-${v.url}`}
                 className={style.ThumbCarousel_ImageContainer}
                 onClick={() => props.updateIndex(i)}
                 type="button"
+                aria-label={`set main image to number ${i}`}
+
               >
                 <img
-                  id="ThumbCarousel-Image"
-                  key={`image-${v.url}`}
+                id={`ThumbCarousel-Image-photo${i}`}
+                key={`image-${v.url}`}
                   className={
                     i === props.activeIndex
                       ? style.ThumbCarousel_Image_Selected
                       : style.ThumbCarousel_Image
                   }
                   src={v.thumbnail_url}
-                  alt={v.name}
+                  alt={`photo #${i}`}
                   style={{ height: '100%' }}
                 />
               </button>
@@ -83,8 +85,12 @@ function ThumbCarousel(props) {
         </div>
       </div>
       <div id="ThumbCarousel-Controls" className={style.ThumbCarousel_Controls}>
-        <button onClick={() => { updateThumbCarouselPosition(carouselIndex - 1); }}><img src={arrows.up} /></button>
-        <button onClick={() => { updateThumbCarouselPosition(carouselIndex + 1); }}><img src={arrows.down} /></button>
+        <button onClick={() => { updateThumbCarouselPosition(carouselIndex - 1); }}>
+          <img src={arrows.up} alt="scroll thumbnail section up" />
+        </button>
+        <button onClick={() => { updateThumbCarouselPosition(carouselIndex + 1); }}>
+          <img src={arrows.down}  alt="scroll thumbnail section down"/>
+        </button>
       </div>
     </div>
   );
@@ -95,8 +101,16 @@ function BigCarousel(props) {
     <div className={style.BigCarousel} id="Big Carousel">
       <div className={style.BigCarousel_Viewport}>
         <div className={style.BigCarousel_Controls}>
-          <button onClick={() => { props.updateIndex(props.activeIndex - 1); }}><img src={arrows.left} /></button>
-          <button onClick={() => { props.updateIndex(props.activeIndex + 1); }}><img src={arrows.right} /></button>
+          <button
+            aria-label="scroll main display to previous image"
+            onClick={() => { props.updateIndex(props.activeIndex - 1); }}>
+              <img src={arrows.left} alt="<<"/>
+          </button>
+          <button
+            aria-label="scroll main display to next image"
+            onClick={() => { props.updateIndex(props.activeIndex + 1); }}>
+              <img src={arrows.right}  alt=">>"/>
+          </button>
         </div>
         <div
           className={style.BigCarousel_Inner}
@@ -109,7 +123,8 @@ function BigCarousel(props) {
                   key={v.name}
                   className={style.BigCarousel_Image}
                   src={v.url}
-                  alt={v.name}
+                  alt={`image #${i}`}
+                  name={`image number ${i}`}
                 />
               </div>
             ))
