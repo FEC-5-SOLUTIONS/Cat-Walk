@@ -2,10 +2,10 @@ import React from 'react';
 import Photo from './photo';
 import styles from '../Ratings.module.css';
 
-function Photos( {pics} ) {
+function Photos( {pics, setUrl } ) {
   return (
     <div className={styles.photoList}>
-      {pics.map((pic) => <Photo pic={pic} />)}
+      {pics.map((pic) => <Photo pic={pic} setUrl={setUrl} />)}
     </div>
   );
 }

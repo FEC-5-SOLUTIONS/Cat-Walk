@@ -27,7 +27,7 @@ const fitArray = ['Runs tight',
   'Runs long',
 ];
 
-function Modal({ setModal, charObj, productID}) {
+function Modal({ setModal, charObj, productID, name }) {
   const [starRating, setStarRating] = useState(0);
   const [recRating, setRecRating] = useState(2);
   const [sizeRating, setSizeRating] = useState(0);
@@ -36,6 +36,10 @@ function Modal({ setModal, charObj, productID}) {
   const [qualityRating, setQualityRating] = useState(0);
   const [lengthRating, setLengthRating] = useState(0);
   const [fitRating, setFitRating] = useState(0);
+  const [show, setShow] = useState(false);
+  const [thanks, setThanks] = useState(false);
+
+  const photosArray = [];
 
   const [eMail, setEMail] = useState(0);
   const [sumText, setSumText] = useState(0);
@@ -103,30 +107,38 @@ function Modal({ setModal, charObj, productID}) {
   function handleSubmit() {
     if (postArray.every(isTrue) && chaToArray.every(objIsTrue)) {
       if (typeof recRating === 'boolean') {
-        // must construct object here and make get request
-        // first create the object for all the characteristics
-        const characteristicObj = {};
-        for (let i = 0; i < chaToArray.length; i++) {
-          const currentChara = chaToArray[i];
-          const currentID = charObj[currentChara].id;
-          characteristicObj[currentID] = Number(charRatingObj[currentChara]);
+        if (review.length > 50) {
+          // must construct object here and make get request
+          // first create the object for all the characteristics
+          const characteristicObj = {};
+          for (let i = 0; i < chaToArray.length; i++) {
+            const currentChara = chaToArray[i];
+            const currentID = charObj[currentChara].id;
+            characteristicObj[currentID] = Number(charRatingObj[currentChara]);
+          }
+          const dataObj = {
+            product_id: productID,
+            rating: starRating,
+            summary: sumText,
+            body: review,
+            recommend: recRating,
+            name: nickname,
+            email: eMail,
+            characteristics: characteristicObj,
+            photos: [],
+          };
+          axios({
+            method: 'post',
+            url: '/api/reviews',
+            data: dataObj,
+          }).then(() => {
+            setShow(false);
+            setThanks(true);
+          });
         }
-        const dataObj = {
-          product_id: productID,
-          rating: starRating,
-          summary: sumText,
-          body: review,
-          recommend: recRating,
-          name: nickname,
-          email: eMail,
-          characteristics: characteristicObj,
-          photos: [],
-        };
-        axios({
-          method: 'post',
-          url: '/api/reviews',
-          data: dataObj,
-        });
+        else {
+          setShow(true);
+        }
       } else {
         console.log('missing something ');
       }
@@ -141,12 +153,15 @@ function Modal({ setModal, charObj, productID}) {
   return (
     <div className={styles.modalBackground}>
       <div className={styles.modalContainer}>
+        <div>
+          <h1>Write your review about {name} here!</h1>
+        </div>
         <div className={styles.starsAndRec}>
           <Stars starRating={starRating} setStarRating={setStarRating} />
           <div className={styles.recommend}>
-            Do you recommend this product?
+            {'Do you recommend this product? '}
             <label>
-              Yes!
+              {' Yes: '}
               <input
                 type="radio"
                 name="reccomend"
@@ -156,7 +171,7 @@ function Modal({ setModal, charObj, productID}) {
             </label>
 
             <label>
-              No:
+              {' No: '}
               <input
                 type="radio"
                 name="reccomend"
@@ -184,38 +199,45 @@ function Modal({ setModal, charObj, productID}) {
           })}
         </div>
         <div className={styles.form}>
-          Please enter a sumText:
+          <p>Please enter a Summary:</p>
           <input type="text" maxLength="60" placeholder="Example: Best Purchase Ever!"
             onChange={(e) => setSumText(e.target.value)}
           />
         </div>
         <div className={styles.form}>
-          Please enter a Review:
-          <input type="text"
+          <p>Please enter a Review:</p>
+          <textArea
+            type="text"
             maxLength="1000"
             placeholder="Why did you like the product or not?"
+            rows="5"
             onChange={(e) => setReview(e.target.value)}
           />
         </div>
         <div className={styles.form}>
-          What is your nickname:
+          <p>What is your nickname:</p>
           <input type="text"
             maxLength="60"
             placeholder="Please enter a nickname"
             onChange={(e) => setNickname(e.target.value)}
+            className={styles.nameform}
           />
+          <p>For privacy reasons, do not use your full name or email address</p>
         </div>
         <div className={styles.form}>
-          Please enter your eMail:
-          <input type="text"
+          <p>Please enter your eMail:</p>
+          <input
+            type="text"
             maxLength="60"
             placeholder="Please enter your eMail"
             onChange={(e) => setEMail(e.target.value)}
+            className={styles.nameform}
           />
+          <p>For authentication reasons, you will not be emailed</p>
         </div>
         <div className={styles.buttons}>
-          <button onClick={handleSubmit} className={styles.submit}>Submit</button>
-          <button onClick={() => { setModal(false) }} className={styles.cancel}>Cancel</button>
+          <button onClick={handleSubmit} className={styles.submit} type="submit">Submit</button>
+          <button onClick={() => { setModal(false); }} className={styles.cancel} type="button">Cancel</button>
         </div>
       </div>
     </div>

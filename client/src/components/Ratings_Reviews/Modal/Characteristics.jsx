@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Modal.module.css';
+
 function Chars({
   char, array, setSizeRating, setWidthRating, setComfortRating,
   setFitRating, setQualityRating, setLengthRating
@@ -21,7 +22,7 @@ function Chars({
   }
   return (
     <div className={styles.cat}>
-      <div>
+      <div className={styles.sep}>
         {char}
         :
       </div>

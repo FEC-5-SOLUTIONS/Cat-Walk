@@ -3,7 +3,7 @@ import Stars from '../../Shared/StarsUni';
 import Recommended from './recommended';
 import RatingBars from './RatingBars';
 import Characteristics from './Characteristics';
-import getAvg from '../../utils/getAvg';
+// import getAvg from '../../utils/getAvg';
 import styles from '../Ratings.module.css';
 
 function Stats({ meta, average }) {
@@ -20,7 +20,7 @@ function Stats({ meta, average }) {
         <RatingBars meta={meta} />
       </div>
       <div className={styles.statsFit}>
-        <Characteristics meta={meta} />
+        <Characteristics meta={meta.characteristics} />
       </div>
     </div>
   );

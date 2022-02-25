@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // eslint-disable-next-line import/no-named-as-default
+import styles from './App.module.css';
 import Overview from './Overview/Overview';
 import RatingsAndReviews from './Ratings_Reviews/Ratings_Reviews';
 import RelatedItems from './RelatedItems/RelatedItems';
@@ -9,24 +10,25 @@ import getAvg from './utils/getAvg';
 
 function App() {
   // set the states required
-  const [relatedProducts, setRelatedProducts] = useState(0);
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [product, setProduct] = useState({});
   const [apiResponse, setApiResponse] = useState(false);
   const [meta, setMeta] = useState([]);
   const [average, setAvg] = useState(0);
 
   useEffect(() => {
-    if (relatedProducts.length !== 0) {
-      axios.get('api/products')
-        .then((res) => {
-          // set state accordingly
-          setRelatedProducts(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [relatedProducts]);
+    // if (relatedProducts.length !== 0) {
+    // if (product.id) {
+    axios.get('api/products')
+      .then((res) => {
+        // set state accordingly
+        setRelatedProducts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // }
+  }, [product]);
 
   const selectProduct = (id) => {
     axios({
@@ -51,7 +53,7 @@ function App() {
 
   // grabbing the meta obj whenever product state is changed
   useEffect(() => {
-    if (product) {
+    if (product.id) {
       axios.get(`api/reviews/meta/${product.id}`)
         .then((res) => {
           // setMeta state accordingly
@@ -74,7 +76,7 @@ function App() {
   }, [meta]);
 
   return !apiResponse ? <div>Loading...</div> : (
-    <div id="App" className="App">
+    <div id="App" className={styles.App}>
       <Overview
         product={product}
         average={average}
