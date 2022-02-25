@@ -4,7 +4,9 @@ import styles from './Questions.module.css';
 import SubmitError from './SubmitError';
 import UploadError from './UploadError';
 
-export default function AddAnswer({ question, handleClick, postAnswer }) {
+export default function AddAnswer({
+  question, productName, handleClick, postAnswer,
+}) {
   const [state, setState] = useState({
     body: '',
     name: '',
@@ -12,7 +14,7 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
   });
   const [validEmail, setValidEmail] = useState(true);
   const [photos, setPhotos] = useState([]);
-  const [files, setFiles] = useState([]);
+  // const [files, setFiles] = useState([]);
   const [hasFive, setHasFive] = useState(false);
   const [submitError, setSubmitError] = useState(false);
   const [imgError, setImgError] = useState(false);
@@ -64,7 +66,7 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
         const validTypes = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
         if (validTypes.test(imgType)) {
           setPhotos((prev) => [...prev, URL.createObjectURL(img)]);
-          setFiles((prev) => [...prev, img]);
+          // setFiles((prev) => [...prev, img]);
         } else {
           setImgError(true);
         }
@@ -110,12 +112,12 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
 
   return (
     <form className={styles.modal}>
-      <h3>Submit your Answer</h3>
-      <h4>
-        Heir Force Ones:
+      <p className={styles.answer_title}>Submit your Answer</p>
+      <p className={styles.answer_subtitle}>
+        {productName}
         {' '}
         {question}
-      </h4>
+      </p>
       Your Answer (*)
       <input
         type="text"
@@ -186,6 +188,7 @@ export default function AddAnswer({ question, handleClick, postAnswer }) {
 }
 AddAnswer.propTypes = {
   question: PropTypes.string.isRequired,
+  productName: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
   postAnswer: PropTypes.func.isRequired,
 };
