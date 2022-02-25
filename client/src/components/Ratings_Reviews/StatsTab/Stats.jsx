@@ -10,15 +10,15 @@ function Stats({
   meta, average, filterFunc, inFilter, setInFilter, setFilter
 }) {
   return !meta ? null : (
-    <div className={styles.statsTab}>
-      <div className={styles.statsStars}>
+    <div className={styles.statsTab} id="statsTab">
+      <div className={styles.statsStars} id="statsStars">
         {String(average).slice(0, 4)}
         <Stars average={average} />
       </div>
-      <div className={styles.statsRec}>
+      <div className={styles.statsRec} id="statsRec">
         <Recommended meta={meta} />
       </div>
-      <div className={styles.statsBars}>
+      <div className={styles.statsBars} id="statsBars">
         <RatingBars
           meta={meta}
           filterFunc={filterFunc}
@@ -27,7 +27,7 @@ function Stats({
           setFilter={setFilter}
         />
       </div>
-      <div className={styles.statsFit}>
+      <div className={styles.statsFit} id="statsFit">
         <Characteristics meta={meta.characteristics} />
       </div>
     </div>

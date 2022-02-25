@@ -21,16 +21,16 @@ function Chars({
     }
   }
   return (
-    <div className={styles.cat}>
-      <div className={styles.sep}>
+    <div className={styles.cat} id="modalCat">
+      <div className={styles.sep} id="modalSep">
         {char}
         :
       </div>
-      <div className={styles.catRadios}>
+      <div className={styles.catRadios} id="ModalCatRadios">
         {array.map((cat, i) => {
           const rating = i + 1;
           return (
-            <div className={styles.indRadios}>
+            <div className={styles.indRadios} id="modalIndRadios">
             {cat}
             <label>
               <input

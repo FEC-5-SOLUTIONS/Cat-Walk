@@ -84,8 +84,8 @@ function RatingsAndReviews({ product, meta, avg }) {
   }
 
   return !product ? <div>Ratings and Reviews loading...</div> : (
-    <div className={styles.topLevel}>
-      <div className={styles.reviewRatingsContainer}>
+    <div className={styles.topLevel} id="topLevel">
+      <div className={styles.reviewRatingsContainer} id="reviewRatingsContainer">
         <Stats
           meta={meta}
           average={avg}

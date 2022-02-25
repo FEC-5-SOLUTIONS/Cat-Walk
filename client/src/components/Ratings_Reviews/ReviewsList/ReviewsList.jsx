@@ -17,7 +17,7 @@ function ReviewsList({
   }
   return !reviews.results ?
     <div>nothing to see</div> : (
-      <div className={styles.reviewsContainer}>
+      <div className={styles.reviewsContainer} id="reviewsContainer">
         <div>
           {`displaying ${reviewNum} of ${reviews.results.length} Reviews. Sorted by `}
           <select value={sort} onChange={handleChange}>
@@ -26,26 +26,27 @@ function ReviewsList({
             <option value="helpful">helpful</option>
           </select>
         </div>
-        <div className={styles.reviewList}>
+        <div className={styles.reviewList} id="reviewList">
           <ReviewList data={reviews.results.slice(0, slice)} setUrl={setUrl} />
           {/* {!viewMore ? <ReviewList data={reviews.results.slice(0, 2)} /> :
             <ReviewList data={reviews.results} />} */}
         </div>
         {reviews.results.length <= 2 ? (
-          <div className={styles.buttons}>
+          <div className={styles.buttons} id="RRbuttons">
             <button
               onClick={() => { setModal(true); }}
               className={styles.soloAddButton}
               type="button"
+              id="soloAddButton"
             >
               Add A review!
             </button>
           </div>
         )
           : (
-            <div className={styles.buttons}>
-              <button onClick={click} className={styles.viewButton} type="button">{text}</button>
-              <button onClick={() => { setModal(true); }} className={styles.addButton} type="button">Add A review! </button>
+            <div className={styles.buttons} id="RRbuttons">
+              <button onClick={click} className={styles.viewButton} type="button" id="ViewButton">{text}</button>
+              <button onClick={() => { setModal(true); }} className={styles.addButton} type="button" id="addButton">Add A review! </button>
             </div>
           )
         }

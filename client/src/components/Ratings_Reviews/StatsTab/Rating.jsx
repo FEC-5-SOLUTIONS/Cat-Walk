@@ -5,17 +5,18 @@ function Rating({ rating, data, filterFunc, totalCount }) {
   const percentage = (Number(data[rating]) / totalCount) * 100;
   // console.log(percentage);
   return !rating ? null : (
-    <div className={styles.barHolder}>
-      <div className={styles.barNumber}>
+    <div className={styles.barHolder} id="barHolder">
+      <div className={styles.barNumber} id="barNumber">
         <button
           className={styles.filterButton}
           onClick={() => filterFunc(rating)}
           type="button"
+          id="filterButton"
         >
-          {rating}
+          <div className={styles.Numerobutton} id="buttonNumero">{rating}</div>
         </button>
       </div>
-      <div className={styles.barBar}>
+      <div className={styles.barBar} id="barBar">
         <div style={{
           background: 'green',
           width: `${percentage}%`,
@@ -25,7 +26,7 @@ function Rating({ rating, data, filterFunc, totalCount }) {
 
       </div>
       <div>
-        {`${data[rating]} reviews`}
+        {`(${data[rating]})`}
       </div>
     </div>
   );

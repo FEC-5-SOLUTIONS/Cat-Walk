@@ -81,9 +81,13 @@ function RatingBars({
         />
       ))}
       {inFilter.length === 0 ? null : (
-        <div>
-          {`in filter: ${inFilter}`}
-          <button type="button"
+        <div className={styles.clearContainer}>
+          <div className={styles.clearText}>
+            {`In filter: ${inFilter}`}
+          </div>
+          <button
+            type="button"
+            className={styles.clearContainerButton}
             onClick={() => {
               setInFilter([]);
               setFilter([]);
