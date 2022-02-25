@@ -72,9 +72,9 @@ function RatingBars({
 
   return !meta.ratings ? null : (
     <div>
-      {barList.map((rating) => (
+      {[...Array(5)].map((rating, i) => (
         <Rating
-          rating={rating}
+          rating={i+1}
           data={meta.ratings}
           filterFunc={filterFunc}
           totalCount={totalCount}
