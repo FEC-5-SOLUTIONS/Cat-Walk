@@ -1,9 +1,13 @@
 /* ------------ RELATED PRODUCTS ---------- */
 
-#header {
+.Header {
   position:relative;
   left: 12px;
-  margin: 42px 42px 12px 12px;
+  margin-left: 462px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
   /* font-size: 26px;
   float: right; */
 }
@@ -63,7 +67,7 @@
   height: calc(95vw * 0.5625);
   max-height: 43vh;
   max-width: calc(50vh * 1.78);
-  margin: auto;
+  margin-left: 320px;
   text-align: left;
   font: "Lucida Console", "Courier New", monospace;
   overflow-y: hidden;
@@ -83,13 +87,14 @@
 
 .leftArrow {
   position: absolute;
-  left: 6%;
-  padding-left: 76px;
-  padding-right: 0.1px;
-  font-size: xx-large;
+  left: 1%;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-size: 55px;
   color: black;
   user-select: none;
   z-index: 2;
+  /* margin-left: 550px; */
 }
 
 .leftArrow:hover{
@@ -102,13 +107,14 @@
 
 .rightArrow {
   position: absolute;
-  right: 30%;
-  padding-left: 0.1px;
-  padding-right: 76px;
-  font-size: xx-large;
+  right: 1%;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-size: 55px;
   color: black;
   user-select: none;
   z-index: 2;
+  /* margin-right: -200px; */
 }
 
 .rightArrow:hover{
@@ -124,13 +130,14 @@
   display: flex;
   vertical-align: middle;
   overflow: hidden;
-  width: auto;
+  /* width: auto; */
   align-items: center;
-  margin-left: 0px;
+  /* margin-right: auto; */
+  /* margin-left: 500px; */
   padding-left: 0.6px;
   padding-right: 0.6px;
   position: relative;
-  left:-80px;
+  /* left:-80px; */
   /* color: none; */
 }
 
@@ -273,7 +280,21 @@
     animation-fill-mode: both;
 }
 
+.actionBtn {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 3px;
+  right: 6px;
+  cursor: pointer;
+  opacity: .75;
+  border-radius: 2rem;
+  box-shadow: 3px 2px 2px rgb(26, 25, 25);
+}
 
+.actionBtn:hover
+{
+    transform: scale(1.5);
+}
 
 
 

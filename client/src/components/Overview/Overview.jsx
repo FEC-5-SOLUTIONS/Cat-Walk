@@ -35,14 +35,14 @@ function Overview(props) {
           }
         });
       });
-  }, [info]);
+  }, [info, product]);
 
   if (!selectedVariant.name) { return <div>overview</div>; }
 
   return (
     <div id="Overview" className={style.Overview} data-testid="Overview">
       <div id="Overview-Grid" className={style.Overview_Grid}>
-        <DisplaySection variant={selectedVariant} />
+        <DisplaySection variant={variants[0]} />
         <div id={"Details"} className={style.Details}>
           <ProductInfo product={product} variant={selectedVariant} average={average} />
           <StyleSelector

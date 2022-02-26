@@ -1,8 +1,9 @@
 import React from 'react';
+import classes from './RelatedItems.module.css';
 
 function OutfitHeader() {
   return (
-    <div id="header">YOUR OUTFIT</div>
+    <div className={classes.Header}>YOUR OUTFIT</div>
   );
 }
 

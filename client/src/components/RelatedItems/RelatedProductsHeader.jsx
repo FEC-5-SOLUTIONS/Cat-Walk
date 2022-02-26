@@ -1,8 +1,9 @@
 import React from 'react';
+import classes from './RelatedItems.module.css';
 
 function RelatedProductsHeader() {
   return (
-    <div id="header">RELATED PRODUCTS</div>
+    <div className={classes.Header}>RELATED PRODUCTS</div>
   );
 }
 
