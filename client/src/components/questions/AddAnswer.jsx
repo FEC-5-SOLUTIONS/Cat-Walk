@@ -111,79 +111,81 @@ export default function AddAnswer({
   }
 
   return (
-    <form className={styles.modal}>
-      <p className={styles.answer_title}>Submit your Answer</p>
-      <p className={styles.answer_subtitle}>
-        {productName}
-        {' '}
-        {question}
-      </p>
-      Your Answer (*)
-      <input
-        type="text"
-        id="body"
-        maxLength="1000"
-        value={state.body}
-        onChange={handleInput}
-      />
-      <br />
-      What is your nickname (*)
-      <input
-        type="text"
-        id="name"
-        maxLength="60"
-        value={state.name}
-        placeholder="Example: jack543!"
-        onChange={handleInput}
-      />
-      <br />
-      For privacy reasons, do not use your full name or email address
-      <br />
-      Your email (*)
-      <input
-        type="text"
-        id="email"
-        maxLength="60"
-        value={state.email}
-        placeholder="Example: jack@email.com"
-        onChange={emailValidation}
-      />
-      <div className={validEmail ? styles.hide : styles.show}>
-        Please enter a valid email
-      </div>
-      <br />
-      For authentication reasons, you will not be emailed
-      <br />
-      <input
+    <div className={styles.answer_modal_background}>
+      <div className={styles.modal}>
+        <p className={styles.answer_title}>Submit your Answer</p>
+        <p className={styles.answer_subtitle}>
+          {productName}
+          {' '}
+          {question}
+        </p>
+        Your Answer (*)
+        <input
+          type="text"
+          id="body"
+          maxLength="1000"
+          value={state.body}
+          onChange={handleInput}
+        />
+        <br />
+        What is your nickname (*)
+        <input
+          type="text"
+          id="name"
+          maxLength="60"
+          value={state.name}
+          placeholder="Example: jack543!"
+          onChange={handleInput}
+        />
+        <br />
+        For privacy reasons, do not use your full name or email address
+        <br />
+        Your email (*)
+        <input
+          type="text"
+          id="email"
+          maxLength="60"
+          value={state.email}
+          placeholder="Example: jack@email.com"
+          onChange={emailValidation}
+        />
+        <div className={validEmail ? styles.hide : styles.show}>
+          Please enter a valid email
+        </div>
+        <br />
+        For authentication reasons, you will not be emailed
+        <br />
+        <input
         // className={hasFive ? styles.hide : styles.show}
-        type="file"
-        onChange={selectImg}
-        multiple
-      />
-      {photos && photos.map((item) => <img className={styles.thumbnails} src={item} alt="" />)}
-      <div className={imgError ? styles.show : styles.hide}>
-        <UploadError err="jpg, jpeg, png, gif only" />
-      </div>
-      {/* <button type="submit" onClick={upload}>
+          type="file"
+          onChange={selectImg}
+          multiple
+        />
+        {photos && photos.map((item) => <img className={styles.thumbnails} src={item} alt="" />)}
+        <div className={imgError ? styles.show : styles.hide}>
+          <UploadError err="jpg, jpeg, png, gif only" />
+        </div>
+        {/* <button type="submit" onClick={upload}>
         Upload
       </button> */}
-      <br />
-      <div className={submitError ? styles.show : styles.hide}>
-        <SubmitError errorField={errorField} />
+        <br />
+        <div className={submitError ? styles.show : styles.hide}>
+          <SubmitError errorField={errorField} />
+        </div>
+        <button
+          type="submit"
+          onClick={checkSubmit}
+        >
+          Submit answer
+        </button>
+        <button
+          type="submit"
+          onClick={closeModal}
+        >
+          close
+        </button>
       </div>
-      <button
-        type="submit"
-        onClick={checkSubmit}
-      >
-        Submit answer
-      </button>
-      <button
-        type="submit"
-        onClick={closeModal}
-      >
-        close
-      </button>
-    </form>
+    </div>
   );
 }
 AddAnswer.propTypes = {

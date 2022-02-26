@@ -174,11 +174,11 @@ button {
 
 .modal_background {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100vw;
-  height: 100vh;
-  background: gray;
+  top: 1510px;
+  width: 72.5%;
+  min-width: 860px;
+  height: 60%;
+  background: rgb(230, 230, 230);
   /* translu */
   display: flex;
   flex-direction: row;
@@ -196,26 +196,82 @@ button {
   /* padding: 25px; */
 }
 
-.modal_title {
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 .close_button {
   border: none;
-  font-size: xx-large;
-  margin-right: 10px;
+  font-size: large;
+  margin-left: 480px;
+}
+
+.modal_title {
+  text-align: center;
 }
 
 .modal_subtitle {
   text-align: center;
 }
 
+.require_text {
+  color: red;
+  font-size: 11px;
+  margin-left: 430px;
+}
+
+.required {
+  color: red;
+  font-size: 11px;
+}
+
+.modal_body {
+  display: flex;
+  flex-direction: row;
+}
+
+.email_input {
+  width: 260px;
+}
+
+.warnings {
+  font-size: 9px;
+}
+
+.error_message {
+  color: red;
+  font-size: 11px;
+}
+
+.modal_submit {
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  align-items: center;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: .25rem;
+  font-size: 12px;
+  font-weight: 500;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  width: auto;
+}
+
 .thumbnails {
   height: 40px;
   margin: 5px;
+}
+
+.answer_modal_background {
+  position: absolute;
+  top: 1510px;
+  width: 72.5%;
+  min-width: 860px;
+  height: 60%;
+  background: rgb(230, 230, 230);
+  /* translu */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .seller_answer {
