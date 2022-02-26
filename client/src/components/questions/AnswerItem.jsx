@@ -17,14 +17,20 @@ export default function AnswerItem({
 
   return (
     <div>
-      <div className={styles.answer}>
-        A:
-        {' '}
-        {answer}
+      <div className={styles.answer_line}>
+        <div className={styles.answer}>
+          A:
+        </div>
+        <div className={styles.answer_answer}>
+          {answer}
+        </div>
       </div>
-      {photos.map((item) => (
-        <img src={item.url} alt="user answer" key={item.id} className={styles.user_photo} />
-      ))}
+      <br />
+      <div className={styles.answer_imgs}>
+        {photos.map((item) => (
+          <img className={styles.answer_img} src={item.url} alt="user answer" key={item.id} />
+        ))}
+      </div>
       <div className={styles.answer_info}>
         <div className={styles.answerer}>
           by
@@ -37,10 +43,8 @@ export default function AnswerItem({
           {moment(date).format('MMMM Do, YYYY')}
           {' '}
           |
-
         </div>
         <div className={styles.answer_vote}>
-          {' '}
           Helpful?
           {' '}
           <button
