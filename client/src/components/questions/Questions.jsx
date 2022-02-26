@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from './Questions.module.css';
@@ -7,7 +7,6 @@ import QuestionItem from './QuestionItem';
 import AddQuestion from './AddQuestion';
 
 export default function Questions({ productId, productName }) {
-  const mounted = useRef(false);
   const [questions, setQuestions] = useState([]);
   const [moreQ, setMoreQ] = useState(false);
   const [moreThanTwo, setMoreThanTwo] = useState(false);
@@ -34,8 +33,7 @@ export default function Questions({ productId, productName }) {
   }
 
   // GET ALL QUESTIONS
-  function getAllQuestions(e) {
-    e.preventDefault();
+  function getAllQuestions() {
     const params = {
       product_id: productId,
       page: 1,
@@ -50,11 +48,8 @@ export default function Questions({ productId, productName }) {
   }
 
   useEffect(() => {
-    if (!mounted.current) {
-      mounted.current = true;
-      getTwoQuestions();
-    }
-  });
+    getTwoQuestions();
+  }, [productId]);
 
   const search = (userInput) => {
     if (userInput.length > 2) {
@@ -90,6 +85,7 @@ export default function Questions({ productId, productName }) {
             helpfulness={item.question_helpfulness}
             qId={item.question_id}
             handleClick={upvoteQuestion}
+            productName={productName}
             key={item.question_id}
           />
         ))}

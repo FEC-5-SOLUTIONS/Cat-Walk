@@ -71,65 +71,82 @@ export default function AddQuestion({ productName, handleClick, postQuestion }) 
   }
 
   return (
-    <form className={styles.modal}>
-      <div>
-        Ask Your Question
+    <div className={styles.modal_background}>
+      <div className={styles.modal_container}>
         <button
+          className={styles.close_button}
           type="submit"
           onClick={closeModal}
         >
           x
         </button>
+        <h3 className={styles.modal_title}>Ask Your Question</h3>
+        <h5 className={styles.modal_subtitle}>
+          About the
+          {' '}
+          {productName}
+        </h5>
+        <p className={styles.require_text}>Required (*)</p>
+        <div className={styles.modal_body}>
+          Your Question
+          <p className={styles.required}>(*)</p>
+        </div>
+        <input
+          type="text"
+          id="body"
+          maxLength="1000"
+          value={state.body}
+          onChange={handleInput}
+        />
+        <div />
+        <div className={styles.modal_body}>
+          What is your nickname
+          <p className={styles.required}>(*)</p>
+        </div>
+        <input
+          type="text"
+          id="name"
+          maxLength="60"
+          value={state.name}
+          placeholder="Example: jackson11!"
+          onChange={handleInput}
+        />
+        <br />
+        <p className={styles.warnings}>
+          For privacy reasons, do not use your full name or email address
+        </p>
+        <br />
+        <div className={styles.modal_body}>
+          Your email
+          <p className={styles.required}>(*)</p>
+        </div>
+        <input
+          className={styles.email_input}
+          type="text"
+          id="email"
+          maxLength="60"
+          value={state.email}
+          placeholder="Why did you like the product or not?"
+          onChange={emailValidation}
+        />
+        <div className={validEmail ? styles.hide : styles.show}>
+          <p className={styles.error_message}>Please enter a valid email</p>
+        </div>
+        <br />
+        <p className={styles.warnings}>For authentication reasons, you will not be emailed</p>
+        <br />
+        <div className={hasError ? styles.show : styles.hide}>
+          <SubmitError errorField={errorField} />
+        </div>
+        <button
+          className={styles.modal_submit}
+          type="submit"
+          onClick={checkSubmit}
+        >
+          Submit question
+        </button>
       </div>
-      <div>
-        {productName}
-      </div>
-      Your Question (*)
-      <input
-        type="text"
-        id="body"
-        maxLength="1000"
-        value={state.body}
-        onChange={handleInput}
-      />
-      <br />
-      What is your nickname (*)
-      <input
-        type="text"
-        id="name"
-        maxLength="60"
-        value={state.name}
-        placeholder="Example: jackson11!"
-        onChange={handleInput}
-      />
-      <br />
-      For privacy reasons, do not use your full name or email address
-      <br />
-      Your email (*)
-      <input
-        type="text"
-        id="email"
-        maxLength="60"
-        value={state.email}
-        placeholder="Why did you like the product or not?"
-        onChange={emailValidation}
-      />
-      <div className={validEmail ? styles.hide : styles.show}>
-        Please enter a valid email
-      </div>
-      <br />
-      For authentication reasons, you will not be emailed
-      <br />
-      <div className={hasError ? styles.show : styles.hide}>
-        <SubmitError errorField={errorField} />
-      </div>
-      <button
-        type="submit"
-        onClick={checkSubmit}
-      >
-        Submit question
-      </button>
-    </form>
+    </div>
   );
 }
 AddQuestion.propTypes = {
