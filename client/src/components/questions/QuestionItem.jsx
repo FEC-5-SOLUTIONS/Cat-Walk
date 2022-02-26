@@ -6,7 +6,7 @@ import AnswerItem from './AnswerItem';
 import AddAnswer from './AddAnswer';
 
 export default function QuestionItem({
-  question, helpfulness, qId, handleClick,
+  question, helpfulness, qId, handleClick, productName,
 }) {
   const mounted = useRef(false);
   const [answers, setAnswers] = useState([]);
@@ -127,13 +127,13 @@ export default function QuestionItem({
     if (moreThanTwo) {
       if (!loadMore) {
         button = (
-          <button type="submit" onClick={getAllAnswers}>
+          <button className={styles.more_answers} type="submit" onClick={getAllAnswers}>
             LOAD MORE ANSWERS
           </button>
         );
       } else {
         button = (
-          <button type="submit" onClick={getTwoAnswers}>
+          <button className={styles.more_answers} type="submit" onClick={getTwoAnswers}>
             COLLAPSE ANSWERS
           </button>
         );
@@ -166,13 +166,12 @@ export default function QuestionItem({
     <div className={styles.question_item}>
       <div className={styles.question_line}>
         <div className={styles.question}>
-          Q:
-          {' '}
+          {'Q: '}
           {question}
         </div>
         <div className={styles.q_vote}>
           Helpful?
-          {' '}
+          {'  '}
           <button type="submit" onClick={upvoteQuestion}>
             Yes
           </button>
@@ -190,6 +189,7 @@ export default function QuestionItem({
       <div className={showAddAnswer ? styles.show : styles.hide}>
         <AddAnswer
           question={question}
+          productName={productName}
           handleClick={addAnswer}
           postAnswer={postAnswer}
         />
@@ -205,4 +205,5 @@ QuestionItem.propTypes = {
   helpfulness: PropTypes.number.isRequired,
   qId: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
+  productName: PropTypes.string.isRequired,
 };
