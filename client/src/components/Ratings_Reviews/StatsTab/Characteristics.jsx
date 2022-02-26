@@ -15,24 +15,23 @@ const lengthArray = ['Runs Short', 'Perfect', 'Runs long'];
 
 const fitArray = ['Runs tight', 'Perfect', 'Runs long'];
 
-function Characteristics({meta}) {
+function Characteristics({ meta }) {
   return !meta ? <div>hello</div> : (
     <div>
       {
         (Object.keys(meta)).map((bar) => {
           if (bar === 'Comfort') {
-            return <Bar char={bar} array={comfortArray} rating={meta.Comfort.value}/>;
-          } else if (bar === 'Size') {
-            return <Bar char={bar} array={sizeArray} meta={meta.Size.value}/>
-          } else if (bar === 'Width') {
-            return <Bar char={bar} array={widthArray} rating={meta.Width.value} />
-          } else if (bar === 'Quality') {
-            return <Bar char={bar} array={qualityArray} rating={meta.Quality.value} />
-          } else if (bar === 'Length') {
-            return <Bar char={bar}array={lengthArray} rating={meta.Length.value} />
-          } else {
-            return <Bar char={bar} array={fitArray} rating={meta.Fit.value} />
+            return <Bar char={bar} array={comfortArray} rating={meta.Comfort.value} />;
+          } if (bar === 'Size') {
+            return <Bar char={bar} array={sizeArray} meta={meta.Size.value} />;
+          } if (bar === 'Width') {
+            return <Bar char={bar} array={widthArray} rating={meta.Width.value} />;
+          } if (bar === 'Quality') {
+            return <Bar char={bar} array={qualityArray} rating={meta.Quality.value} />;
+          } if (bar === 'Length') {
+            return <Bar char={bar} array={lengthArray} rating={meta.Length.value} />;
           }
+          return <Bar char={bar} array={fitArray} rating={meta.Fit.value} />;
         })
       }
     </div>

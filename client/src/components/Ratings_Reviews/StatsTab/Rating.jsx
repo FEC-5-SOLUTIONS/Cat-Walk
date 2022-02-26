@@ -2,9 +2,12 @@ import React from 'react';
 import styles from '../Ratings.module.css';
 
 function Rating({ rating, data, filterFunc, totalCount }) {
-  const percentage = (Number(data[rating]) / totalCount) * 100;
+  let percentage = 0;
+  if (data[rating]) {
+    percentage = (Number(data[rating]) / totalCount) * 100;
+  }
   // console.log(percentage);
-  return !rating ? null : (
+  return !data ? null : (
     <div className={styles.barHolder} id="barHolder">
       <div className={styles.barNumber} id="barNumber">
         <button
@@ -26,7 +29,7 @@ function Rating({ rating, data, filterFunc, totalCount }) {
 
       </div>
       <div>
-        {`(${data[rating]})`}
+        {data[rating] !== undefined ? `(${data[rating]})` : '(0)'}
       </div>
     </div>
   );
