@@ -7,7 +7,7 @@ import style from './Overview.module.css';
 import StyleSelector from './ov_StyleSelector';
 import { DisplaySection, ThumbCarousel, BigCarousel } from './ov_Carousels';
 import Actions from './ov_Actions';
-import Stars from '../Shared/StarsUni'
+import Stars from '../Shared/StarsUni';
 
 function Overview(props) {
   const product = props.product;
@@ -27,9 +27,7 @@ function Overview(props) {
       .then((response) => {
         setVariants(response.data.results);
         setInfo(true);
-      })
-      .then(() => {
-        variants.forEach((v) => {
+        response.data.results.forEach((v, i) => {
           if (v['default?']) {
             setSelectedVariant(v);
           }
@@ -42,7 +40,7 @@ function Overview(props) {
   return (
     <div id="Overview" className={style.Overview} data-testid="Overview">
       <div id="Overview-Grid" className={style.Overview_Grid}>
-        <DisplaySection variant={variants[0]} />
+        <DisplaySection variant={selectedVariant} />
         <div id={"Details"} className={style.Details}>
           <ProductInfo product={product} variant={selectedVariant} average={average} />
           <StyleSelector
